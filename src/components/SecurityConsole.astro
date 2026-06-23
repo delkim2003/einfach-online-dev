@@ -1,5 +1,5 @@
 ---
-// SecurityConsole.astro — System-Status Monitoring Panel mit Count-Up
+// SecurityConsole.astro — System-Status Panel (Health Stat Card Design)
 ---
 
 <section class="py-20 lg:py-28 section-padding" id="sicherheit" aria-label="System-Status">
@@ -13,86 +13,163 @@
       </p>
     </div>
 
-    <!-- Monitoring Panel -->
-    <div class="bg-white rounded-2xl shadow-lg border border-[#E2E8F0] overflow-hidden">
+    <!-- Health Stat Card -->
+    <div class="bg-white rounded-2xl shadow-lg border border-[#E2E8F0] overflow-hidden p-6 sm:p-8">
+
       <!-- Header -->
-      <div class="flex items-center gap-3 px-6 py-4 border-b border-[#E2E8F0] bg-[#F8FAFC]">
-        <span class="w-3 h-3 rounded-full bg-[#10B981] shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
-        <span class="text-sm font-semibold text-[#0F172A] tracking-wider uppercase">System // Aktiv</span>
-        <span class="ml-auto text-xs text-[#64748B] font-mono">uptime: 100%</span>
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-8">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+               style="background: linear-gradient(135deg, #4D7CFF, #22d3ee);">
+            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="text-lg font-semibold text-[#0F172A]">System Performance</span>
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[#64748B]">
+              <span class="flex items-center gap-1.5">
+                <span class="sc-dot"></span>
+                Alle Systeme aktiv
+              </span>
+              <span class="sc-badge">
+                <svg class="w-3 h-3 inline-block mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                0 externe DNS
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="text-center sm:text-right">
+          <div class="text-2xl font-bold text-[#10B981]">100%</div>
+          <div class="text-xs text-[#64748B]">Uptime</div>
+        </div>
       </div>
 
-      <!-- Control Buttons -->
-      <div class="flex gap-3 px-6 pt-5 pb-3 border-b border-[#E2E8F0] bg-white">
-        <button id="sc-tab-local" class="sc-tab-btn active px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border">
-          <svg class="inline-block w-4 h-4 mr-1.5 -mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          Lokale Assets
-        </button>
-        <button id="sc-tab-ext" class="sc-tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border">
-          <svg class="inline-block w-4 h-4 mr-1.5 -mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          Externe Abhängigkeiten
-        </button>
+      <!-- Metric Cards: 4-col desktop / 2-col mobile -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8">
+
+        <div class="rounded-xl p-4" style="background: #F0F4F8;">
+          <div class="text-xs font-medium text-[#64748B] mb-1">Schriftarten</div>
+          <div class="flex items-baseline gap-1 mb-2">
+            <span class="sc-counter text-2xl font-bold text-[#4D7CFF]" data-target="12">0</span>
+            <span class="text-sm text-[#64748B]">ms</span>
+          </div>
+          <div class="sc-track"><div class="sc-bar bar-fast" style="width: 0%;"></div></div>
+        </div>
+
+        <div class="rounded-xl p-4" style="background: #F0F4F8;">
+          <div class="text-xs font-medium text-[#64748B] mb-1">Logo</div>
+          <div class="flex items-baseline gap-1 mb-2">
+            <span class="sc-counter text-2xl font-bold text-[#22d3ee]" data-target="22">0</span>
+            <span class="text-sm text-[#64748B]">ms</span>
+          </div>
+          <div class="sc-track"><div class="sc-bar bar-medium" style="width: 0%;"></div></div>
+        </div>
+
+        <div class="rounded-xl p-4" style="background: #F0F4F8;">
+          <div class="text-xs font-medium text-[#64748B] mb-1">JavaScript</div>
+          <div class="flex items-baseline gap-1 mb-2">
+            <span class="sc-counter text-2xl font-bold text-[#f59e0b]" data-target="34">0</span>
+            <span class="text-sm text-[#64748B]">ms</span>
+          </div>
+          <div class="sc-track"><div class="sc-bar bar-slow" style="width: 0%;"></div></div>
+        </div>
+
+        <div class="rounded-xl p-4" style="background: #F0F4F8;">
+          <div class="text-xs font-medium text-[#64748B] mb-1">CSS</div>
+          <div class="flex items-baseline gap-1 mb-2">
+            <span class="sc-counter text-2xl font-bold text-[#10B981]" data-target="8">0</span>
+            <span class="text-sm text-[#64748B]">ms</span>
+          </div>
+          <div class="sc-track"><div class="sc-bar bar-success" style="width: 0%;"></div></div>
+        </div>
+
       </div>
 
-      <!-- Content Area -->
-      <div class="px-6 py-5 min-h-[220px]">
-        <!-- Local Assets Tab -->
-        <div id="sc-content-local" class="sc-content active">
-          <div class="space-y-2 font-mono text-sm">
-            <div class="sc-line"><span class="text-[#10B981]">✓</span> /fonts/outfit-bold.woff2 <span class="sc-ms" data-target="12">0</span><span class="text-[#64748B]">ms</span> <span class="text-[#64748B]">[74KB]</span></div>
-            <div class="sc-line"><span class="text-[#10B981]">✓</span> /images/logo.png <span class="sc-ms" data-target="22">0</span><span class="text-[#64748B]">ms</span> <span class="text-[#64748B]">[75KB]</span></div>
-            <div class="sc-line"><span class="text-[#10B981]">✓</span> /js/core-bundle.min.js <span class="sc-ms" data-target="34">0</span><span class="text-[#64748B]">ms</span> <span class="text-[#64748B]">[112KB]</span></div>
-            <div class="sc-line"><span class="text-[#10B981]">✓</span> /css/globals.css <span class="sc-ms" data-target="8">0</span><span class="text-[#64748B]">ms</span> <span class="text-[#64748B]">[24KB]</span></div>
-            <div class="pt-3 mt-3 border-t border-[#E2E8F0] text-[#475569]">
-              <span class="text-[#10B981]">◆</span> EXTERNE CDN DNS QUERIES: <span class="text-[#10B981] font-bold">0</span>
+      <!-- Asset Detail List -->
+      <div class="rounded-xl p-5 sm:p-6" style="background: #F9FAFB; border: 1px solid #E5E7EB;">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm font-semibold text-[#0F172A]">Lokale Assets</span>
+          <span class="sc-asset-count">4 Dateien</span>
+        </div>
+
+        <div class="space-y-0 divide-y divide-[#E5E7EB]/60">
+          <div class="sc-asset-row">
+            <div class="sc-file-icon" style="background: #8b5cf6;">F</div>
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-center gap-2">
+                <span class="text-sm font-medium text-[#0F172A] truncate">outfit-bold.woff2</span>
+                <span class="text-xs text-[#64748B] shrink-0">74 KB</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="sc-latency text-green-600 font-medium text-xs" data-target="12">0</span>
+                <span class="text-xs text-[#9CA3AF]">ms vom Server</span>
+              </div>
+            </div>
+          </div>
+          <div class="sc-asset-row">
+            <div class="sc-file-icon" style="background: #4D7CFF;">L</div>
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-center gap-2">
+                <span class="text-sm font-medium text-[#0F172A] truncate">logo.png</span>
+                <span class="text-xs text-[#64748B] shrink-0">75 KB</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="sc-latency text-green-600 font-medium text-xs" data-target="22">0</span>
+                <span class="text-xs text-[#9CA3AF]">ms vom Server</span>
+              </div>
+            </div>
+          </div>
+          <div class="sc-asset-row">
+            <div class="sc-file-icon" style="background: #f59e0b;">JS</div>
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-center gap-2">
+                <span class="text-sm font-medium text-[#0F172A] truncate">core-bundle.min.js</span>
+                <span class="text-xs text-[#64748B] shrink-0">112 KB</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="sc-latency text-amber-600 font-medium text-xs" data-target="34">0</span>
+                <span class="text-xs text-[#9CA3AF]">ms vom Server</span>
+              </div>
+            </div>
+          </div>
+          <div class="sc-asset-row">
+            <div class="sc-file-icon" style="background: #10B981;">C</div>
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-center gap-2">
+                <span class="text-sm font-medium text-[#0F172A] truncate">globals.css</span>
+                <span class="text-xs text-[#64748B] shrink-0">24 KB</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="sc-latency text-green-600 font-medium text-xs" data-target="8">0</span>
+                <span class="text-xs text-[#9CA3AF]">ms vom Server</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- External Dependencies Tab -->
-        <div id="sc-content-ext" class="sc-content hidden">
-          <div class="space-y-5">
-            <div>
-              <div class="flex justify-between text-sm mb-1.5">
-                <span class="font-semibold text-[#0F172A]">Externe Abhängigkeiten</span>
-                <span class="text-[#10B981] font-bold sc-pct" data-target="100">0</span><span class="text-[#10B981]">%</span>
-              </div>
-              <div class="h-4 bg-[#E2E8F0] rounded-full overflow-hidden">
-                <div class="h-full bg-[#10B981] rounded-full sc-bar" style="width: 0%"></div>
-              </div>
-              <p class="text-xs text-[#64748B] mt-1">Keine externen Abhängigkeiten — alles lokal gehostet</p>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1.5">
-                <span class="font-semibold text-[#0F172A]">Daten bei Dritten</span>
-                <span class="text-[#10B981] font-bold sc-pct" data-target="75">0</span><span class="text-[#10B981]">%</span>
-              </div>
-              <div class="h-4 bg-[#E2E8F0] rounded-full overflow-hidden">
-                <div class="h-full bg-[#10B981] rounded-full sc-bar" style="width: 0%"></div>
-              </div>
-              <p class="text-xs text-[#64748B] mt-1">Minimiert — nur technisch notwendige Dienste</p>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1.5">
-                <span class="font-semibold text-[#0F172A]">Lokale Assets</span>
-                <span class="text-[#10B981] font-bold sc-pct" data-target="100">0</span><span class="text-[#10B981]">%</span>
-              </div>
-              <div class="h-4 bg-[#E2E8F0] rounded-full overflow-hidden">
-                <div class="h-full bg-[#10B981] rounded-full sc-bar" style="width: 0%"></div>
-              </div>
-              <p class="text-xs text-[#64748B] mt-1">100% lokal — keine CDN-Abhängigkeit</p>
-            </div>
+        <!-- Zero External DNS Footer -->
+        <div class="mt-5 flex items-start gap-3 rounded-xl p-4" style="background: #F0F4F8;">
+          <svg class="w-5 h-5 text-green-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          <div>
+            <span class="text-sm font-semibold text-green-700">0 externe CDN DNS Queries</span>
+            <span class="text-xs block text-green-600">Keine Daten an Dritte — alle Assets lokal gehostet</span>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <script>
-  // Count-Up Animation
-  function animateCountUp() {
-    const counters = document.querySelectorAll('.sc-ms, .sc-pct');
+  function animateSecurityConsole() {
+    // Count-up: Haupt-Zähler (Metric Cards)
+    const counters = document.querySelectorAll('.sc-counter');
     counters.forEach(el => {
       const target = parseInt(el.getAttribute('data-target'), 10);
       if (isNaN(target)) return;
@@ -101,88 +178,136 @@
       function update(now) {
         const elapsed = now - start;
         const progress = Math.min(elapsed / duration, 1);
-        // ease-out cubic
         const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(eased * target);
-        el.textContent = current;
-        if (progress < 1) {
-          requestAnimationFrame(update);
-        } else {
-          el.textContent = target;
-        }
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target;
       }
       requestAnimationFrame(update);
     });
 
-    // Animate bars
+    // Count-up: Latenz-Zeilen
+    const latencies = document.querySelectorAll('.sc-latency');
+    latencies.forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      if (isNaN(target)) return;
+      const duration = 600;
+      const start = performance.now();
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + ' ms';
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target + ' ms';
+      }
+      requestAnimationFrame(update);
+    });
+
+    // Bars animieren
     const bars = document.querySelectorAll('.sc-bar');
     bars.forEach(bar => {
-      const pctEl = bar.closest('div').parentElement.querySelector('.sc-pct') ||
-                    bar.closest('div').closest('div').querySelector('.sc-pct');
-      const target = pctEl ? parseInt(pctEl.getAttribute('data-target'), 10) : 0;
+      const parent = bar.closest('.rounded-xl');
+      let target = 0;
+      if (parent) {
+        const counter = parent.querySelector('.sc-counter');
+        if (counter) {
+          target = parseInt(counter.getAttribute('data-target'), 10);
+        }
+      }
+      // Map: 12ms → 30%, 22ms → 55%, 34ms → 85%, 8ms → 20%
+      const widthMap = { 12: 30, 22: 55, 34: 85, 8: 20 };
+      const pct = widthMap[target] || Math.min(target * 2.5, 100);
       bar.style.transition = 'width 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
-      bar.style.width = target + '%';
+      bar.style.width = pct + '%';
     });
   }
 
-  // Tab switching
-  function initTabs() {
-    const tabLocal = document.getElementById('sc-tab-local');
-    const tabExt = document.getElementById('sc-tab-ext');
-    const contentLocal = document.getElementById('sc-content-local');
-    const contentExt = document.getElementById('sc-content-ext');
-
-    if (!tabLocal || !tabExt || !contentLocal || !contentExt) return;
-
-    function setActive(local) {
-      tabLocal.classList.toggle('active', local);
-      tabExt.classList.toggle('active', !local);
-      contentLocal.classList.toggle('hidden', !local);
-      contentExt.classList.toggle('hidden', local);
-      // Run count-up when a tab becomes visible (first time)
-      if (local) {
-        animateCountUp();
-      } else {
-        animateCountUp();
-      }
-    }
-
-    tabLocal.addEventListener('click', () => setActive(true));
-    tabExt.addEventListener('click', () => setActive(false));
-  }
-
   document.addEventListener('DOMContentLoaded', () => {
-    initTabs();
-    // Initial animation on load
-    setTimeout(animateCountUp, 300);
+    // Trigger on load
+    setTimeout(animateSecurityConsole, 300);
   });
 </script>
 
 <style>
-  .sc-tab-btn {
-    color: #64748B;
-    background: #FFFFFF;
-    border-color: #E2E8F0;
-    cursor: pointer;
+  /* Status Dot mit Ping */
+  .sc-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #10B981;
+    position: relative;
   }
-  .sc-tab-btn:hover {
-    border-color: #4D7CFF;
+  .sc-dot::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.2);
+    animation: sc-ping 2s infinite;
+  }
+  @keyframes sc-ping {
+    75%, 100% { transform: scale(1.5); opacity: 0; }
+  }
+
+  /* Badge */
+  .sc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    background: rgba(16, 185, 129, 0.08);
+    color: #059669;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* Bar Tracks */
+  .sc-track {
+    background: #E2E8F0;
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .sc-bar {
+    height: 8px;
+    border-radius: 4px;
+    transition: width 0s;
+  }
+  .bar-fast { background: linear-gradient(90deg, #4D7CFF, #22d3ee); }
+  .bar-medium { background: linear-gradient(90deg, #22d3ee, #4D7CFF); }
+  .bar-slow { background: linear-gradient(90deg, #f59e0b, #f97316); }
+  .bar-success { background: linear-gradient(90deg, #10B981, #4D7CFF); }
+
+  /* Asset Count Badge */
+  .sc-asset-count {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: #E0E7FF;
     color: #4D7CFF;
   }
-  .sc-tab-btn.active {
-    background: #EEF2FF;
-    border-color: #4D7CFF;
-    color: #4D7CFF;
+
+  /* Asset Rows */
+  .sc-asset-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
   }
-  .sc-content.hidden {
-    display: none;
-  }
-  .sc-line {
-    padding: 0.35rem 0;
-    color: #0F172A;
-  }
-  .sc-ms, .sc-pct {
+  .sc-file-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: white;
     font-weight: 700;
-    color: #4D7CFF;
+    flex-shrink: 0;
   }
 </style>
