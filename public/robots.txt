@@ -1,0 +1,20 @@
+User-agent: GPTBot
+Disallow: /impressum
+Disallow: /datenschutz
+Disallow: /agb
+
+User-agent: PerplexityBot
+Disallow: /impressum
+Disallow: /datenschutz
+Disallow: /agb
+
+User-agent: Claude-Web
+Disallow: /impressum
+Disallow: /datenschutz
+Disallow: /agb
+
+User-agent: *
+Allow: /
+Disallow: /server/
+
+Sitemap: https://einfach-online.dev/sitemap.xml

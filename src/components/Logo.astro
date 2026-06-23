@@ -1,0 +1,30 @@
+---
+export interface Props {
+  class?: string;
+}
+
+const { class: className = 'h-9 w-auto' } = Astro.props;
+---
+
+<svg viewBox="0 0 400 300" class={className} xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradE" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4D7CFF" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="gradO" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#22d3ee" />
+    </linearGradient>
+  </defs>
+
+  <g>
+    <!-- E Shape (Solid for Print) -->
+    <path d="M 32.5 50 L 201.7 50 A 120 120 0 0 0 164.1 90 L 72.5 90 L 72.5 130 L 127.5 130 L 127.5 170 L 72.5 170 L 72.5 210 L 164.1 210 A 120 120 0 0 0 201.7 250 L 32.5 250 Z"
+          fill="url(#gradE)" />
+
+    <!-- O Shape (Solid for Print) -->
+    <path d="M 268 50 A 100 100 0 1 1 268 250 A 100 100 0 1 1 268 50 Z M 268 85 A 65 65 0 1 0 268 215 A 65 65 0 1 0 268 85 Z"
+          fill="url(#gradO)" />
+  </g>
+</svg>

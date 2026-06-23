@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import PricingCards from '../components/PricingCards.astro';
+---
+
+<Layout 
+  title="Leistungen & Preise | einfach-online.dev"
+  description="Transparente Preise für Webentwicklung und SEO. Digital Start €1.490 und Digital Flex €2.990. Persönlich betreut in der Steiermark."
+  canonical="https://einfach-online.dev/leistungen"
+>
+  <Header />
+  
+  <main class="pt-20">
+    <!-- Leistungen Hero -->
+    <section class="py-20 lg:py-28 section-padding text-center" aria-label="Leistungen Übersicht">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-text-primary mb-6" style="font-family: 'Geist', sans-serif; letter-spacing: -0.04em;">
+          Transparente Preise für Ihren <span class="gradient-text">Erfolg.</span>
+        </h1>
+        <p class="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto">
+          Moderne Webentwicklung, DSGVO-konform und auf Performance optimiert. Wählen Sie das Paket, das zu Ihrem Unternehmen passt.
+        </p>
+      </div>
+    </section>
+    
+    <PricingCards />
+  </main>
+  
+  <Footer />
+  <CookieBanner />
+</Layout>

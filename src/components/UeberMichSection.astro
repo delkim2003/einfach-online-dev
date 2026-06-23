@@ -1,0 +1,136 @@
+---
+// UeberMichSection.astro — Terminal-Codeblock + Persönlicher Text + 3 Stats
+---
+
+<section class="py-20 lg:py-28 section-padding" id="ueber-mich" aria-label="Über mich">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+      <!-- Left: Terminal / Code-Block -->
+      <div>
+        <div class="terminal-block">
+          <div class="terminal-header">
+            <span class="terminal-dot bg-[#EF4444]"></span>
+            <span class="terminal-dot bg-[#F59E0B]"></span>
+            <span class="terminal-dot bg-[#10B981]"></span>
+            <span class="ml-3 text-xs text-[#64748B] font-mono">terminal — bash</span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line"><span class="terminal-prompt">$</span> cat über-mich.txt</div>
+            <div class="terminal-line terminal-output"><span class="terminal-key">&gt; Name:</span> <span class="terminal-value">Philipp Schlemmer</span></div>
+            <div class="terminal-line terminal-output"><span class="terminal-key">&gt; Standort:</span> <span class="terminal-value">Gleisdorf, Steiermark</span></div>
+            <div class="terminal-line terminal-output"><span class="terminal-key">&gt; Erfahrung:</span> <span class="terminal-value">15+ Jahre Webentwicklung</span></div>
+            <div class="terminal-line terminal-output"><span class="terminal-key">&gt; Fokus:</span> <span class="terminal-value">DSGVO, Performance, GEO</span></div>
+            <div class="terminal-line terminal-output"><span class="terminal-key">&gt; Tools:</span> <span class="terminal-value">Astro, Drupal, Tailwind, SEO</span></div>
+            <div class="terminal-line"><span class="terminal-prompt">$</span> <span class="terminal-cursor">_</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Text + Stats -->
+      <div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] mb-6" style="font-family: 'Geist', sans-serif;">
+          Persönliche Betreuung<br />
+          <span class="text-[#4D7CFF]">statt Callcenter.</span>
+        </h2>
+
+        <p class="text-[#475569] leading-relaxed mb-4">
+          Kein Ticket-System. Keine Chatbots. Nur ein Mensch, der Ihr Projekt kennt.
+        </p>
+
+        <p class="text-[#475569] leading-relaxed mb-6">
+          Ich bin Philipp — Webentwickler aus Leidenschaft. Seit über 15 Jahren baue ich Websites, die nicht nur gut aussehen, sondern auch funktionieren. Mein Fokus liegt auf DSGVO-konformen, performanten Lösungen für kleine und mittlere Unternehmen in Österreich.
+        </p>
+
+        <p class="text-[#475569] leading-relaxed mb-8">
+          Keine versteckten Kosten. Keine Lock-in-Verträge. Nur ehrliche Beratung und handgemachte Qualität — persönlich betreut von der ersten Idee bis zum Launch und darüber hinaus.
+        </p>
+
+        <!-- 3 Stats -->
+        <div class="grid grid-cols-3 gap-4">
+          <div class="stat-card">
+            <p class="text-2xl font-extrabold text-[#4D7CFF]" style="font-family: 'Geist', sans-serif;">15+</p>
+            <p class="text-xs text-[#64748B] mt-1">Jahre</p>
+          </div>
+          <div class="stat-card">
+            <p class="text-2xl font-extrabold text-[#4D7CFF]" style="font-family: 'Geist', sans-serif;">50+</p>
+            <p class="text-xs text-[#64748B] mt-1">Projekte</p>
+          </div>
+          <div class="stat-card">
+            <p class="text-2xl font-extrabold text-[#4D7CFF]" style="font-family: 'Geist', sans-serif;">100%</p>
+            <p class="text-xs text-[#64748B] mt-1">DSGVO</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Terminal Block */
+  .terminal-block {
+    background: #0F172A;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #1E293B;
+    box-shadow: 0 8px 32px -8px rgba(15, 23, 42, 0.2);
+  }
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #1E293B;
+    border-bottom: 1px solid #334155;
+  }
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  .terminal-body {
+    padding: 1.25rem 1.5rem;
+    font-family: 'Courier New', 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: #CBD5E1;
+  }
+  .terminal-prompt {
+    color: #4D7CFF;
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
+  .terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1.1em;
+    background: #4D7CFF;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  .terminal-key {
+    color: #22D3EE;
+    margin-right: 0.5rem;
+  }
+  .terminal-value {
+    color: #E2E8F0;
+  }
+
+  /* Stat Cards */
+  .stat-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.25rem 0.75rem;
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .stat-card:hover {
+    border-color: #4D7CFF;
+    box-shadow: 0 4px 16px -4px rgba(77, 124, 255, 0.12);
+  }
+</style>

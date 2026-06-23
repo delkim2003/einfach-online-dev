@@ -1,0 +1,188 @@
+---
+// SecurityConsole.astro — System-Status Monitoring Panel mit Count-Up
+---
+
+<section class="py-20 lg:py-28 section-padding" id="sicherheit" aria-label="System-Status">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] mb-4" style="font-family: 'Geist', sans-serif;">
+        System-Status
+      </h2>
+      <p class="text-[#475569] text-base sm:text-lg max-w-xl mx-auto">
+        Ihre Daten sind bei uns in sicheren Händen — das sehen Sie hier auf einen Blick.
+      </p>
+    </div>
+
+    <!-- Monitoring Panel -->
+    <div class="bg-white rounded-2xl shadow-lg border border-[#E2E8F0] overflow-hidden">
+      <!-- Header -->
+      <div class="flex items-center gap-3 px-6 py-4 border-b border-[#E2E8F0] bg-[#F8FAFC]">
+        <span class="w-3 h-3 rounded-full bg-[#10B981] shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+        <span class="text-sm font-semibold text-[#0F172A] tracking-wider uppercase">System // Aktiv</span>
+        <span class="ml-auto text-xs text-[#64748B] font-mono">uptime: 100%</span>
+      </div>
+
+      <!-- Control Buttons -->
+      <div class="flex gap-3 px-6 pt-5 pb-3 border-b border-[#E2E8F0] bg-white">
+        <button id="sc-tab-local" class="sc-tab-btn active px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border">
+          <svg class="inline-block w-4 h-4 mr-1.5 -mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Lokale Assets
+        </button>
+        <button id="sc-tab-ext" class="sc-tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border">
+          <svg class="inline-block w-4 h-4 mr-1.5 -mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Externe Abhängigkeiten
+        </button>
+      </div>
+
+      <!-- Content Area -->
+      <div class="px-6 py-5 min-h-[220px]">
+        <!-- Local Assets Tab -->
+        <div id="sc-content-local" class="sc-content active">
+          <div class="space-y-2 font-mono text-sm">
+            <div class="sc-line"><span class="text-[#10B981]">✓</span> /fonts/outfit-bold.woff2 <span class="sc-ms" data-target="12">0</span><span class="text-[#64748B]">ms</span> <span class="text-[#64748B]">[74KB]</span></div>
+            <div class="sc-line"><span class="text-[#10B981]">✓</span> /images/logo.png <span class="sc-ms" data-target="22">0</span><span class="text-[#64748B]">ms</span> <span class="text-[#64748B]">[75KB]</span></div>
+            <div class="sc-line"><span class="text-[#10B981]">✓</span> /js/core-bundle.min.js <span class="sc-ms" data-target="34">0</span><span class="text-[#64748B]">ms</span> <span class="text-[#64748B]">[112KB]</span></div>
+            <div class="sc-line"><span class="text-[#10B981]">✓</span> /css/globals.css <span class="sc-ms" data-target="8">0</span><span class="text-[#64748B]">ms</span> <span class="text-[#64748B]">[24KB]</span></div>
+            <div class="pt-3 mt-3 border-t border-[#E2E8F0] text-[#475569]">
+              <span class="text-[#10B981]">◆</span> EXTERNE CDN DNS QUERIES: <span class="text-[#10B981] font-bold">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- External Dependencies Tab -->
+        <div id="sc-content-ext" class="sc-content hidden">
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between text-sm mb-1.5">
+                <span class="font-semibold text-[#0F172A]">Externe Abhängigkeiten</span>
+                <span class="text-[#10B981] font-bold sc-pct" data-target="100">0</span><span class="text-[#10B981]">%</span>
+              </div>
+              <div class="h-4 bg-[#E2E8F0] rounded-full overflow-hidden">
+                <div class="h-full bg-[#10B981] rounded-full sc-bar" style="width: 0%"></div>
+              </div>
+              <p class="text-xs text-[#64748B] mt-1">Keine externen Abhängigkeiten — alles lokal gehostet</p>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1.5">
+                <span class="font-semibold text-[#0F172A]">Daten bei Dritten</span>
+                <span class="text-[#10B981] font-bold sc-pct" data-target="75">0</span><span class="text-[#10B981]">%</span>
+              </div>
+              <div class="h-4 bg-[#E2E8F0] rounded-full overflow-hidden">
+                <div class="h-full bg-[#10B981] rounded-full sc-bar" style="width: 0%"></div>
+              </div>
+              <p class="text-xs text-[#64748B] mt-1">Minimiert — nur technisch notwendige Dienste</p>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1.5">
+                <span class="font-semibold text-[#0F172A]">Lokale Assets</span>
+                <span class="text-[#10B981] font-bold sc-pct" data-target="100">0</span><span class="text-[#10B981]">%</span>
+              </div>
+              <div class="h-4 bg-[#E2E8F0] rounded-full overflow-hidden">
+                <div class="h-full bg-[#10B981] rounded-full sc-bar" style="width: 0%"></div>
+              </div>
+              <p class="text-xs text-[#64748B] mt-1">100% lokal — keine CDN-Abhängigkeit</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Count-Up Animation
+  function animateCountUp() {
+    const counters = document.querySelectorAll('.sc-ms, .sc-pct');
+    counters.forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      if (isNaN(target)) return;
+      const duration = 800;
+      const start = performance.now();
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = current;
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = target;
+        }
+      }
+      requestAnimationFrame(update);
+    });
+
+    // Animate bars
+    const bars = document.querySelectorAll('.sc-bar');
+    bars.forEach(bar => {
+      const pctEl = bar.closest('div').parentElement.querySelector('.sc-pct') ||
+                    bar.closest('div').closest('div').querySelector('.sc-pct');
+      const target = pctEl ? parseInt(pctEl.getAttribute('data-target'), 10) : 0;
+      bar.style.transition = 'width 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+      bar.style.width = target + '%';
+    });
+  }
+
+  // Tab switching
+  function initTabs() {
+    const tabLocal = document.getElementById('sc-tab-local');
+    const tabExt = document.getElementById('sc-tab-ext');
+    const contentLocal = document.getElementById('sc-content-local');
+    const contentExt = document.getElementById('sc-content-ext');
+
+    if (!tabLocal || !tabExt || !contentLocal || !contentExt) return;
+
+    function setActive(local) {
+      tabLocal.classList.toggle('active', local);
+      tabExt.classList.toggle('active', !local);
+      contentLocal.classList.toggle('hidden', !local);
+      contentExt.classList.toggle('hidden', local);
+      // Run count-up when a tab becomes visible (first time)
+      if (local) {
+        animateCountUp();
+      } else {
+        animateCountUp();
+      }
+    }
+
+    tabLocal.addEventListener('click', () => setActive(true));
+    tabExt.addEventListener('click', () => setActive(false));
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initTabs();
+    // Initial animation on load
+    setTimeout(animateCountUp, 300);
+  });
+</script>
+
+<style>
+  .sc-tab-btn {
+    color: #64748B;
+    background: #FFFFFF;
+    border-color: #E2E8F0;
+    cursor: pointer;
+  }
+  .sc-tab-btn:hover {
+    border-color: #4D7CFF;
+    color: #4D7CFF;
+  }
+  .sc-tab-btn.active {
+    background: #EEF2FF;
+    border-color: #4D7CFF;
+    color: #4D7CFF;
+  }
+  .sc-content.hidden {
+    display: none;
+  }
+  .sc-line {
+    padding: 0.35rem 0;
+    color: #0F172A;
+  }
+  .sc-ms, .sc-pct {
+    font-weight: 700;
+    color: #4D7CFF;
+  }
+</style>

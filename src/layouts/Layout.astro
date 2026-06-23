@@ -1,0 +1,150 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "Ihre Website in der Steiermark, sichtbar für Google und KI. Persönlich betreut.",
+  canonical = "https://einfach-online.dev",
+  ogImage = "/images/og-default.webp"
+} = Astro.props;
+
+const baseUrl = "https://einfach-online.dev";
+const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
+const siteName = "einfach-online.dev";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": siteName,
+  "description": description,
+  "url": baseUrl,
+  "email": "info@einfach-online.dev",
+  "telephone": "+43 664 1234567",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Ungerdorf 279/4",
+    "postalCode": "8200",
+    "addressLocality": "Gleisdorf",
+    "addressRegion": "Steiermark",
+    "addressCountry": "AT"
+  },
+  "founder": { "@type": "Person", "name": "Philipp Schlemmer" },
+  "priceRange": "€€",
+  "areaServed": ["AT"],
+  "knowsAbout": ["Webentwicklung", "SEO", "GEO", "KI-Suche", "Drupal", "Astro"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Website-Pakete",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Digital Start",
+          "description": "Astro SSG Website"
+        },
+        "price": "1490",
+        "priceCurrency": "EUR"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Digital Flex",
+          "description": "Drupal CMS Website"
+        },
+        "price": "2990",
+        "priceCurrency": "EUR"
+      }
+    ]
+  }
+};
+---
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Philipp Schlemmer" />
+  <meta name="theme-color" content="#FFFFFF" />
+
+  <link rel="icon" type="image/svg+xml" href="/svg/logo_ohne_glow.svg" />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Gipfel Global Styles -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+    :root {
+      --primary: #4D7CFF;
+      --primary-hover: #3B6BF5;
+      --secondary: #22d3ee;
+      --white: #FFFFFF;
+      --off-white: #F8FAFC;
+      --text-headline: #0F172A;
+      --text-body: #334155;
+      --text-muted: #64748B;
+      --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #FFFFFF;
+      color: #334155;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    img,picture,svg,video { display: block; max-width: 100%; height: auto; }
+    a { color: #4D7CFF; text-decoration: none; transition: color 0.3s ease; }
+    a:hover { color: #3B6BF5; }
+    h1,h2,h3,h4,h5,h6 { font-family: 'Inter',sans-serif; font-weight: 800; line-height: 1.15; color: #0F172A; letter-spacing: -0.02em; }
+    p { line-height: 1.65; color: #334155; max-width: 65ch; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    ul,ol { list-style: none; }
+    ::selection { background: #4D7CFF; color: #FFFFFF; }
+  </style>
+
+  <title>{title} | {siteName}</title>
+
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:alt" content={title} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_AT" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+  <meta name="twitter:image:alt" content={title} />
+
+  <link rel="preconnect" href={baseUrl} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</head>
+<body class="">
+  <slot />
+
+  <script src="/scripts/cookie-banner.js" defer></script>
+</body>
+</html>

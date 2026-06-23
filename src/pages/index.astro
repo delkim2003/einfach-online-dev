@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import HeroSection from '../components/HeroSection.astro';
+import LeistungenSection from '../components/LeistungenSection.astro';
+import UeberMichSection from '../components/UeberMichSection.astro';
+import SecurityConsole from '../components/SecurityConsole.astro';
+import PrinzipienSection from '../components/PrinzipienSection.astro';
+import ProzessSection from '../components/ProzessSection.jsx';
+import FaqSection from '../components/FaqSection.astro';
+import PricingSection from '../components/PricingSection.astro';
+import KontaktSection from '../components/KontaktSection.astro';
+---
+
+<Layout
+  title="Webdesign aus der Steiermark"
+  description="Webdesign aus der Steiermark. Mit Herz, Hand und Gipfelblick. Astro & Drupal, persönlich betreut aus Gleisdorf."
+  canonical="https://einfach-online.dev/"
+>
+  <Header />
+
+  <main style="position:relative; z-index:1; background:#FFFFFF;">
+    <HeroSection />
+
+    <PrinzipienSection />
+    <LeistungenSection />
+    <UeberMichSection />
+    <ProzessSection client:load />
+    <SecurityConsole />
+    <FaqSection />
+    <PricingSection />
+    <KontaktSection />
+  </main>
+
+  <Footer />
+  <CookieBanner />
+</Layout>

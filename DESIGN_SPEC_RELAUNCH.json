@@ -1,0 +1,1234 @@
+{
+  "meta": {
+    "title": "Design Specification — einfach-online.dev Relaunch",
+    "target_framework": "Astro + React + Tailwind CSS v4",
+    "target_builder": "GLM 5.2",
+    "design_agent": "Athena (Design/UI)",
+    "date": "2026-06-23",
+    "version": "1.0",
+    "notes": "Kombiniert Content & visuelle Kraft der Online-Version (dark/Tech) mit der Struktur der Offline-Relaunch-Version"
+  },
+
+  "design_tokens": {
+    "colors": {
+      "background": {
+        "page": "#051424",
+        "surface": "#0a1a2e",
+        "card": "#0d1f36",
+        "card_hover": "#0f2340",
+        "section_alt": "#081829"
+      },
+      "text": {
+        "primary": "#ffffff",
+        "secondary": "#94a3b8",
+        "muted": "rgba(148, 163, 184, 0.6)",
+        "headline": "#f1f5f9"
+      },
+      "accent": {
+        "purple": "#a855f7",
+        "purple_hover": "#b06af8",
+        "blue": "#3b82f6",
+        "blue_hover": "#6096f7",
+        "cyan": "#22d3ee",
+        "cyan_hover": "#3dddec",
+        "gradient_primary": "linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #22d3ee 100%)",
+        "gradient_subtle": "linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(59,130,246,0.08) 50%, rgba(34,211,238,0.06) 100%)"
+      },
+      "border": {
+        "default": "rgba(255,255,255,0.06)",
+        "hover": "rgba(255,255,255,0.12)",
+        "accent": "rgba(168,85,247,0.3)"
+      },
+      "status": {
+        "success": "#22c55e",
+        "warning": "#eab308",
+        "error": "#ef4444",
+        "info": "#3b82f6"
+      },
+      "tailwind_mapping": {
+        "page_bg": "bg-[#051424]",
+        "surface_bg": "bg-[#0a1a2e]",
+        "card_bg": "bg-[#0d1f36]",
+        "text_primary": "text-white",
+        "text_secondary": "text-slate-400",
+        "accent_purple": "text-purple-500",
+        "accent_blue": "text-blue-500",
+        "accent_cyan": "text-cyan-400",
+        "border_default": "border-white/5",
+        "border_hover": "border-white/10"
+      }
+    },
+    "typography": {
+      "headline_font": "'Inter', 'Geist', system-ui, sans-serif",
+      "body_font": "'Inter', system-ui, sans-serif",
+      "mono_font": "'JetBrains Mono', 'Fira Code', monospace",
+      "sizes": {
+        "h1_desktop": "88px",
+        "h1_mobile": "clamp(2.5rem, 10vw, 3.5rem)",
+        "h2_desktop": "48px",
+        "h2_mobile": "clamp(1.75rem, 5vw, 2.25rem)",
+        "h3": "24px",
+        "body": "16px",
+        "small": "14px"
+      },
+      "weights": {
+        "headline": 800,
+        "subheadline": 700,
+        "body": 400,
+        "strong": 600
+      },
+      "tracking": {
+        "headline": "-0.03em",
+        "tight": "-0.02em",
+        "wide": "0.02em",
+        "uppercase": "0.15em"
+      }
+    },
+    "spacing": {
+      "section_padding_desktop": "clamp(5rem, 10vw, 8rem)",
+      "section_padding_mobile": "clamp(3rem, 6vw, 4rem)",
+      "container_max_width": "1200px",
+      "container_padding": "clamp(16px, 4vw, 48px)",
+      "card_padding": "2rem",
+      "grid_gap": "24px"
+    },
+    "effects": {
+      "glow_purple": "0 0 20px rgba(168,85,247,0.15), 0 0 40px rgba(168,85,247,0.08)",
+      "glow_blue": "0 0 20px rgba(59,130,246,0.15), 0 0 40px rgba(59,130,246,0.08)",
+      "glow_cyan": "0 0 20px rgba(34,211,238,0.15), 0 0 40px rgba(34,211,238,0.08)",
+      "glass_bg": "rgba(10,26,46,0.6)",
+      "glass_border": "rgba(255,255,255,0.08)",
+      "glass_blur": "12px",
+      "border_radius": {
+        "sm": "8px",
+        "md": "12px",
+        "lg": "16px",
+        "xl": "24px",
+        "full": "9999px"
+      },
+      "grid_bg": "repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(168,85,247,0.03) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(168,85,247,0.03) 40px)"
+    },
+    "animations": {
+      "ease": [0.22, 1, 0.36, 1],
+      "duration_fast": "0.2s",
+      "duration_normal": "0.3s",
+      "duration_slow": "0.6s",
+      "engine": "Framer Motion (React-Komponenten), CSS @keyframes (Einfache Effekte)",
+      "framer_motion_presets": {
+        "fade_up": {
+          "initial": { "opacity": 0, "y": 30 },
+          "animate": { "opacity": 1, "y": 0 },
+          "transition": { "duration": 0.7, "ease": [0.22, 1, 0.36, 1] }
+        },
+        "fade_in": {
+          "initial": { "opacity": 0 },
+          "animate": { "opacity": 1 },
+          "transition": { "duration": 0.6, "ease": [0.22, 1, 0.36, 1] }
+        },
+        "stagger_children": {
+          "staggerChildren": 0.15,
+          "delayChildren": 0.2
+        }
+      }
+    }
+  },
+
+  "sections": [
+    {
+      "id": "header",
+      "name": "HEADER — Navigation",
+      "briefing_reference": "SEKTION 2",
+      "layout": {
+        "position": "fixed",
+        "z_index": 50,
+        "height": "64px",
+        "max_width": "1200px",
+        "margin": "0 auto",
+        "padding": "0 clamp(16px, 4vw, 48px)",
+        "display": "flex",
+        "align_items": "center",
+        "gap": "1.25rem",
+        "transition": "background 0.3s ease, box-shadow 0.3s ease"
+      },
+      "colors": {
+        "background_transparent": "transparent",
+        "background_scrolled": "#051424",
+        "background_scrolled_border": "rgba(255,255,255,0.05)",
+        "box_shadow_scrolled": "0 1px 3px rgba(0,0,0,0.3)",
+        "link_default": "#94a3b8",
+        "link_hover": "#a855f7",
+        "link_active": "#a855f7",
+        "cta_text": "#ffffff",
+        "cta_bg": "linear-gradient(135deg, #a855f7, #3b82f6)",
+        "cta_hover_bg": "linear-gradient(135deg, #b06af8, #6096f7)",
+        "language_active": "#a855f7",
+        "language_inactive": "#64748b"
+      },
+      "components": {
+        "logo": {
+          "type": "react/astro",
+          "src": "Logo.astro (sinngemäß in React übertragen)",
+          "height": "2.25rem",
+          "hover": "translateY(-1px)"
+        },
+        "nav_links": [
+          { "label": "LEISTUNGEN", "href": "#leistungen" },
+          { "label": "PHILOSOPHIE", "href": "#prinzipien" },
+          { "label": "FAQ", "href": "#faq" }
+        ],
+        "language_switcher": {
+          "type": "DE/EN Toggle",
+          "layout": "Two inline buttons/links",
+          "active_styles": "color: #a855f7; font-weight: 600",
+          "inactive_styles": "color: #64748b",
+          "separator": "| oder · zwischen DE/EN",
+          "href_de": "/",
+          "href_en": "/en"
+        },
+        "cta_button": {
+          "label": "KONTAKT",
+          "href": "#kontakt",
+          "effect": "SHIMMER",
+          "shimmer_css": "background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); background-size: 200% 100%; animation: shimmer 2s infinite;",
+          "shimmer_keyframes": "@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }",
+          "padding": "0.6rem 1.5rem",
+          "border_radius": "10px",
+          "font_weight": 600,
+          "font_size": "0.9375rem"
+        },
+        "mobile_menu": {
+          "toggle": "Hamburger Icon (3 Linien → X)",
+          "panel": "Fixed full-width dropdown unter Header",
+          "background": "#0a1a2e",
+          "border": "1px solid rgba(255,255,255,0.06)",
+          "animation": "max-height + opacity transition"
+        }
+      },
+      "animations": {
+        "scroll_effect": "Transparent → #051424 beim Scrollen nach 60px",
+        "link_hover": "color #94a3b8 → #a855f7 (0.2s ease)",
+        "cta_hover": "background brightness increase, translateY(-1px)",
+        "mobile_panel": "slide-down + fade-in (0.4s ease)"
+      },
+      "mobile": {
+        "breakpoint": "< 768px",
+        "changes": "Hamburger sichtbar, Desktop-Nav + CTA versteckt; mobile panel mit full-width links; Logo bleibt links"
+      },
+      "spezial": "Shimmer-Animation auf CTA-Button via CSS @keyframes; Language Switcher als inline-flex Gruppe"
+    },
+    {
+      "id": "hero",
+      "name": "HERO — Animated Glitch-Text",
+      "briefing_reference": "SEKTION 1",
+      "layout": {
+        "type": "fullscreen",
+        "height": "100vh",
+        "min_height": "600px",
+        "max_height": "1080px",
+        "position": "relative",
+        "overflow": "hidden",
+        "content_alignment": "flex, row: text left, graphic right (desktop); centered column (mobile)",
+        "container_max_width": "1200px",
+        "container_padding": "0 clamp(16px, 4vw, 48px)",
+        "z_index_layers": {
+          "bg_grid": 1,
+          "particles": 2,
+          "aurora_glow": 3,
+          "content": 10,
+          "scroll_indicator": 15
+        }
+      },
+      "colors": {
+        "background": "#051424",
+        "grid_color": "rgba(168,85,247,0.04)",
+        "text_headline": "#ffffff",
+        "text_subline": "#94a3b8",
+        "accent_glitch_purple": "#a855f7",
+        "accent_glitch_cyan": "#22d3ee",
+        "accent_glitch_blue": "#3b82f6",
+        "badge_bg": "rgba(168,85,247,0.1)",
+        "badge_border": "rgba(168,85,247,0.2)",
+        "badge_text": "#a855f7",
+        "zitat_box_bg": "rgba(168,85,247,0.06)",
+        "zitat_box_border_left": "3px solid #a855f7",
+        "cta_primary_bg": "linear-gradient(135deg, #a855f7, #3b82f6)",
+        "cta_primary_text": "#ffffff",
+        "cta_secondary_bg": "transparent",
+        "cta_secondary_border": "rgba(255,255,255,0.15)",
+        "cta_secondary_text": "#94a3b8",
+        "cta_secondary_hover": "rgba(255,255,255,0.08)"
+      },
+      "components": {
+        "badge": {
+          "text": "DSGVO-sicher · EU-Hosting · Fair",
+          "style": "inline-flex, small pill, border, subtle glow",
+          "font_size": "0.8125rem",
+          "font_weight": 500,
+          "border_radius": "9999px",
+          "padding": "0.3rem 1rem",
+          "margin_bottom": "1.5rem",
+          "icon": "optional: kleinen Neon-Pulse-Punkt voranstellen"
+        },
+        "glitch_headline": {
+          "text": "Digitale Exzellenz für KMUs.",
+          "animation_type": "Buchstabenweise (letter-by-letter) für 'Digitale Exzellenz', Cryptic-Effekt '$0DOM → KMUs'",
+          "implementation": "React Component mit useState + useEffect für Buchstaben-Timing",
+          "font_size": "clamp(2.5rem, 6vw, 88px)",
+          "font_weight": 800,
+          "line_height": "1.05",
+          "letter_spacing": "-0.03em",
+          "color": "#ffffff",
+          "glitch_colors": ["#a855f7", "#22d3ee", "#3b82f6"],
+          "glitch_animation": {
+            "keyframes": "@keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(2px, -2px); } 60% { transform: translate(-1px, 1px); } 80% { transform: translate(1px, -1px); } 100% { transform: translate(0); } }"
+          }
+        },
+        "cryptic_animation": {
+          "target": "für KMUs.",
+          "effect": "Jeder Buchstabe durchläuft zufällige Zeichen ($0DOM) bevor er zum finalen Buchstaben wird",
+          "timing": "~50ms pro Buchstabe, gestaffelt",
+          "loop": "Auf Wunsch beim Hover/Viewport erneut abspielen"
+        },
+        "subtext": {
+          "text": "Wir bauen Ihre digitale Präsenz – DSGVO-konform, blitzschnell und persönlich betreut. Transparente Kosten, faire Konditionen und keinerlei Lock-in-Effekte.",
+          "font_size": "clamp(1rem, 1.2vw, 1.125rem)",
+          "color": "#94a3b8",
+          "max_width": "65ch",
+          "margin_bottom": "1.5rem",
+          "line_height": "1.65"
+        },
+        "kerneffekt_zitat": {
+          "text": "\"Messbar. Performant. Sicher. – DSGVO-konform, blitzschnell und persönlich betreut.\"",
+          "style": "Box mit border-left: 3px solid #a855f7, bg: rgba(168,85,247,0.06), padding: 1rem 1.25rem",
+          "font_size": "0.95rem",
+          "color": "#c4b5e3",
+          "margin_bottom": "2rem",
+          "border_radius": "0 8px 8px 0",
+          "font_style": "italic"
+        },
+        "logo_graphic": {
+          "position": "right side (desktop)",
+          "type": "EO Brand Logo (SVG) mit Glow-Effekt",
+          "size": "clamp(120px, 20vw, 200px)",
+          "animation": "soft pulse / floating animation",
+          "mobile": "hidden on mobile"
+        },
+        "ctas": {
+          "cta_primary": {
+            "label": "Leistungen ansehen",
+            "href": "#leistungen",
+            "style": "solid gradient button with arrow icon",
+            "padding": "0.875rem 2rem"
+          },
+          "cta_secondary": {
+            "label": "So arbeiten wir",
+            "href": "#prinzipien",
+            "style": "outline/ghost button with transparent bg",
+            "padding": "0.875rem 2rem"
+          }
+        },
+        "scroll_indicator": {
+          "type": "bouncing dot/arrow",
+          "color": "rgba(168,85,247,0.5)",
+          "position": "absolute, bottom: 2rem, center"
+        }
+      },
+      "animations": {
+        "glitch_text": "CSS @keyframes glitch + React State für Buchstaben-Iteration",
+        "cryptic_reveal": "500ms pro Wort, Buchstaben-Randomisierung via setInterval",
+        "particle_bg": "Optional: Canvas Partikel-Effekt (Backend: einfache Canvas-Animation oder CSS-Pseudo-Elemente)",
+        "cta_hover": "scale(1.02) + brightness boost",
+        "scroll_indicator": "bounce y-axis: [0, 6, 0] (Framer Motion Repeat)",
+        "logo_graphic": "float: translateY oscillate ±5px (10s infinite)"
+      },
+      "mobile": {
+        "breakpoint": "< 768px",
+        "changes": "Text zentriert, Logo-Grafik rechts versteckt, CTAs gestapelt (column), Headline kleiner (clamp(2.5rem, 10vw, 3.5rem))"
+      },
+      "spezial": "Buchstabenweise Glitch-Animation + Cryptic-Effekt für 'KMUs' — das Herzstück; Kerneffekt-Zitat in lila Box"
+    },
+    {
+      "id": "prinzipien",
+      "name": "PRINZIPIEN — Wofür wir stehen",
+      "briefing_reference": "SEKTION 3",
+      "layout": {
+        "type": "section",
+        "section_id": "prinzipien",
+        "background": "#051424",
+        "padding": "clamp(5rem, 10vw, 8rem) 0",
+        "max_width": "1200px",
+        "margin": "0 auto",
+        "content": "eyebrow + heading + subline + tabs (3) + security console",
+        "grid": "single column, tabs horizontal row, console below tabs"
+      },
+      "colors": {
+        "background": "#051424",
+        "eyebrow_line": "linear-gradient(90deg, #a855f7, #22d3ee)",
+        "eyebrow_text": "#a855f7",
+        "heading": "#f1f5f9",
+        "subline": "#94a3b8",
+        "tab_active_bg": "rgba(168,85,247,0.1)",
+        "tab_active_border": "#a855f7",
+        "tab_active_text": "#a855f7",
+        "tab_inactive_bg": "transparent",
+        "tab_inactive_border": "rgba(255,255,255,0.06)",
+        "tab_inactive_text": "#64748b",
+        "tab_hover_bg": "rgba(168,85,247,0.05)",
+        "tab_content_bg": "#0a1a2e",
+        "tab_content_border": "rgba(255,255,255,0.06)",
+        "tab_tags_bg": "rgba(168,85,247,0.08)",
+        "tab_tags_text": "#a855f7",
+        "console_bg": "#060a14",
+        "console_border": "rgba(34,211,238,0.15)",
+        "console_header": "#22d3ee",
+        "console_text": "#94a3b8",
+        "console_success": "#22c55e",
+        "console_accent": "#22d3ee"
+      },
+      "components": {
+        "eyebrow": {
+          "type": "gradient line + label",
+          "label": "PRINZIPIEN",
+          "line_width": "32px",
+          "line_height": "3px"
+        },
+        "heading": {
+          "tag": "h2",
+          "text": "Wofür wir stehen",
+          "font_size": "clamp(1.75rem, 3.5vw, 48px)",
+          "font_weight": 700,
+          "letter_spacing": "-0.02em",
+          "margin_bottom": "1rem"
+        },
+        "subline": {
+          "tag": "p",
+          "text": "Drei Prinzipien. Eine Haltung. Eine Website ist kein Selbstzweck. Sie soll Ihr Geschäft voranbringen – sicher, schnell und ohne Abhängigkeiten.",
+          "max_width": "65ch",
+          "margin_bottom": "3rem"
+        },
+        "tabs": {
+          "type": "Horizontal Tab Navigation (3 Tabs)",
+          "implementation": "React Component mit useState für activeTab",
+          "items": [
+            {
+              "id": "unabhaengig",
+              "number": "01",
+              "title": "Unabhängig",
+              "detail": "Ihre Website läuft ohne Google, Amazon & Co. Wir hosten alle Dateien direkt bei uns – keine externen Skripte, keine versteckten Datenabflüsse, keine Abhängigkeiten von Dritten. Ihre Seite gehört Ihnen, technisch und rechtlich.",
+              "tags": ["Lokale Fonts", "Kein CDN", "Kein Google-Tracking", "Puristisches CSS"]
+            },
+            {
+              "id": "sicher",
+              "number": "02",
+              "title": "Sicher",
+              "detail": "Ihre Kundendaten bleiben in Europa. DSGVO ist für uns kein Formular, das man abhakt, sondern Bauprinzip. Kein Cookie-Banner nötig, weil wir gar nicht erst tracken. Kein US-Tool, kein Datenleck.",
+              "tags": ["DSGVO by Design", "EU-Rechenzentrum", "Cookie-frei", "Kein US-Transfer"]
+            },
+            {
+              "id": "schnell",
+              "number": "03",
+              "title": "Schnell",
+              "detail": "Performantes Hosting in deutschen Rechenzentren. Statisch generierte Seiten laden besonders schnell – auch bei schwachem Handy-Empfang.",
+              "tags": ["Schnelle Ladezeit", "Statisches Rendering", "Mobil optimiert", "CDN-frei"]
+            }
+          ],
+          "tab_button_style": {
+            "padding": "0.85rem 1.5rem",
+            "border_radius": "10px",
+            "border_width": "1px",
+            "font_weight": 600,
+            "font_size": "0.9375rem",
+            "transition": "all 0.2s ease",
+            "display": "inline-flex",
+            "align_items": "center",
+            "gap": "0.4rem"
+          },
+          "tab_panel_style": {
+            "background": "#0a1a2e",
+            "border": "1px solid rgba(255,255,255,0.06)",
+            "border_radius": "16px",
+            "padding": "2rem",
+            "margin_top": "1.5rem"
+          },
+          "tags_style": {
+            "display": "flex",
+            "flex_wrap": "wrap",
+            "gap": "0.5rem",
+            "margin_top": "1.25rem",
+            "tag_bg": "rgba(168,85,247,0.08)",
+            "tag_text": "#a855f7",
+            "tag_padding": "0.3rem 0.8rem",
+            "tag_border_radius": "9999px",
+            "tag_font_size": "0.8125rem"
+          }
+        },
+        "security_console": {
+          "type": "Simulierte Terminal-Console",
+          "position": "below the tab panel",
+          "margin_top": "2rem",
+          "implementation": "React Component mit festen, animierten Daten",
+          "header": "SYSTEM // AKTIV",
+          "seed_line": "SEC_SEED: 0x<random-hex>",
+          "location_line": "STANDORT: DEUTSCHLAND",
+          "divider": "────────────────────────────",
+          "check_title": "Prüfung",
+          "status": "LOKAL GEHOSTET – NULL EXTERNE ABHÄNGIGKEITEN",
+          "file_list": [
+            { "path": "/fonts/outfit-bold.woff2", "time": "12ms", "size": "74KB" },
+            { "path": "/images/logo.png", "time": "22ms", "size": "75KB" },
+            { "path": "/js/core-bundle.min.js", "time": "34ms", "size": "112KB" },
+            { "path": "/css/globals.css", "time": "8ms", "size": "24KB" }
+          ],
+          "stats": [
+            "0% Externe Abhängigkeiten",
+            "Minimiert Daten bei Dritten",
+            "100% Lokale Assets"
+          ],
+          "colors": {
+            "bg": "#060a14",
+            "border": "rgba(34,211,238,0.15)",
+            "header_text": "#22d3ee",
+            "body_text": "#94a3b8",
+            "checkmark": "#22c55e",
+            "accent": "#22d3ee",
+            "divider": "rgba(34,211,238,0.2)"
+          },
+          "typing_animation": "Buchstaben erscheinen mit ~30ms Verzögerung (CSS animation: typing)",
+          "font": "'JetBrains Mono', 'Fira Code', monospace",
+          "font_size": "0.85rem",
+          "line_height": "1.6"
+        }
+      },
+      "animations": {
+        "tab_switch": "Framer Motion AnimatePresence für content swap (fade + slide)",
+        "console_typing": "CSS @keyframes typing (blink cursor, char-by-char reveal)",
+        "stagger_fade": "Karten/Inhalt mit delay gestaffelt einblenden"
+      },
+      "mobile": {
+        "breakpoint": "< 768px",
+        "changes": "Tabs als vertikale Liste (full-width buttons), Console kleiner font, file_list gestackt",
+        "tab_button": "full width, text left"
+      },
+      "spezial": "Security Console mit Terminal-Optik + typing-Animation; Tabs mit Nummern-Prefix (01, 02, 03); Tags als Pill-Elemente"
+    },
+    {
+      "id": "leistungen",
+      "name": "LEISTUNGEN — Was ich für Sie tun kann",
+      "briefing_reference": "SEKTION 4",
+      "layout": {
+        "type": "section",
+        "section_id": "leistungen",
+        "background": "#081829",
+        "padding": "clamp(5rem, 10vw, 8rem) 0",
+        "max_width": "1200px",
+        "margin": "0 auto",
+        "grid": "3 columns, auto-fit minmax(320px, 1fr)",
+        "gap": "24px"
+      },
+      "colors": {
+        "background": "#081829",
+        "eyebrow_line": "linear-gradient(90deg, #a855f7, #22d3ee)",
+        "eyebrow_text": "#a855f7",
+        "heading": "#f1f5f9",
+        "subline": "#94a3b8",
+        "card_bg": "#0a1a2e",
+        "card_border": "rgba(255,255,255,0.06)",
+        "card_hover_border": "#a855f7",
+        "card_hover_shadow": "0 4px 24px rgba(168,85,247,0.08)",
+        "card_title": "#ffffff",
+        "card_body": "#94a3b8",
+        "card_icon_purple": "#a855f7",
+        "card_icon_cyan": "#22d3ee",
+        "card_link": "#a855f7",
+        "card_link_hover": "#b06af8"
+      },
+      "components": {
+        "eyebrow": { "label": "LEISTUNGEN" },
+        "heading": {
+          "text": "Was ich für Sie tun kann",
+          "font_size": "clamp(1.75rem, 3.5vw, 48px)"
+        },
+        "subline": {
+          "text": "Von der ersten Idee bis zur fertigen Website – maßgeschneidert, transparent und mit viel Leidenschaft fürs Detail."
+        },
+        "cards": [
+          {
+            "id": "webdesign",
+            "title": "Webdesign & Entwicklung",
+            "icon": "Code/Laptop (lucide: Monitor, Code2)",
+            "description": "Maßgeschneiderte Websites mit modernem Design, optimaler Performance und vollständiger DSGVO-Konformität.",
+            "href": "#kontakt"
+          },
+          {
+            "id": "cms",
+            "title": "CMS & Redaktionssysteme",
+            "icon": "Layers/Drupal (lucide: Layers, FolderTree)",
+            "description": "Flexible Content-Management-Systeme mit Drupal – für Unternehmen, die Inhalte selbst pflegen wollen.",
+            "href": "#kontakt"
+          },
+          {
+            "id": "seo_geo",
+            "title": "SEO & GEO",
+            "icon": "BarChart/Search (lucide: BarChart3, Search)",
+            "description": "Search Engine Optimization und Generative Engine Optimization – für Google, ChatGPT, Perplexity & Co.",
+            "href": "#kontakt"
+          }
+        ],
+        "card_styles": {
+          "padding": "2rem",
+          "border_radius": "16px",
+          "border_width": "1px",
+          "transition": "all 0.3s ease",
+          "icon_container": {
+            "width": "48px",
+            "height": "48px",
+            "margin_bottom": "1.5rem",
+            "icon_color": "#a855f7"
+          },
+          "title_size": "clamp(1.125rem, 1.5vw, 1.375rem)",
+          "body_size": "1rem",
+          "link_style": "inline-flex with arrow icon, gap widens on hover"
+        }
+      },
+      "animations": {
+        "card_enter": "Framer Motion stagger: fade-up + y: 40 → 0, delay: 0.2s per card",
+        "card_hover": "border-color: #a855f7, box-shadow: glow, translateY(-4px)",
+        "icon_hover": "scale(1.05) + color shift"
+      },
+      "mobile": {
+        "breakpoint": "< 768px",
+        "changes": "Grid → single column, cards stacked vertically"
+      },
+      "spezial": "Icons via lucide-react, border-glow on hover, 'Mehr erfahren' link mit arrow-slide animation"
+    },
+    {
+      "id": "pricing",
+      "name": "PRICING — Investition & Transparenz mit Toggle",
+      "briefing_reference": "SEKTION 5",
+      "layout": {
+        "type": "section",
+        "section_id": "pricing",
+        "background": "#051424",
+        "padding": "clamp(5rem, 10vw, 8rem) 0",
+        "max_width": "1200px",
+        "margin": "0 auto",
+        "toggle_position": "centered, above pricing cards",
+        "grid": "3 columns für Karten (auto-fit minmax(300px, 1fr))",
+        "extra_pakete_grid": "3 columns unterhalb, leicht dezentriert"
+      },
+      "colors": {
+        "background": "#051424",
+        "eyebrow_line": "linear-gradient(90deg, #a855f7, #22d3ee)",
+        "eyebrow_text": "#a855f7",
+        "heading": "#f1f5f9",
+        "subline": "#94a3b8",
+        "toggle_bg": "#0a1a2e",
+        "toggle_border": "rgba(255,255,255,0.1)",
+        "toggle_active_bg": "linear-gradient(135deg, #a855f7, #3b82f6)",
+        "toggle_active_text": "#ffffff",
+        "toggle_inactive_text": "#94a3b8",
+        "card_bg": "#0a1a2e",
+        "card_featured_bg": "#0d1f36",
+        "card_border": "rgba(255,255,255,0.06)",
+        "card_featured_border": "#a855f7",
+        "card_title": "#ffffff",
+        "card_price": "#ffffff",
+        "card_price_period": "#64748b",
+        "card_desc": "#94a3b8",
+        "card_feature_text": "#cbd5e1",
+        "card_feature_icon": "#22d3ee",
+        "card_badge_bg": "#a855f7",
+        "card_badge_text": "#ffffff",
+        "card_cta_bg": "#a855f7",
+        "card_cta_text": "#ffffff",
+        "card_cta_outline_border": "rgba(168,85,247,0.3)",
+        "card_cta_outline_text": "#a855f7",
+        "extra_karte_bg": "rgba(10,26,46,0.7)",
+        "extra_karte_border": "rgba(255,255,255,0.04)",
+        "extra_karte_title": "#22d3ee"
+      },
+      "components": {
+        "eyebrow": { "label": "PREISE" },
+        "heading": {
+          "text": "Investition & Transparenz",
+          "font_size": "clamp(1.75rem, 3.5vw, 48px)"
+        },
+        "toggle": {
+          "type": "Two-option segmented switch",
+          "label_left": "Einmalig kaufen",
+          "label_right": "Monatlich mieten",
+          "active_color_left": "#a855f7 (Lila)",
+          "active_color_right": "#22d3ee (Cyan)",
+          "implementation": "React Component mit useState 'purchase' | 'monthly'",
+          "style": {
+            "display": "inline-flex",
+            "background": "#0a1a2e",
+            "border": "1px solid rgba(255,255,255,0.1)",
+            "border_radius": "12px",
+            "padding": "4px",
+            "font_weight": 600,
+            "font_size": "0.9375rem"
+          },
+          "slider_style": {
+            "position": "absolute",
+            "background": "linear-gradient(135deg, #a855f7, #3b82f6)",
+            "border_radius": "8px",
+            "transition": "all 0.3s ease"
+          },
+          "hint_text": "Bindung: 24 Monate (Miet-Modell)",
+          "hint_style": {
+            "font_size": "0.8125rem",
+            "color": "#64748b",
+            "margin_top": "0.75rem",
+            "text_align": "center"
+          }
+        },
+        "purchase_plans": [
+          {
+            "id": "digital_start",
+            "name": "Digital Start",
+            "price": "€1.490–2.490",
+            "description": "Die schnelle, schlanke Lösung für kleine Unternehmen und Selbstständige.",
+            "features": ["1-seitig (Astro SSG)", "Responsive", "SEO & GEO Basis", "Hosting & Domain (1 Jahr)", "DSGVO-konform"],
+            "cta": "Anfragen",
+            "featured": false
+          },
+          {
+            "id": "digital_flex",
+            "name": "Digital Flex",
+            "price": "€2.990–4.490",
+            "description": "Die flexible Lösung für Unternehmen mit Redaktionsbedarf.",
+            "features": ["Mehrseitig (CMS)", "Responsive", "SEO & GEO Optimierung", "Hosting & Domain (1 Jahr)", "DSGVO-konform", "✅ Drupal CMS", "Redaktionseinführung"],
+            "cta": "Anfragen",
+            "featured": true
+          },
+          {
+            "id": "digital_flexplus",
+            "name": "Digital Flex+",
+            "price": "€4.490",
+            "description": "Die Komplettlösung für anspruchsvolle Projekte mit vollem Service.",
+            "features": ["Individuell (CMS+)", "Responsive", "SEO & GEO Premium", "Hosting & Domain (1 Jahr)", "DSGVO-konform", "✅ Drupal CMS", "Individuelles Design + Performance"],
+            "cta": "Anfragen",
+            "featured": false
+          }
+        ],
+        "monthly_plans": [
+          {
+            "id": "guardian",
+            "name": "Online Guardian",
+            "subtitle": "Basis-Schutz",
+            "price": "€39–59/Monat",
+            "description": "Sicherheits-Updates, Monitoring & technischer Support. Ideal für statische Websites (Digital Start).",
+            "features": ["Sicherheits-Updates", "Monitoring", "Technischer Support", "Lighthouse-Check"],
+            "cta": "Anfragen",
+            "type": "extra"
+          },
+          {
+            "id": "care",
+            "name": "Online Care",
+            "subtitle": "Rundum-Sorglos",
+            "price": "€99–149/Monat",
+            "description": "Wartung, Updates, Inhaltspflege & priorisierter Support. Inkl. monatlicher Lighthouse-Garantie. Ideal für Unternehmen mit CMS.",
+            "features": ["Wartung & Updates", "Inhaltspflege", "Priorisierter Support", "Lighthouse-Garantie", "CMS-Pflege"],
+            "cta": "Anfragen",
+            "featured": true,
+            "type": "care"
+          },
+          {
+            "id": "all_in",
+            "name": "ALL-IN Smart",
+            "subtitle": "Für Neugründungen",
+            "price": "€149–199/Monat",
+            "description": "Komplettpaket: Website + Hosting + Wartung + Support. Ideal für Start-ups und Einsteiger.",
+            "features": ["Komplette Website", "Hosting", "Wartung", "Support", "Bereitstellung: €399"],
+            "cta": "Anfragen",
+            "type": "premium"
+          }
+        ],
+        "card_styles": {
+          "padding": "2.5rem",
+          "border_radius": "16px",
+          "transition": "all 0.3s ease",
+          "price_size": "2.5rem",
+          "price_weight": 800,
+          "feature_gap": "0.6rem",
+          "feature_icon": "checkmark in cyan circle (lucide: Check)"
+        }
+      },
+      "animations": {
+        "toggle_switch": "Slider bewegt sich mit Framer Motion layoutAnimation (layoutId)",
+        "card_switch": "AnimatePresence: alte Karten exit (scale down + fade), neue enter (scale up + fade)",
+        "card_hover": "translateY(-4px) + box-shadow glow (purple/cyan)",
+        "stagger": "Karten mit delay 0.15s gestaffelt"
+      },
+      "mobile": {
+        "breakpoint": "< 768px",
+        "changes": "Karten-Grid → single column, Toggle etwas kleiner, Preise prominenter"
+      },
+      "spezial": "Toggle mit zwei visuell unterschiedlichen Farb-Modi (Lila↔Cyan); 2 komplett unterschiedliche Kartensets; 'Bindung: 24 Monate' Hinweis unter Toggle; Kauf-Pakete haben Badge 'Am beliebtesten'"
+    },
+    {
+      "id": "faq",
+      "name": "FAQ — Häufige Fragen",
+      "briefing_reference": "SEKTION 6",
+      "layout": {
+        "type": "section",
+        "section_id": "faq",
+        "background": "#081829",
+        "padding": "clamp(5rem, 10vw, 8rem) 0",
+        "max_width": "720px",
+        "margin": "0 auto"
+      },
+      "colors": {
+        "background": "#081829",
+        "eyebrow_line": "linear-gradient(90deg, #a855f7, #22d3ee)",
+        "eyebrow_text": "#a855f7",
+        "heading": "#f1f5f9",
+        "item_border": "rgba(255,255,255,0.06)",
+        "question_text": "#f1f5f9",
+        "question_hover_text": "#a855f7",
+        "question_active_text": "#a855f7",
+        "answer_text": "#94a3b8",
+        "icon_color": "#64748b",
+        "icon_active_color": "#a855f7"
+      },
+      "components": {
+        "eyebrow": { "label": "FAQ" },
+        "heading": {
+          "text": "Häufige Fragen – direkt beantwortet",
+          "font_size": "clamp(1.75rem, 3.5vw, 48px)"
+        },
+        "questions": [
+          {
+            "id": "faq-1",
+            "question": "Warum \"Local First\" – und was bedeutet das?",
+            "answer": "\"Local First\" bedeutet: Ihre Website läuft komplett ohne externe Abhängigkeiten. Keine Google Fonts, kein CDN, kein fremdes Tracking. Alle Dateien liegen auf unserem Server in Deutschland. Das macht Ihre Seite schneller, sicherer und unabhängiger – und schützt die Daten Ihrer Kunden."
+          },
+          {
+            "id": "faq-2",
+            "question": "Was kostet eine Website bei Ihnen?",
+            "answer": "Meine Pakete starten bei €1.490 für eine schlanke Einseiten-Website (Digital Start) bis €4.490 für eine flexible Drupal-CMS-Lösung (Digital Flex+). Alternativ bieten wir monatliche Miet-Modelle ab €39/Monat an. Jedes Projekt ist individuell – im kostenlosen Erstgespräch besprechen wir Ihre Anforderungen."
+          },
+          {
+            "id": "faq-3",
+            "question": "Kümmere ich mich selbst um Updates?",
+            "answer": "Nein, wenn Sie das nicht möchten. Mit unseren Wartungs-Paketen (Online Guardian/Care) übernehmen wir Sicherheits-Updates, Monitoring und technischen Support für Sie. Sie kümmern sich um Ihr Geschäft – wir um Ihre Website."
+          },
+          {
+            "id": "faq-4",
+            "question": "Was passiert, wenn mal etwas nicht funktioniert?",
+            "answer": "Dann bin ich für Sie da. Als persönlicher Ansprechpartner bin ich per E-Mail und Telefon erreichbar. Bei kritischen Problemen reagieren wir innerhalb weniger Stunden. Mit unseren Care-Paketen haben Sie priorisierten Support."
+          },
+          {
+            "id": "faq-5",
+            "question": "Bin ich danach an Sie gebunden?",
+            "answer": "Nein. Es gibt keine Lock-in-Effekte. Ihre Website gehört Ihnen – technisch und rechtlich. Sie erhalten alle Zugänge und können jederzeit zu einem anderen Anbieter wechseln. Wir setzen auf moderne, offene Technologien, keine proprietären Systeme."
+          },
+          {
+            "id": "faq-6",
+            "question": "Übernehmen Sie auch Domain und Hosting?",
+            "answer": "Ja, im ersten Jahr sind Hosting und Domain im Paketpreis enthalten. Danach zahlen Sie nur die laufenden Kosten (ca. €10–15/Monat für Hosting in deutschen Rechenzentren). Wir kümmern uns um die gesamte Einrichtung und Konfiguration."
+          }
+        ],
+        "accordion_styles": {
+          "button": {
+            "width": "100%",
+            "display": "flex",
+            "justify_content": "space-between",
+            "align_items": "center",
+            "gap": "1rem",
+            "padding": "1.25rem 0",
+            "background": "none",
+            "border": "none",
+            "cursor": "pointer",
+            "text_align": "left",
+            "font_size": "1.05rem",
+            "font_weight": 500,
+            "color": "#f1f5f9",
+            "transition": "color 0.2s ease"
+          },
+          "answer": {
+            "padding_bottom": "1.25rem",
+            "font_size": "1rem",
+            "line_height": "1.65",
+            "color": "#94a3b8",
+            "max_width": "65ch"
+          },
+          "icon": {
+            "type": "ChevronDown (lucide)",
+            "size": 20,
+            "rotation": "0° → 180° bei open"
+          }
+        }
+      },
+      "animations": {
+        "accordion_open": "AnimatePresence height: 0 → auto (0.3s ease)",
+        "icon_rotate": "rotate 180° bei open (Framer Motion animate)",
+        "stagger": "Fragen erscheinen nacheinander mit delay i*0.1s"
+      },
+      "mobile": {
+        "breakpoint": "< 768px",
+        "changes": "Keine Layout-Änderung, nur kleinere Abstände"
+      },
+      "spezial": "6 Fragen im Akkordeon-Stil (nur eine offen gleichzeitig); Chevron-Dreh-Animation"
+    },
+    {
+      "id": "kontakt",
+      "name": "KONTAKT — Lassen Sie uns reden.",
+      "briefing_reference": "SEKTION 7",
+      "layout": {
+        "type": "section",
+        "section_id": "kontakt",
+        "background": "#051424",
+        "padding": "clamp(5rem, 10vw, 8rem) 0",
+        "max_width": "1200px",
+        "margin": "0 auto",
+        "grid": "2 columns (form left, info right), 1fr 1fr",
+        "gap": "clamp(2rem, 5vw, 4rem)"
+      },
+      "colors": {
+        "background": "#051424",
+        "eyebrow_line": "linear-gradient(90deg, #a855f7, #22d3ee)",
+        "eyebrow_text": "#a855f7",
+        "heading": "#f1f5f9",
+        "subline": "#94a3b8",
+        "form_input_bg": "#0a1a2e",
+        "form_input_border": "rgba(255,255,255,0.1)",
+        "form_input_focus_border": "#a855f7",
+        "form_input_focus_shadow": "0 0 0 3px rgba(168,85,247,0.15)",
+        "form_input_text": "#ffffff",
+        "form_input_placeholder": "#64748b",
+        "form_label": "#94a3b8",
+        "form_checkbox_accent": "#a855f7",
+        "form_submit_bg": "linear-gradient(135deg, #a855f7, #3b82f6)",
+        "form_submit_text": "#ffffff",
+        "form_submit_hover": "linear-gradient(135deg, #b06af8, #6096f7)",
+        "info_card_bg": "#0a1a2e",
+        "info_card_border": "rgba(255,255,255,0.06)",
+        "info_card_title": "#ffffff",
+        "info_card_text": "#94a3b8",
+        "info_icon_bg_purple": "rgba(168,85,247,0.1)",
+        "info_icon_bg_cyan": "rgba(34,211,238,0.1)",
+        "success_bg": "rgba(34,197,94,0.1)",
+        "success_border": "rgba(34,197,94,0.2)",
+        "success_text": "#4ade80"
+      },
+      "components": {
+        "eyebrow": { "label": "KONTAKT" },
+        "heading": {
+          "text": "Lassen Sie uns reden.",
+          "font_size": "clamp(1.75rem, 3.5vw, 48px)"
+        },
+        "subline": {
+          "text": "Bereit für Ihre neue Website? Einfach das Formular ausfüllen und ich melde mich innerhalb von 24 Stunden bei Ihnen."
+        },
+        "form": {
+          "implementation": "React Component mit useState + onSubmit Handler",
+          "fields": [
+            { "name": "name", "type": "text", "label": "Name", "required": true, "placeholder": "Ihr Name" },
+            { "name": "email", "type": "email", "label": "E-Mail", "required": true, "placeholder": "ihre@email.de" },
+            {
+              "name": "paket", "type": "select", "label": "Welches Paket interessiert Sie?",
+              "options": ["Noch unklar", "Digital Start", "Digital Flex", "Digital Flex+"],
+              "required": false
+            },
+            { "name": "message", "type": "textarea", "label": "Nachricht", "required": true, "placeholder": "Beschreiben Sie kurz Ihr Projekt...", "rows": 5 }
+          ],
+          "dsgvo_checkbox": {
+            "text": "Ich habe die Datenschutzerklärung gelesen und stimme zu.",
+            "link_href": "/datenschutz",
+            "link_label": "Datenschutzerklärung"
+          },
+          "submit_button": {
+            "label": "Nachricht senden",
+            "style": "gradient button with arrow icon",
+            "loading_label": "Wird gesendet..."
+          },
+          "honeypot": "Verstecktes Feld (position: absolute; left: -9999px) für Bot-Abwehr",
+          "success_message": {
+            "title": "Nachricht gesendet!",
+            "text": "Vielen Dank für Ihre Nachricht. Ich melde mich schnellstmöglich bei Ihnen.",
+            "icon": "CheckCircle (lucide)"
+          }
+        },
+        "contact_info": {
+          "email": "info@einfach-online.dev",
+          "phone": "+43 664 567 4567",
+          "address": "Ungerdorf 279/4, 8200 Gleisdorf, Steiermark",
+          "icons": {
+            "email": "Mail (lucide)",
+            "phone": "Phone (lucide)",
+            "location": "MapPin (lucide)"
+          }
+        },
+        "cta_box": {
+          "text": "Gratis Erstgespräch: Kein Risiko, keine Verpflichtung. Wir besprechen Ihr Projekt und finden heraus, ob wir zusammenpassen.",
+          "style": "subtle gradient background with purple-tinted border"
+        },
+        "form_input_styles": {
+          "padding": "0.75rem 1rem",
+          "border_radius": "10px",
+          "border_width": "1.5px",
+          "font_size": "1rem",
+          "transition": "all 0.2s ease",
+          "width": "100%"
+        }
+      },
+      "animations": {
+        "form_submit": "Button scale(0.97) on tap, success message fade-in",
+        "stagger": "Formular und Info-Seite fade-in mit delay"
+      },
+      "mobile": {
+        "breakpoint": "< 768px",
+        "changes": "Grid → single column (form above info), Submit-Button full-width"
+      },
+      "spezial": "Dropdown für Paket-Auswahl; Honeypot-Spamschutz; Success-State nach Absenden"
+    },
+    {
+      "id": "cookie_banner",
+      "name": "COOKIE-BANNER — Kräftiges Overlay",
+      "briefing_reference": "SEKTION 8",
+      "layout": {
+        "type": "fixed overlay",
+        "position": "fixed inset-0",
+        "z_index": 200,
+        "display": "flex",
+        "align_items": "center",
+        "justify_content": "center"
+      },
+      "colors": {
+        "overlay_bg": "rgba(5, 20, 36, 0.85)",
+        "overlay_blur": "8px",
+        "banner_bg": "#0a1a2e",
+        "banner_border": "rgba(168,85,247,0.2)",
+        "banner_shadow": "0 12px 40px rgba(0,0,0,0.5)",
+        "heading_text": "#ffffff",
+        "body_text": "#94a3b8",
+        "accept_btn_bg": "linear-gradient(135deg, #a855f7, #3b82f6)",
+        "accept_btn_text": "#ffffff",
+        "decline_btn_bg": "transparent",
+        "decline_btn_border": "rgba(255,255,255,0.15)",
+        "decline_btn_text": "#94a3b8",
+        "decline_btn_hover_bg": "rgba(255,255,255,0.05)",
+        "decline_btn_hover_text": "#ffffff"
+      },
+      "components": {
+        "overlay": {
+          "type": "full-screen semi-transparent backdrop",
+          "backdrop_blur": "8px",
+          "click_outside_close": true
+        },
+        "banner_card": {
+          "max_width": "440px",
+          "padding": "2rem",
+          "border_radius": "16px",
+          "position": "centered on screen",
+          "implementation": "React Component mit LocalStorage-Persistenz",
+          "animation": "scale(0.95) → scale(1) + fade in (0.3s ease)"
+        },
+        "heading": {
+          "text": "Cookie-Einstellungen",
+          "font_size": "1.15rem",
+          "font_weight": 600,
+          "margin_bottom": "0.75rem"
+        },
+        "text": {
+          "content": "Wir nutzen ausschließlich technisch notwendige Cookies. Statistiken (Plausible) werden nur nach Ihrer Zustimmung aktiviert. Keine Datenweitergabe an Dritte.",
+          "font_size": "0.9rem",
+          "line_height": "1.55",
+          "margin_bottom": "1.5rem"
+        },
+        "buttons": {
+          "accept": {
+            "label": "Alle akzeptieren",
+            "style": "gradient primary button",
+            "onclick": "localStorage.setItem('cookie_consent', 'all'); hide banner; load plausible"
+          },
+          "decline": {
+            "label": "Nur notwendige",
+            "style": "outline/ghost button",
+            "onclick": "localStorage.setItem('cookie_consent', 'necessary'); hide banner"
+          }
+        },
+        "button_styles": {
+          "padding": "0.7rem 1.25rem",
+          "border_radius": "10px",
+          "font_weight": 600,
+          "font_size": "0.92rem",
+          "flex": "1",
+          "transition": "all 0.2s ease"
+        }
+      },
+      "animations": {
+        "banner_enter": "Framer Motion: scale 0.95 → 1, opacity 0 → 1 (0.3s ease)",
+        "banner_exit": "scale 0.95 + opacity 0 (0.2s ease)"
+      },
+      "mobile": {
+        "breakpoint": "< 768px",
+        "changes": "Banner card: max-width 100% - 2rem, padding reduced to 1.5rem; buttons stacked vertically"
+      },
+      "spezial": "Kräftiges Overlay (nicht nur dezentes Banner); LocalStorage für Consent; 'Cookie-Einstellungen' Link im Footer öffnet Banner erneut; Plausible Analytics nur bei 'Alle akzeptieren' laden"
+    },
+    {
+      "id": "footer",
+      "name": "FOOTER — Brand, Links, Social",
+      "briefing_reference": "SEKTION 9",
+      "layout": {
+        "type": "footer",
+        "background": "#020912",
+        "padding_top": "clamp(3rem, 6vw, 5rem)",
+        "padding_bottom": "0",
+        "max_width": "1200px",
+        "margin": "0 auto",
+        "grid_desktop": "1.3fr 1fr 1fr 1fr (4 columns)",
+        "grid_tablet": "repeat(2, 1fr)",
+        "grid_mobile": "1fr"
+      },
+      "colors": {
+        "background": "#020912",
+        "border_top": "rgba(255,255,255,0.04)",
+        "brand_text": "#ffffff",
+        "tagline": "#22d3ee",
+        "description": "rgba(255,255,255,0.45)",
+        "col_title": "#f1f5f9",
+        "link_default": "rgba(255,255,255,0.5)",
+        "link_hover": "#a855f7",
+        "bottom_bar_text": "rgba(255,255,255,0.35)",
+        "bottom_bar_border": "rgba(255,255,255,0.04)",
+        "motto": "#22d3ee"
+      },
+      "components": {
+        "brand_column": {
+          "logo": "EO Logo (invertiert für dark bg)",
+          "tagline": "DSGVO-konform. EU-gehostet. Unabhängig.",
+          "description": "Persönliche Webentwicklung, SEO & GEO-Optimierung für Unternehmen in der Steiermark. Mit Herz, Hand und digitaler Exzellenz."
+        },
+        "navigation_column": {
+          "title": "Navigation",
+          "links": [
+            { "label": "Start", "href": "/" },
+            { "label": "Leistungen", "href": "/#leistungen" },
+            { "label": "Philosophie", "href": "/#prinzipien" },
+            { "label": "Kontakt", "href": "/#kontakt" }
+          ]
+        },
+        "services_column": {
+          "title": "Services",
+          "links": [
+            { "label": "Webdesign & Entwicklung", "href": "/#leistungen" },
+            { "label": "CMS & Drupal", "href": "/#leistungen" },
+            { "label": "SEO & GEO", "href": "/#leistungen" },
+            { "label": "FAQ", "href": "/#faq" }
+          ]
+        },
+        "contact_column": {
+          "title": "Kontakt",
+          "email": "info@einfach-online.dev",
+          "phone": "+43 664 567 4567",
+          "address": "Ungerdorf 279/4, 8200 Gleisdorf",
+          "social_icons": {
+            "github": { "url": "https://github.com/einfach-online", "icon": "Github (lucide)" },
+            "twitter": { "url": "https://twitter.com/einfach_online", "icon": "Twitter (lucide)" },
+            "linkedin": { "url": "https://linkedin.com/in/philipp-schlemmer", "icon": "Linkedin (lucide)" }
+          },
+          "legal_links": ["Datenschutz", "Cookie-Einstellungen", "AGB", "Impressum"],
+          "legal_hrefs": { "Datenschutz": "/datenschutz", "Cookie-Einstellungen": "#", "AGB": "/agb", "Impressum": "/impressum" }
+        },
+        "bottom_bar": {
+          "copyright": "© 2026 einfach-online.dev",
+          "motto": "Gebaut in der Steiermark, mit digitaler Exzellenz und Leidenschaft."
+        },
+        "link_styles": {
+          "font_size": "0.9rem",
+          "transition": "color 0.2s ease",
+          "text_decoration": "none"
+        },
+        "social_icon_styles": {
+          "size": "20px",
+          "color": "rgba(255,255,255,0.4)",
+          "hover_color": "#a855f7",
+          "transition": "color 0.2s ease"
+        }
+      },
+      "animations": {
+        "link_hover": "color change to #a855f7 (0.2s ease)",
+        "social_hover": "color change + subtle translateY(-2px)"
+      },
+      "mobile": {
+        "breakpoint": "< 768px",
+        "changes": "Grid → 1 column, centered text, legal links centered, social icons centered"
+      },
+      "spezial": "Cookie-Einstellungen-Link öffnet Cookie-Banner erneut (per JavaScript); Social Icons als lucide-react Komponenten"
+    }
+  ],
+
+  "shared_components": {
+    "section_eyebrow": {
+      "description": "Einheitliche Sektions-Kopfzeile: Gradient-Linie + Label",
+      "html_structure": "<div class='flex items-center gap-3 mb-4'><div class='w-8 h-0.5 rounded-full bg-gradient-to-r from-purple-500 to-cyan-400'></div><span class='text-xs font-semibold tracking-[0.15em] uppercase text-purple-500'>LABEL</span></div>"
+    },
+    "shimmer_button": {
+      "description": "Button mit Shimmer-Effekt für CTA-Buttons",
+      "css": "position: relative; overflow: hidden;",
+      "pseudo_element": "content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); background-size: 200% 100%; animation: shimmer 2.5s infinite;",
+      "keyframes": "@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }"
+    },
+    "glass_card": {
+      "description": "Glasmorphismus-Karte für konsistente Cards",
+      "css": "background: rgba(10,26,46,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px;"
+    },
+    "grid_background": {
+      "description": "Subtiles Grid für Hero und Sections",
+      "css": "background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(168,85,247,0.03) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(168,85,247,0.03) 40px); background-size: 40px 40px;"
+    }
+  },
+
+  "implementation_ordering": {
+    "phase_1_global": [
+      "global.css auf dark umstellen (Farben, Tokens, Fonts)",
+      "Layout.astro anpassen (theme-color, globale dark styles)",
+      "Design Tokens als CSS-Variablen definieren"
+    ],
+    "phase_2_components": [
+      "Header (React, mit Shimmer-Button + Language Switcher)",
+      "Hero (React, mit Glitch-Animation + Cryptic-Effekt)",
+      "Prinzipien (React, mit Tabs + Security Console)",
+      "Leistungen (React, Dark-Version der Karten)",
+      "Pricing mit Toggle (React, Zwei Kartensets)",
+      "FAQ (React, Akkordeon)",
+      "Kontakt (React, Formular + Info)",
+      "Cookie-Banner (React, Overlay + LocalStorage)",
+      "Footer (Astro oder React, mit Cookie-Einstellungen-Link)"
+    ],
+    "phase_3_animation": [
+      "Glitch/Cryptic-Animation testen",
+      "Security Console typing testen",
+      "Pricing Toggle testen",
+      "Scroll-Animationen für alle Sections"
+    ],
+    "phase_4_mobile": [
+      "Mobile Breakpoints prüfen (< 768px)",
+      "Hamburger-Menü testen",
+      "Touch-Targets prüfen (min 44x44px)"
+    ],
+    "phase_5_qs": [
+      "Performance (Lighthouse)",
+      "Barrierefreiheit (Tab-Navigation, Screenreader)",
+      "Dark-Mode-Konsistenz",
+      "Keine broken Links"
+    ]
+  },
+
+  "notes_for_glm": {
+    "framework": "Astro + React + Tailwind CSS v4. Tailwind wird via @tailwindcss/vite Plugin geladen (kein tailwind.config).",
+    "dependencies_available": ["framer-motion ^12.40.0", "react ^19.2.7", "lucide-react (bitte installieren)", "tailwindcss ^4.3.1"],
+    "lucide_icons_used": ["Monitor", "Code2", "Layers", "BarChart3", "Search", "ChevronDown", "Check", "Mail", "Phone", "MapPin", "Github", "Twitter", "Linkedin", "ArrowRight", "X"],
+    "animation_engine": "Framer Motion für React-Komponenten, CSS @keyframes für reine CSS-Effekte (Glitch, Shimmer, Typing)",
+    "color_system": "KEIN light-mode mehr — vollständig dark (#051424 Basis). Sollte der User irgendwann einen Light-Theme wünschen, später implementieren.",
+    "code_location": "src/components/*.jsx für React, src/components/*.astro für einfache Astro-Komponenten, src/layouts/Layout.astro für globales HTML",
+    "existing_components_to_replace": "Header.astro, HeroSection.jsx/HeroSection.astro, LeistungenSection.jsx, FaqSection.jsx, PricingSection.jsx, KontaktSection.jsx, CookieBanner.astro, Footer.astro",
+    "new_components_needed": "PrinzipienSection.jsx (mit Tabs + Security Console), PricingToggle.jsx, GlitchText.jsx, SecurityConsole.jsx",
+    "cross_browser": "Chrome, Firefox, Safari, Edge aktuellste Versionen",
+    "accessibility": "ARIA-Labels, focus-visible outlines, keyboard navigation für Tabs/Akkordeon/Toggle, reduced-motion media query"
+  }
+}

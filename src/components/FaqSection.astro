@@ -1,0 +1,143 @@
+---
+// FaqSection.astro — ALPINE: 6 FRAGEN AKKORDEON
+// Inline-SVGs (Plus/Minus), kein ChevronDownIcon-Import
+// Sanftes ein-/ausblenden über CSS + minimales JS
+---
+
+<section class="py-20 lg:py-28" id="faq" aria-label="Häufige Fragen">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] mb-4" style="font-family: 'Geist', 'Inter', sans-serif;">
+        Häufige Fragen – direkt beantwortet
+      </h2>
+    </div>
+
+    <div class="space-y-3">
+      <!-- FAQ 1 -->
+      <div class="faq-item bg-white rounded-xl border border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden transition-shadow duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+        <button class="faq-question flex items-center justify-between w-full text-left px-6 py-5 cursor-pointer" aria-expanded="false">
+          <span class="text-base sm:text-lg font-semibold text-[#0F172A] pr-4" style="font-family: 'Geist', 'Inter', sans-serif;">Warum "Local First" – und was bedeutet das?</span>
+          <span class="faq-icon shrink-0 flex items-center justify-center w-6 h-6 text-[#4D7CFF] transition-transform duration-300">
+            <!-- Plus icon (default) -->
+            <svg class="faq-icon-plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <!-- Minus icon (hidden by default) -->
+            <svg class="faq-icon-minus hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-sm text-[#475569] leading-relaxed bg-[#F8FAFC] pt-4 -mt-2 rounded-b-xl">
+            Wir hosten alle Dateien direkt bei uns. Das bedeutet: keine externen Google-Schriften, kein Amazon-Cloud-Tool, kein US-Tracker. Ihre Seite lädt tendenziell schneller und gibt weniger Daten an Dritte weiter.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="faq-item bg-white rounded-xl border border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden transition-shadow duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+        <button class="faq-question flex items-center justify-between w-full text-left px-6 py-5 cursor-pointer" aria-expanded="false">
+          <span class="text-base sm:text-lg font-semibold text-[#0F172A] pr-4" style="font-family: 'Geist', 'Inter', sans-serif;">Was kostet eine Website bei Ihnen?</span>
+          <span class="faq-icon shrink-0 flex items-center justify-center w-6 h-6 text-[#4D7CFF] transition-transform duration-300">
+            <svg class="faq-icon-plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <svg class="faq-icon-minus hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-sm text-[#475569] leading-relaxed bg-[#F8FAFC] pt-4 -mt-2 rounded-b-xl">
+            Digital Start ist eine statische Website zum Festpreis – ohne laufende Kosten. Digital Flex hat einmalige Einrichtungskosten plus optional eine Hosting- und Betreuungspauschale. Sie bekommen vorab ein verbindliches Angebot.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="faq-item bg-white rounded-xl border border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden transition-shadow duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+        <button class="faq-question flex items-center justify-between w-full text-left px-6 py-5 cursor-pointer" aria-expanded="false">
+          <span class="text-base sm:text-lg font-semibold text-[#0F172A] pr-4" style="font-family: 'Geist', 'Inter', sans-serif;">Kümmere ich mich selbst um Updates?</span>
+          <span class="faq-icon shrink-0 flex items-center justify-center w-6 h-6 text-[#4D7CFF] transition-transform duration-300">
+            <svg class="faq-icon-plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <svg class="faq-icon-minus hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-sm text-[#475569] leading-relaxed bg-[#F8FAFC] pt-4 -mt-2 rounded-b-xl">
+            Bei Digital Start läuft die Seite weitgehend von alleine. Bei Digital Flex haben Sie ein eigenes CMS, mit dem Sie Texte und Bilder selbst ändern können (wir zeigen Ihnen wie). Auf Wunsch übernehmen wir auch die Pflege.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="faq-item bg-white rounded-xl border border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden transition-shadow duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+        <button class="faq-question flex items-center justify-between w-full text-left px-6 py-5 cursor-pointer" aria-expanded="false">
+          <span class="text-base sm:text-lg font-semibold text-[#0F172A] pr-4" style="font-family: 'Geist', 'Inter', sans-serif;">Was passiert, wenn mal etwas nicht funktioniert?</span>
+          <span class="faq-icon shrink-0 flex items-center justify-center w-6 h-6 text-[#4D7CFF] transition-transform duration-300">
+            <svg class="faq-icon-plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <svg class="faq-icon-minus hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-sm text-[#475569] leading-relaxed bg-[#F8FAFC] pt-4 -mt-2 rounded-b-xl">
+            Sie schreiben eine E-Mail oder rufen an. Wir kümmern uns darum – persönlich, ohne Ticket-System, ohne Chatbot. Ein Mensch, der Ihr Projekt kennt, antwortet Ihnen.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="faq-item bg-white rounded-xl border border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden transition-shadow duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+        <button class="faq-question flex items-center justify-between w-full text-left px-6 py-5 cursor-pointer" aria-expanded="false">
+          <span class="text-base sm:text-lg font-semibold text-[#0F172A] pr-4" style="font-family: 'Geist', 'Inter', sans-serif;">Bin ich danach an Sie gebunden?</span>
+          <span class="faq-icon shrink-0 flex items-center justify-center w-6 h-6 text-[#4D7CFF] transition-transform duration-300">
+            <svg class="faq-icon-plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <svg class="faq-icon-minus hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-sm text-[#475569] leading-relaxed bg-[#F8FAFC] pt-4 -mt-2 rounded-b-xl">
+            Nein. Ihre Website gehört Ihnen. Der Code basiert auf offenen Standards – andere Entwickler können daran weiterarbeiten. Ein Wechsel ist jederzeit möglich.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 6 -->
+      <div class="faq-item bg-white rounded-xl border border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden transition-shadow duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+        <button class="faq-question flex items-center justify-between w-full text-left px-6 py-5 cursor-pointer" aria-expanded="false">
+          <span class="text-base sm:text-lg font-semibold text-[#0F172A] pr-4" style="font-family: 'Geist', 'Inter', sans-serif;">Übernehmen Sie auch Domain und Hosting?</span>
+          <span class="faq-icon shrink-0 flex items-center justify-center w-6 h-6 text-[#4D7CFF] transition-transform duration-300">
+            <svg class="faq-icon-plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <svg class="faq-icon-minus hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-sm text-[#475569] leading-relaxed bg-[#F8FAFC] pt-4 -mt-2 rounded-b-xl">
+            Ja, wir richten alles ein. Die Domain wird auf Ihren Namen registriert, das Hosting läuft in deutschen Rechenzentren (IONOS). Sie bleiben Eigentümer.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const item = this.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const plus = item.querySelector('.faq-icon-plus');
+        const minus = item.querySelector('.faq-icon-minus');
+        const isOpen = this.getAttribute('aria-expanded') === 'true';
+
+        if (isOpen) {
+          // Close
+          this.setAttribute('aria-expanded', 'false');
+          answer.style.maxHeight = '0';
+          plus.classList.remove('hidden');
+          minus.classList.add('hidden');
+        } else {
+          // Open
+          this.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 80 + 'px';
+          plus.classList.add('hidden');
+          minus.classList.remove('hidden');
+        }
+      });
+    });
+  })();
+</script>

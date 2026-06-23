@@ -1,0 +1,353 @@
+{
+  "meta": {
+    "projekt": "einfach-online.dev — Neudesign",
+    "autor": "Athena (Designerin einfach-online.dev)",
+    "datum": "2026-06-23",
+    "version": "1.0",
+    "status": "fertig",
+    "design_name": "Gipfel",
+    "design_tagline": "Klar wie die Bergluft. Digital wie das EO."
+  },
+
+  "vision": {
+    "kurzbeschreibung": "«Gipfel» ist ein luftiges, editorielles Design, das die Klarheit eines steirischen Bergmorgens in die digitale Welt übersetzt. Der Berg ist nicht Dekoration, sondern Bühne. Als fotorealistisches Hero-Element verankert er die Marke visuell in der Steiermark — ohne Kitsch, ohne Pathos. Die EO-Farben Blau (#4D7CFF) und Cyan (#22d3ee) durchziehen das gesamte Design als primäre Akzente, während viel Weißraum, eine reduzierte Sans-Serif-Typografie und ein klares Raster dem Ganzen eine professionelle, ruhige Autorität verleihen. Es fühlt sich an wie der erste Kaffee auf einer Berghütte: wach, klar, voller Vorfreude.",
+    "atmosphaere": [
+      "Hell und freundlich — kein düsteres Interface",
+      "Luftig — viel Weißraum, weiche Übergänge",
+      "Geerdet — der Berg als Anker, nicht als Gimmick",
+      "Editorsche Ruhe — reduziert, aber nicht kalt",
+      "Regional souverän — Steiermark als Qualitätssiegel, nicht als Folklore",
+      "Digital selbstbewusst — EO-Farben leuchten, dominieren aber nicht"
+    ],
+    "was_dieses_design_anders_macht": [
+      "Der Berg ist ein FOTO (keine CSS-Silhouette)",
+      "Hell statt dunkel — Tageslicht-Atmosphäre",
+      "EO-Farben sind primär, nicht akzentuell",
+      "Weißraum ist das teuerste Gestaltungsmittel",
+      "Typografie als Architektur — nicht als Dekoration"
+    ]
+  },
+
+  "farbpalette": {
+    "primary": {
+      "eo_blue": {
+        "hex": "#4D7CFF",
+        "purpose": "Primär-Akzent, Buttons, Links, Überschriften-Akzente",
+        "alias": "EO E-Blau"
+      },
+      "eo_cyan": {
+        "hex": "#22d3ee",
+        "purpose": "Sekundär-Akzent, Hover-States, Icons, O-Aspekt des Logos",
+        "alias": "EO O-Cyan"
+      }
+    },
+    "neutral": {
+      "white": {
+        "hex": "#FFFFFF",
+        "purpose": "Hintergrund Hero, Cards, Sektionen"
+      },
+      "off_white": {
+        "hex": "#F8FAFC",
+        "purpose": "Alternativer Sektions-Hintergrund (z.B. FAQ, Prozess)"
+      },
+      "light_gray": {
+        "hex": "#F1F5F9",
+        "purpose": "Card-Hover, Subtile Trennlinien, Input-Felder"
+      },
+      "mid_gray": {
+        "hex": "#CBD5E1",
+        "purpose": "Border-Linien, deaktive Zustände"
+      }
+    },
+    "text": {
+      "headline": {
+        "hex": "#0F172A",
+        "purpose": "Überschriften, Hero-Titel"
+      },
+      "body": {
+        "hex": "#334155",
+        "purpose": "Fließtext, Beschreibungen"
+      },
+      "muted": {
+        "hex": "#64748B",
+        "purpose": "Nebentexte, Meta-Informationen"
+      }
+    },
+    "gradient": {
+      "eo_gradient": "linear-gradient(135deg, #4D7CFF 0%, #22d3ee 100%)",
+      "eo_gradient_subtle": "linear-gradient(135deg, rgba(77,124,255,0.08) 0%, rgba(34,211,238,0.06) 100%)",
+      "hero_overlay": "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.70) 50%, rgba(255,255,255,0.92) 100%)"
+    }
+  },
+
+  "typografie": {
+    "philosophie": "Klare, geometrische Sans-Serif. Keine Serifen, keine dekorativen Schriften. Die Typografie ist die Architektur des Designs — sie trägt, schmückt nicht.",
+    "headings": {
+      "font_family": "'Inter', 'DM Sans', system-ui, sans-serif",
+      "weights": {
+        "hero": "800 (ExtraBold)",
+        "section_title": "700 (Bold)",
+        "card_title": "600 (SemiBold)",
+        "subtitle": "500 (Medium)"
+      },
+      "sizes": {
+        "hero_desktop": "clamp(3.5rem, 7vw, 6rem)",
+        "hero_mobile": "clamp(2.2rem, 10vw, 3.5rem)",
+        "section_title_desktop": "clamp(2rem, 3.5vw, 2.75rem)",
+        "section_title_mobile": "clamp(1.5rem, 5vw, 2rem)",
+        "card_title": "clamp(1.125rem, 1.5vw, 1.375rem)",
+        "subtitle": "clamp(1rem, 1.3vw, 1.125rem)"
+      },
+      "line_height": {
+        "hero": "1.05",
+        "section_title": "1.15",
+        "card_title": "1.3"
+      },
+      "letter_spacing": {
+        "hero": "-0.03em",
+        "section_title": "-0.02em",
+        "card_title": "-0.01em"
+      }
+    },
+    "body": {
+      "font_family": "'Inter', system-ui, sans-serif",
+      "weight": "400 (Regular)",
+      "sizes": {
+        "body_desktop": "clamp(1rem, 1.2vw, 1.125rem)",
+        "body_mobile": "1rem",
+        "small": "0.875rem"
+      },
+      "line_height": "1.65",
+      "max_width": "65ch"
+    },
+    "ui": {
+      "font_family": "'Inter', system-ui, sans-serif",
+      "button": "600 (SemiBold)",
+      "nav_link": "500 (Medium)",
+      "label": "500 (Medium)",
+      "meta": "400 (Regular)",
+      "nav_size": "0.9375rem",
+      "button_size": "1rem",
+      "label_size": "0.8125rem",
+      "meta_size": "0.75rem"
+    }
+  },
+
+  "layout": {
+    "grid": {
+      "columns_desktop": "12",
+      "columns_tablet": "8",
+      "columns_mobile": "4",
+      "max_width": "1200px",
+      "gutter_desktop": "24px",
+      "gutter_mobile": "16px",
+      "margin_desktop": "clamp(24px, 4vw, 48px)",
+      "margin_mobile": "16px"
+    },
+    "section_spacing": {
+      "desktop": "clamp(4rem, 8vw, 8rem)",
+      "tablet": "clamp(3rem, 6vw, 5rem)",
+      "mobile": "clamp(2.5rem, 8vw, 3.5rem)"
+    },
+    "hero": {
+      "height_desktop": "100vh",
+      "height_tablet": "90vh",
+      "height_mobile": "80vh",
+      "layout": "Text links, Berg-Bild als Full-Bleed-Hintergrund mit sanftem Overlay",
+      "alignment": "Vertikal zentriert, horizontal linksbündig (Desktop) / zentriert (Mobil)",
+      "content_width": "max(50%, 560px)"
+    }
+  },
+
+  "komponenten": {
+    "header": {
+      "style": "Transparent → weißer Kasten bei Scroll (mit Schatten)",
+      "logo_position": "Links, prominent (Höhe: 36px Desktop, 32px Mobil)",
+      "logo_style": "EO-Logo als vollständiges SVG mit Farbverlauf (E=Blau, O=Cyan)",
+      "navigation": "Rechts, horizontal (Desktop) / Hamburger (Mobil)",
+      "nav_items": ["Leistungen", "Über mich", "Kontakt"],
+      "cta_button": "«Gratis Erstgespräch» — EO-Blau gefüllt, weiße Schrift",
+      "height": "64px (Desktop), 56px (Mobil)",
+      "background_scrolled": "#FFFFFF mit box-shadow: 0 1px 3px rgba(0,0,0,0.06)"
+    },
+    "hero": {
+      "background": "Fotorealistischer Berg (Steiermark: Grimming, Hochschwab oder Schöckl) mit weichem weißlich-blauen Overlay (opacity ~0.85 auf hellem Teil)",
+      "headline_style": "Groß, fett, dark (#0F172A) — «Einfach <span style='color:#4D7CFF'>online.</span>»",
+      "subheadline": "Etwas kleiner, muted gray — «Webdesign aus der Steiermark. Persönlich. Digital. Gipfelklar.»",
+      "cta_primary": "«Gratis Erstgespräch» — EO-Blau gefüllt, abgerundet (12px), weiße Schrift",
+      "cta_secondary": "«Leistungen ansehen» — Outline-Stil, grauer Text, grauer Border",
+      "scroll_indicator": "Subtiler Pfeil nach unten, ganz unten zentriert, muted gray",
+      "bg_image_credit": "Hochwertige Bergfotografie (z.B. via Unsplash oder eigene Aufnahme Philipps)",
+      "bg_image_recommendation": "Grimming im Morgensonnenschein, Ennstal, oder Dachstein-Südansicht mit grünen Wiesen im Vordergrund. Wichtig: Sonnenlicht, nicht bewölkt oder düster."
+    },
+    "cards": {
+      "leistungen": {
+        "layout": "3 Spalten (Desktop), 2 Spalten (Tablet), 1 Spalte (Mobil)",
+        "background": "#FFFFFF",
+        "border": "1px solid #F1F5F9",
+        "border_radius": "16px",
+        "padding": "2rem",
+        "hover": "Schatten (box-shadow: 0 4px 20px rgba(0,0,0,0.04)), leichter Border-Übergang zu EO-Blau",
+        "icon_position": "Oben, 48x48px, EO-Blau oder EO-Cyan einfarbig",
+        "title": "Bold, #0F172A",
+        "description": "Regular, #334155"
+      },
+      "pricing": {
+        "layout": "3 Spalten, mittlere Karte hervorgehoben (beliebt)",
+        "background": "#FFFFFF",
+        "featured_background": "linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%)",
+        "featured_border": "2px solid #4D7CFF",
+        "featured_badge": "«Am beliebtesten» — EO-Cyan gefüllt, weiße Schrift",
+        "border_radius": "16px",
+        "padding": "2.5rem",
+        "price_style": "ExtraBold, 2.5rem, #0F172A",
+        "price_period": "Small, muted, #64748B"
+      }
+    },
+    "buttons": {
+      "primary": {
+        "background": "#4D7CFF",
+        "text": "#FFFFFF",
+        "border_radius": "10px",
+        "padding": "0.875rem 2rem",
+        "font_weight": "600",
+        "hover": "#3B6BF5",
+        "transition": "all 0.2s ease"
+      },
+      "secondary": {
+        "background": "transparent",
+        "text": "#4D7CFF",
+        "border": "1.5px solid #4D7CFF",
+        "border_radius": "10px",
+        "padding": "0.875rem 2rem",
+        "font_weight": "600",
+        "hover": "RGBA(77,124,255,0.06) Hintergrund"
+      },
+      "ghost": {
+        "background": "transparent",
+        "text": "#64748B",
+        "border_radius": "10px",
+        "padding": "0.875rem 2rem",
+        "font_weight": "500",
+        "hover": "Text wird #1E293B"
+      }
+    },
+    "footer": {
+      "background": "#0F172A",
+      "text_color": "#CBD5E1",
+      "heading_color": "#F8FAFC",
+      "layout": "4 Spalten (Logo/Claim, Navigation, Kontakt, Leistungen)",
+      "bottom_bar": "Border-top 1px solid #1E293B, Copyright links, «Gebaut in der Steiermark» rechts",
+      "easter_egg": "Letzte Zeile: «Mit Gipfelblick und Leidenschaft gebaut.»"
+    },
+    "section_divider": {
+      "style": "Weicher Weißraum — keine Trennlinien, keine dekorativen SVGs",
+      "abstand": "Nur Section-Spacing (s.o.), kein visuelles Trenn-Element",
+      "optional_element": "Kleines EO-Gradient-Element (z.B. kurzer Strich/divider 2rem breit) über Section-Titeln"
+    }
+  },
+
+  "berg_konzept": {
+    "typ": "Fotorealistische Bergfotografie",
+    "begruendung": "Das Briefing verbietet explizit CSS-Silhouetten, abstrakte Formen, geometrische Berge. Ein echtes Foto ist die einzig verbleibende Option — und die beste. Ein Foto vermittelt Echtheit, Region, Atmosphäre.",
+    "empfohlene_motive": [
+      "Der Grimming — das Wahrzeichen des Ennstals, markanter Einzelberg, gut fotografierbar",
+      "Hochschwab-Gruppe — sanftere Alpen, grüne Wiesen, typisch steirisch",
+      "Schöckl bei Graz — der ‚Hausberg' der Landeshauptstadt, direkter Graz-Bezug",
+      "Dachstein-Südansicht — vom Ennstal aus, mächtig aber nicht bedrohlich"
+    ],
+    "bildstimmung": "Hochsommer oder Frühherbst. Morgensonne (goldene Stunde). Grüne Wiesen im Vordergrund, blauer Himmel mit leichten Wolken. Kein Nebel, kein Regen, keine Nachtaufnahme. Soll klare Sicht und Optimismus vermitteln.",
+    "position": "Full-Bleed im Hero, sanft auslaufend nach unten. Auf Mobil: fokussierterer Ausschnitt (zentriert auf den Gipfel).",
+    "alternative": "Falls kein perfektes Foto verfügbar: Hochwertige Illustration im Stil von ‚modern travel editorial' — also stilisiert, aber erkennbar ein Berg. KEIN CSS-Polygon, keine Vektor-Silhouette."
+  },
+
+  "steiermark_bezug": {
+    "ansatz": "Subtil, nicht aufdringlich. Kein Wappen, keine Tracht, keine ‚steirischen' Pattern.",
+    "elemente": [
+      "Der Berg im Hero (echter steirischer Berg)",
+      "Im Text: ‚Webdesign aus der Steiermark', ‚Graz', ‚Gleisdorf'",
+      "Footer: ‚Gebaut in der Steiermark' mit EO-Cyan-Akzent",
+      "Optional bei Über-mich: Kleine Erwähnung ‚Ungerdorf, 8200 Gleisdorf' als Adresszeile",
+      "Farblich: Das Grün der Wiesen im Bergfoto ist der einzige ‚steirische' Farbhinweis"
+    ]
+  },
+
+  "responsive_regeln": {
+    "mobile_first": true,
+    "breakpoints": {
+      "mobile": "0px - 639px",
+      "tablet": "640px - 1023px",
+      "desktop": "1024px - 1279px",
+      "wide": "1280px+"
+    },
+    "hero_mobile": {
+      "text_align": "Zentriert",
+      "headline_size": "2.2rem",
+      "bg_image": "Fokussierterer Ausschnitt, Gipfel zentriert",
+      "buttons": "Stacked untereinander (full-width empfohlen)",
+      "padding": "0 24px"
+    },
+    "hero_tablet": {
+      "text_align": "Links",
+      "headline_size": "3.5rem",
+      "content_width": "60%",
+      "buttons": "Nebeneinander (gap: 12px)"
+    },
+    "cards_mobile": {
+      "columns": "1",
+      "gap": "16px"
+    },
+    "cards_tablet": {
+      "columns": "2",
+      "gap": "20px"
+    },
+    "cards_desktop": {
+      "columns": "3",
+      "gap": "24px"
+    },
+    "navigation": {
+      "desktop": "Horizontale Leiste im Header",
+      "mobile": "Hamburger-Menü mit Fullscreen-Overlay, weicher Blur-Hintergrund"
+    }
+  },
+
+  "animation_und_motion": {
+    "philosophie": "Zurückhaltend. Keine Spielereien. Nur sinnvolle Mikro-Interaktionen, die Orientierung geben.",
+    "erlaubt": [
+      "Subtiles Parallax des Bergfotos im Hero (5-10% Bewegung beim Scrollen)",
+      "Fade-In der Sektionen beim Reinscrollen (einfach, nicht gestaffelt)",
+      "Button-Hover: sanfter Farbwechsel (0.2s ease)",
+      "Header Scrolled-State: weicher Übergang von transparent zu weiß"
+    ],
+    "verboten": [
+      "Keine schwebenden/floatenden Animationen",
+      "Kein confetti, partikel, etc.",
+      "Keine Typo-Animation (ausser Hero-Initial-Load)",
+      "Keine Lottie- oder komplexen SVG-Animationen"
+    ]
+  },
+
+  "referenzen": [
+    {
+      "titel": "Kudos Agency (Awwwards nominated)",
+      "plattform": "Awwwards",
+      "url": "https://www.awwwards.com/sites/kudos",
+      "beschreibung": "Helles, editorielles Agenturdesign mit viel Weißraum und einer ruhigen, selbstbewussten Typografie. Exzellentes Vorbild für die Balance zwischen Text und Weißraum.",
+      "relevanz": "Layout-Struktur, Weißraum-Nutzung, professioneller Ton"
+    },
+    {
+      "titel": "Mountain Escape Hero Section (Dribbble — Seeam Ahmod)",
+      "plattform": "Dribbble",
+      "url": "https://dribbble.com/shots/25766653-Mountain-Escape-Hero-Section",
+      "beschreibung": "Helle, minimalistische Hero-Section mit Berg-Illustration und klarem, modernem Layout. Blaue Akzente auf hellem Hintergrund. Zeigt wie ein Berg im hellen Kontext funktioniert.",
+      "relevanz": "Hell + Berg Kombination, Farbharmonie Blau-Cyan, CTA-Platzierung"
+    },
+    {
+      "titel": "Roveo — Travel & Adventure Website Hero (Dribbble — Ali Malik)",
+      "plattform": "Dribbble",
+      "url": "https://dribbble.com/shots/25321525-Roveo-Travel-Adventure-Website-Hero-Section",
+      "beschreibung": "Reise-Webdesign mit Naturszenerie im Hero, klarer Typo-Hierarchie und einem frischen, hellen Farbschema. Die Art, wie Naturfotografie mit modernem UI verschmilzt, ist direkt übertragbar.",
+      "relevanz": "Foto + UI Integration, Editorial Vibe, mobile-first Layout"
+    }
+  ]
+}

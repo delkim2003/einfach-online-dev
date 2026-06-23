@@ -1,0 +1,187 @@
+---
+// ProzessSection.astro — 4-Schritte Timeline (ersetzt JSX)
+---
+
+<section class="py-20 lg:py-28 section-padding" id="prozess" aria-label="Prozess">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] mb-4" style="font-family: 'Geist', sans-serif;">
+        So einfach geht's
+      </h2>
+      <p class="text-[#475569] text-base sm:text-lg max-w-xl mx-auto">
+        Vom ersten Gespräch zum fertigen Projekt.
+      </p>
+    </div>
+
+    <!-- Desktop: 4 Steps horizontal -->
+    <div class="prozess-grid">
+      <!-- Step 1 -->
+      <div class="prozess-step">
+        <div class="prozess-circle">
+          <span class="prozess-nr">1</span>
+        </div>
+        <div class="prozess-line-connector"></div>
+        <h3 class="prozess-title">Analyse</h3>
+        <p class="prozess-text">
+          Wir besprechen Ihre Ziele, Ihre Zielgruppe und Ihre Wünsche. Kein Fachchinesisch, nur Klartext.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="prozess-step">
+        <div class="prozess-circle">
+          <span class="prozess-nr">2</span>
+        </div>
+        <div class="prozess-line-connector"></div>
+        <h3 class="prozess-title">Konzept</h3>
+        <p class="prozess-text">
+          Ich erstelle ein maßgeschneidertes Konzept — Design, Technik, Content — abgestimmt auf Ihr Unternehmen.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="prozess-step">
+        <div class="prozess-circle">
+          <span class="prozess-nr">3</span>
+        </div>
+        <div class="prozess-line-connector"></div>
+        <h3 class="prozess-title">Umsetzung</h3>
+        <p class="prozess-text">
+          Ich baue Ihre Website mit modernsten Technologien. DSGVO-konform, schnell und suchmaschinenoptimiert.
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="prozess-step">
+        <div class="prozess-circle">
+          <span class="prozess-nr">4</span>
+        </div>
+        <h3 class="prozess-title">Launch</h3>
+        <p class="prozess-text">
+          Nach gemeinsamer Qualitätskontrolle geht Ihre Seite live. Sie erhalten eine Einführung und laufenden Support.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .prozess-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    position: relative;
+  }
+
+  /* Connecting line (behind circles) */
+  .prozess-grid::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: calc(1.5rem + 32px);
+    right: calc(1.5rem + 32px);
+    height: 2px;
+    background: #E2E8F0;
+    z-index: 0;
+  }
+
+  .prozess-step {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .prozess-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #EEF2FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .prozess-step:hover .prozess-circle {
+    background: #4D7CFF;
+    box-shadow: 0 4px 16px -4px rgba(77, 124, 255, 0.35);
+  }
+  .prozess-step:hover .prozess-nr {
+    color: #FFFFFF;
+  }
+
+  .prozess-nr {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #4D7CFF;
+    transition: color 0.3s ease;
+  }
+
+  .prozess-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+    font-family: 'Geist', sans-serif;
+  }
+
+  .prozess-text {
+    font-size: 0.9rem;
+    color: #64748B;
+    line-height: 1.7;
+    max-width: 38ch;
+    margin: 0 auto;
+  }
+
+  /* Mobile: vertical timeline */
+  @media (max-width: 1023px) {
+    .prozess-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .prozess-grid::before {
+      display: none;
+    }
+    .prozess-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1rem;
+      text-align: left;
+      align-items: start;
+      background: #F8FAFC;
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .prozess-circle {
+      width: 48px;
+      height: 48px;
+      margin: 0;
+    }
+    .prozess-nr {
+      font-size: 1rem;
+    }
+    .prozess-title {
+      margin-bottom: 0.3rem;
+    }
+    .prozess-text {
+      margin: 0;
+      max-width: none;
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .prozess-step {
+      padding: 1rem;
+      grid-template-columns: 40px 1fr;
+    }
+    .prozess-circle {
+      width: 40px;
+      height: 40px;
+    }
+    .prozess-nr {
+      font-size: 0.9rem;
+    }
+  }
+</style>

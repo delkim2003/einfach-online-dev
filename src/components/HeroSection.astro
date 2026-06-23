@@ -1,0 +1,123 @@
+---
+// HeroSection.astro — ALPINE: HELLES DESIGN MIT BERG-BILD
+// Hero mit hero-berg.jpg als rechtem visuellem Anker,
+// hellem Overlay und zwei CTAs
+import AuroraText from '../components/AuroraText.jsx';
+---
+
+<section class="alpine-hero relative w-full min-h-[90vh] lg:min-h-screen overflow-hidden bg-white" id="top" aria-labelledby="hero-title">
+  <!-- Background Layer: Berg-Bild rechts + Gradient-Overlay -->
+  <div class="absolute inset-0 z-0" aria-hidden="true">
+    <!-- Bild -->
+    <img
+      src="/images/hero-berg.jpg"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover object-[30%_5%] lg:object-[20%_5%]"
+      loading="eager"
+      decoding="async"
+    />
+    <!-- Overlay: links hell (weiss→transparent) -->
+    <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 via-50% to-transparent"></div>
+    <!-- Zusätzlicher weicher Verlauf oben/unten für sanften Übergang -->
+    <div class="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/10"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col justify-center min-h-[90vh] lg:min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+    <div class="max-w-2xl lg:max-w-[55%] xl:max-w-[50%]">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#4D7CFF]/8 border border-[#4D7CFF]/15 text-[#4D7CFF] text-xs sm:text-sm font-medium tracking-wide mb-6 sm:mb-8 opacity-0 animate-[alpineFadeUp_0.8s_cubic-bezier(0.22,1,0.36,1)_0.2s_forwards]">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#4D7CFF] animate-pulse"></span>
+        DSGVO-sicher · EU-Hosting · Fair
+      </div>
+
+      <!-- Headline -->
+      <h1 id="hero-title" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-[#0F172A] leading-[1.08] tracking-tight mb-4 opacity-0 animate-[alpineFadeUp_0.8s_cubic-bezier(0.22,1,0.36,1)_0.4s_forwards]">
+        <AuroraText>Digitale</AuroraText><br class="hidden sm:block" />
+        <span class="font-light text-[#475569]">Exzellenz für KMUs</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-base sm:text-lg md:text-xl text-[#475569] font-light tracking-wide mb-6 sm:mb-8 opacity-0 animate-[alpineFadeUp_0.8s_cubic-bezier(0.22,1,0.36,1)_0.6s_forwards]">
+        Local First. Performance Driven. Privacy Centric.
+      </p>
+
+      <!-- Kerneffekt-Zitat-Box -->
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-4 sm:p-5 mb-8 sm:mb-10 opacity-0 animate-[alpineFadeUp_0.8s_cubic-bezier(0.22,1,0.36,1)_0.8s_forwards]">
+        <p class="text-sm sm:text-base text-[#475569] leading-relaxed italic">
+          <span class="text-[#4D7CFF] text-lg sm:text-xl leading-none align-middle">&ldquo;</span>
+          Messbar. Performant. Sicher. &ndash; DSGVO-konform, blitzschnell und pers&ouml;nlich betreut.
+          <span class="text-[#4D7CFF] text-lg sm:text-xl leading-none align-middle">&bdquo;</span>
+        </p>
+      </div>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 opacity-0 animate-[alpineFadeUp_0.8s_cubic-bezier(0.22,1,0.36,1)_1.0s_forwards]">
+        <a href="#leistungen" class="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-[#4D7CFF] text-white text-sm sm:text-base font-semibold rounded-xl shadow-[0_4px_20px_rgba(77,124,255,0.3)] hover:shadow-[0_6px_30px_rgba(77,124,255,0.4)] hover:bg-[#3B6BF5] transition-all duration-300 ease-out hover:-translate-y-0.5">
+          Leistungen ansehen
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="flex-shrink-0">
+            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#ablauf" class="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-transparent text-[#4D7CFF] text-sm sm:text-base font-semibold rounded-xl border-2 border-[#4D7CFF] hover:bg-[#4D7CFF]/5 transition-all duration-300 ease-out hover:-translate-y-0.5">
+          So arbeiten wir
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="flex-shrink-0">
+            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll-Indikator -->
+  <div class="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-10 opacity-0 animate-[alpineFadeUp_1s_ease-out_1.8s_forwards] pointer-events-none">
+    <div class="flex flex-col items-center gap-1.5">
+      <span class="text-[#94A3B8] text-[11px] font-medium tracking-widest uppercase">Scroll</span>
+      <div class="alpine-scroll-arrow w-5 h-8 rounded-full border-2 border-[#CBD5E1] flex items-start justify-center pt-1.5">
+        <span class="block w-1 h-1.5 rounded-full bg-[#4D7CFF] animate-[alpineScrollBounce_2.2s_ease-in-out_infinite]"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hero Fade-Up Animation */
+  @keyframes alpineFadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll-Bounce */
+  @keyframes alpineScrollBounce {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(8px);
+      opacity: 0.3;
+    }
+  }
+
+  /* Smooth image rendering */
+  .alpine-hero img {
+    will-change: transform;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .alpine-hero [class*="animate-"] {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+    .alpine-scroll-arrow span {
+      animation: none !important;
+    }
+  }
+</style>

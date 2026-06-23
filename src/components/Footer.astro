@@ -1,0 +1,113 @@
+---
+// Footer.astro — ALPINE: 4 SPALTEN DUNKEL
+// Hintergrund #1E293B, weiße/slate-300 Texte
+// 4 Columns: Brand, Navigation, Kontakt, Rechtliches
+// Bottom bar mit Copyright
+---
+
+<footer class="bg-[#1E293B] text-[#CBD5E1] w-full" aria-label="Footer">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-0">
+    <!-- 4 Columns Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-10">
+
+      <!-- Column 1: Brand -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="/" class="inline-flex items-center gap-2 mb-4" aria-label="Zur Startseite">
+          <svg viewBox="0 0 400 300" class="h-8 w-auto" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="footerGradE" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#4D7CFF" />
+                <stop offset="100%" stop-color="#3b82f6" />
+              </linearGradient>
+              <linearGradient id="footerGradO" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#22d3ee" />
+              </linearGradient>
+            </defs>
+            <g>
+              <path d="M 32.5 50 L 201.7 50 A 120 120 0 0 0 164.1 90 L 72.5 90 L 72.5 130 L 127.5 130 L 127.5 170 L 72.5 170 L 72.5 210 L 164.1 210 A 120 120 0 0 0 201.7 250 L 32.5 250 Z" fill="url(#footerGradE)" />
+              <path d="M 268 50 A 100 100 0 1 1 268 250 A 100 100 0 1 1 268 50 Z M 268 85 A 65 65 0 1 0 268 215 A 65 65 0 1 0 268 85 Z" fill="url(#footerGradO)" />
+            </g>
+          </svg>
+        </a>
+        <p class="text-sm text-[#94A3B8] leading-relaxed max-w-xs mb-4">
+          Persönliche Webentwicklung, SEO &amp; GEO-Optimierung für Unternehmen. Mit Herz, Hand und Gipfelblick.
+        </p>
+        <p class="text-xs text-[#64748B] italic">
+          Gebaut in der Steiermark, mit Gipfelblick und Leidenschaft.
+        </p>
+      </div>
+
+      <!-- Column 2: Navigation -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-[#F8FAFC] mb-5">Navigation</h3>
+        <ul class="space-y-3">
+          <li><a href="/" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200">Start</a></li>
+          <li><a href="/#leistungen" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200">Leistungen</a></li>
+          <li><a href="/#philosophie" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200">Philosophie</a></li>
+          <li><a href="/#faq" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200">FAQ</a></li>
+          <li><a href="/#kontakt" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Kontakt -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-[#F8FAFC] mb-5">Kontakt</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="mailto:info@einfach-online.dev" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200">
+              info@einfach-online.dev
+            </a>
+          </li>
+          <li class="text-sm text-[#64748B]">
+            Österreich · EU-weit tätig
+          </li>
+          <li class="text-sm text-[#64748B]">
+            Remote & vor Ort
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Rechtliches -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-[#F8FAFC] mb-5">Rechtliches</h3>
+        <ul class="space-y-3">
+          <li><a href="/datenschutz" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200">Datenschutz</a></li>
+          <li><a href="/#cookie-einstellungen" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200" id="cookie-settings-link">Cookie-Einstellungen</a></li>
+          <li><a href="/agb" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200">AGB</a></li>
+          <li><a href="/impressum" class="text-sm text-[#94A3B8] hover:text-white transition-colors duration-200">Impressum</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-2 py-5 border-t border-[#334155] text-center sm:text-left">
+      <p class="text-xs text-[#64748B]">
+        &copy; {new Date().getFullYear()} einfach-online.dev – DSGVO-konform. EU-gehostet. Unabhängig.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Cookie-Einstellungen Link: öffnet den Cookie-Banner
+  (function() {
+    const cookieLink = document.getElementById('cookie-settings-link');
+    if (cookieLink) {
+      cookieLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Versuche, den Cookie-Banner zu triggern
+        const banner = document.querySelector('[data-cookie-banner], .cookie-banner, #cookie-banner');
+        if (banner) {
+          banner.classList.remove('hidden');
+          banner.style.display = 'flex';
+        }
+        // Fallback: globalen Cookie-Consent-Callback
+        if (window.showCookieSettings) {
+          window.showCookieSettings();
+        }
+      });
+    }
+  })();
+</script>

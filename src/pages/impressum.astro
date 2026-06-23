@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+---
+
+<Layout 
+  title="Impressum | einfach-online.dev"
+  description="Impressum von einfach-online.dev. Philipp Schlemmer, Einzelunternehmer, Gleisdorf, Steiermark."
+  canonical="https://einfach-online.dev/impressum"
+>
+  <Header />
+  
+  <main class="pt-20">
+    <section class="py-20 lg:py-28 section-padding" aria-label="Impressum">
+      <div class="max-w-3xl mx-auto">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-text-primary mb-10" style="font-family: 'Geist', sans-serif; letter-spacing: -0.04em;">
+          Impressum
+        </h1>
+        
+        <article class="space-y-8">
+          <div class="bento-tile">
+            <h2 class="text-lg font-bold text-text-primary mb-4" style="font-family: 'Geist', sans-serif;">Unternehmensdaten</h2>
+            <div class="space-y-2 text-text-secondary text-sm leading-relaxed">
+              <p><strong>Firmenwortlaut:</strong> einfach-online.dev</p>
+              <p><strong>Inhaber:</strong> Philipp Schlemmer</p>
+              <p><strong>Rechtsform:</strong> Einzelunternehmer (Kleinstunternehmen)</p>
+              <p><strong>Anschrift:</strong> Ungerdorf 279/4, 8200 Gleisdorf, Österreich</p>
+              <p><strong>E-Mail:</strong> <a href="mailto:info@einfach-online.dev" class="text-accent-blue hover:underline">info@einfach-online.dev</a></p>
+            </div>
+          </div>
+          
+          <div class="bento-tile">
+            <h2 class="text-lg font-bold text-text-primary mb-4" style="font-family: 'Geist', sans-serif;">Berufsbezeichnung & Kammer</h2>
+            <div class="space-y-2 text-text-secondary text-sm leading-relaxed">
+              <p><strong>Berufsbezeichnung:</strong> IT-Dienstleister</p>
+              <p><strong>WKO-Mitgliedschaft:</strong> Mitglied der Wirtschaftskammer Österreich</p>
+              <p><strong>Gewerbe:</strong> Webentwicklung und EDV-Dienstleistungen</p>
+            </div>
+          </div>
+          
+          <div class="bento-tile">
+            <h2 class="text-lg font-bold text-text-primary mb-4" style="font-family: 'Geist', sans-serif;">Umsatzsteuer</h2>
+            <div class="space-y-2 text-text-secondary text-sm leading-relaxed">
+              <p>Umsatzsteuerbefreit gemäß § 6 Abs. 1 Z 27 UStG (Kleinunternehmer).</p>
+            </div>
+          </div>
+          
+          <div class="bento-tile">
+            <h2 class="text-lg font-bold text-text-primary mb-4" style="font-family: 'Geist', sans-serif;">EU-Streitschlichtung</h2>
+            <div class="space-y-2 text-text-secondary text-sm leading-relaxed">
+              <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:</p>
+              <p><a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">https://ec.europa.eu/consumers/odr</a></p>
+              <p class="mt-2">Wir sind nicht verpflichtet, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+              <p class="mt-2">Verbraucher haben die Möglichkeit, Beschwerden bei der Online-Streitbeilegungsplattform der EU einzureichen.</p>
+            </div>
+          </div>
+          
+          <div class="bento-tile">
+            <h2 class="text-lg font-bold text-text-primary mb-4" style="font-family: 'Geist', sans-serif;">Haftungsausschluss</h2>
+            <div class="space-y-2 text-text-secondary text-sm leading-relaxed">
+              <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+              <p class="mt-2">Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird jedoch keine Gewähr übernommen.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+  <CookieBanner />
+</Layout>

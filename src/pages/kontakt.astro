@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import KontaktSection from '../components/KontaktSection.astro';
+---
+
+<Layout 
+  title="Kontakt | einfach-online.dev"
+  description="Kontaktieren Sie Philipp Schlemmer für Webentwicklung und SEO in der Steiermark. E-Mail: info@einfach-online.dev"
+  canonical="https://einfach-online.dev/kontakt"
+>
+  <Header />
+  
+  <main class="pt-20">
+    <!-- Kontakt Hero -->
+    <section class="py-16 lg:py-20 section-padding text-center" aria-label="Kontakt">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-text-primary mb-4" style="font-family: 'Geist', sans-serif; letter-spacing: -0.04em;">
+          Kontaktieren Sie mich
+        </h1>
+        <p class="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto">
+          Bereit für den nächsten Schritt? Ich melde mich innerhalb von 24 Stunden bei Ihnen zurück.
+        </p>
+      </div>
+    </section>
+    
+    <KontaktSection />
+  </main>
+  
+  <Footer />
+  <CookieBanner />
+</Layout>

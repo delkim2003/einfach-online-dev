@@ -1,0 +1,91 @@
+---
+// Alpine Divider — Bergrücken als Trenner zwischen Hero und Leistungen
+export interface Props {
+  variant?: 'bergruecken' | 'wanderweg' | 'tannenzweig' | 'verlauf';
+  flip?: boolean;
+}
+const { variant = 'bergruecken', flip = false } = Astro.props;
+---
+
+{variant === 'bergruecken' && (
+  <div class="alp-divider alp-divider--bergruecken" aria-hidden="true">
+    <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+      <path d="M0,140 L0,90 L120,60 L220,95 L340,40 L460,80 L560,30 L700,75 L820,50 L960,95 L1080,55 L1200,85 L1320,45 L1440,80 L1440,140 Z" fill="currentColor"/>
+    </svg>
+  </div>
+)}
+
+{variant === 'wanderweg' && (
+  <div class="alp-divider alp-divider--wanderweg" aria-hidden="true">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="M0 30 C 150 5, 300 55, 450 30 S 750 5, 900 30 S 1150 50, 1200 30" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="10 7" stroke-linecap="round"/>
+      <circle cx="120" cy="22" r="3" fill="currentColor"/>
+      <circle cx="540" cy="36" r="3" fill="currentColor"/>
+      <circle cx="900" cy="30" r="3" fill="currentColor"/>
+    </svg>
+  </div>
+)}
+
+{variant === 'tannenzweig' && (
+  <div class="alp-divider alp-divider--tannenzweig" aria-hidden="true">
+    <svg viewBox="0 0 240 60">
+      <path d="M10 30 L230 30" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 5" stroke-linecap="round" fill="none"/>
+      <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none">
+        <path d="M120 10 L120 50"/>
+        <path d="M120 18 L108 22 M120 18 L132 22"/>
+        <path d="M120 26 L106 32 M120 26 L134 32"/>
+        <path d="M120 34 L108 42 M120 34 L132 42"/>
+      </g>
+    </svg>
+  </div>
+)}
+
+{variant === 'verlauf' && (
+  <div class="alp-divider alp-divider--verlauf" aria-hidden="true"></div>
+)}
+
+<style>
+.alp-divider{
+  display: block;
+  width: 100%;
+  line-height: 0;
+  margin: 0;
+}
+.alp-divider--bergruecken{
+  background: transparent;
+  color: var(--surface-alt);
+  transform: scaleY(var(--flip, 1));
+}
+.alp-divider--bergruecken svg{
+  width: 100%;
+  height: clamp(60px, 10vw, 140px);
+  display: block;
+  fill: currentColor;
+}
+.alp-divider--wanderweg{
+  padding: 1.4rem 0;
+  color: var(--stone);
+}
+.alp-divider--wanderweg svg{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+  height: clamp(40px, 6vw, 60px);
+}
+.alp-divider--tannenzweig{
+  text-align: center;
+  padding: 1rem 0;
+  color: var(--pine);
+}
+.alp-divider--tannenzweig svg{
+  width: clamp(140px, 22vw, 260px);
+  height: auto;
+  display: inline-block;
+}
+.alp-divider--verlauf{
+  height: clamp(70px, 12vw, 160px);
+  background: linear-gradient(to bottom, var(--surface) 0%, var(--primary) 100%);
+  border: none;
+}
+</style>

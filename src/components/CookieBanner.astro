@@ -1,0 +1,114 @@
+---
+// Cookie-Banner — Fixed-bottom, kräftig aber nicht invasiv
+---
+
+<div
+  id="cookie-banner"
+  class="eo-cookie is-visible"
+  role="dialog"
+  aria-label="Cookie-Einwilligung"
+>
+  <div class="eo-cookie__body">
+    <p class="eo-cookie__text">
+      Diese Website nutzt ausschließlich technisch notwendige Cookies.
+      <a href="/datenschutz" class="eo-cookie__link">Datenschutzerklärung</a>
+    </p>
+    <div class="eo-cookie__actions">
+      <button id="cookie-decline" class="eo-cookie__btn eo-cookie__btn--outline">Nur notwendige</button>
+      <button id="cookie-accept" class="eo-cookie__btn eo-cookie__btn--solid">Alle akzeptieren</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.eo-cookie {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: #1E293B;
+  border-top: 2px solid #4D7CFF;
+  border-radius: 12px 12px 0 0;
+  padding: 0.85rem 1.25rem;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.15);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.eo-cookie.is-visible {
+  transform: translateY(0);
+}
+.eo-cookie__body {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.eo-cookie__text {
+  color: #F1F5F9;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+.eo-cookie__link {
+  color: #60A5FA;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+.eo-cookie__link:hover {
+  color: #93C5FD;
+}
+.eo-cookie__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.eo-cookie__btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.eo-cookie__btn--solid {
+  background: #4D7CFF;
+  color: #FFFFFF;
+  border: 1px solid #4D7CFF;
+}
+.eo-cookie__btn--solid:hover {
+  background: #3B66E0;
+  border-color: #3B66E0;
+}
+.eo-cookie__btn--outline {
+  background: transparent;
+  color: #F1F5F9;
+  border: 1px solid #475569;
+}
+.eo-cookie__btn--outline:hover {
+  border-color: #94A3B8;
+  color: #FFFFFF;
+}
+
+@media (max-width: 480px) {
+  .eo-cookie__body {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .eo-cookie__actions {
+    justify-content: center;
+  }
+}
+</style>

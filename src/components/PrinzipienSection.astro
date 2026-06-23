@@ -1,0 +1,332 @@
+---
+// PrinzipienSection.astro — ALPINE: 3 TABS (Unabhängig/Sicher/Schnell)
+// JS-gesteuerter Tab-Wechsel mit CSS-only Fade-In-Animation
+import VisualUnabhaengig from './VisualUnabhaengig.jsx';
+import VisualSicher from './VisualSicher.jsx';
+import VisualSchnell from './VisualSchnell.jsx';
+---
+
+<section class="py-20 lg:py-28 bg-[#F0F4F8]" id="philosophie" aria-label="Unsere Philosophie">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Überschrift -->
+    <div class="text-center mb-12 sm:mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] mb-3" style="font-family: 'Geist', sans-serif;">
+        Wof&uuml;r wir stehen
+      </h2>
+      <p class="text-[#94A3B8] text-base sm:text-lg font-light tracking-wide">
+        Drei Prinzipien. Eine Haltung.
+      </p>
+    </div>
+
+    <!-- Tab-Navigation -->
+    <div class="flex justify-center mb-8 sm:mb-10">
+      <div class="inline-flex bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-1 w-full sm:w-auto overflow-x-auto" role="tablist" aria-label="Prinzipien Auswahl">
+        <button type="button" class="tab-btn flex items-center gap-2.5 px-4 sm:px-6 py-3 sm:py-3.5 rounded-lg text-sm sm:text-base font-medium whitespace-nowrap transition-all duration-300 active" data-tab="unabhaengig" role="tab" aria-selected="true" aria-controls="panel-unabhaengig" tabindex="0">
+          <!-- Unabhängig Icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="flex-shrink-0">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+          <span>Unabh&auml;ngig</span>
+        </button>
+
+        <button type="button" class="tab-btn flex items-center gap-2.5 px-4 sm:px-6 py-3 sm:py-3.5 rounded-lg text-sm sm:text-base font-medium whitespace-nowrap transition-all duration-300" data-tab="sicher" role="tab" aria-selected="false" aria-controls="panel-sicher" tabindex="-1">
+          <!-- Sicher Icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="flex-shrink-0">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+          <span>Sicher</span>
+        </button>
+
+        <button type="button" class="tab-btn flex items-center gap-2.5 px-4 sm:px-6 py-3 sm:py-3.5 rounded-lg text-sm sm:text-base font-medium whitespace-nowrap transition-all duration-300" data-tab="schnell" role="tab" aria-selected="false" aria-controls="panel-schnell" tabindex="-1">
+          <!-- Schnell Icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="flex-shrink-0">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          <span>Schnell</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tab-Panels -->
+    <div class="panels-container">
+      <!-- Panel 1: Unabhängig -->
+      <div id="panel-unabhaengig" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-1" data-tab="unabhaengig">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          <!-- Linke Spalte: Text -->
+          <div class="lg:col-span-3 bg-white rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-6 sm:p-8 lg:p-10 border border-[#E2E8F0]">
+            <div class="flex items-start gap-4 sm:gap-6 mb-6 sm:mb-8">
+              <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#4D7CFF]/10 flex items-center justify-center shrink-0">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4D7CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-[#0F172A] mb-2" style="font-family: 'Geist', sans-serif;">Unabh&auml;ngig</h3>
+                <p class="text-[#475569] text-sm sm:text-base leading-relaxed">
+                  Ihre Website l&auml;uft ohne Google, Amazon &amp; Co. &ndash;
+                  echte digitale Souver&auml;nit&auml;t f&uuml;r Ihr Unternehmen.
+                </p>
+              </div>
+            </div>
+            <ul class="space-y-3 sm:space-y-4">
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">Lokale Fonts:</strong> Kein Google Fonts CDN, alle Schriftarten werden selbst gehostet.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">Kein CDN:</strong> Alle Ressourcen kommen direkt von Ihrem Server &ndash; keine externen Abh&auml;ngigkeiten.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">Kein Google-Tracking:</strong> Kein Analytics, kein Tag Manager, keine externen Skripte.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">Puristisches CSS:</strong> Kein jQuery, kein Bootstrap &ndash; minimaler, eigener Code f&uuml;r maximale Performance.</span>
+              </li>
+            </ul>
+          </div>
+          <!-- Rechte Spalte: Visual Unabhängig -->
+          <div class="lg:col-span-2 bg-white rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-6 sm:p-8 border border-[#E2E8F0] flex flex-col items-center justify-center">
+            <VisualUnabhaengig client:load />
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Sicher -->
+      <div id="panel-sicher" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-2" data-tab="sicher">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          <!-- Linke Spalte: Text -->
+          <div class="lg:col-span-3 bg-white rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-6 sm:p-8 lg:p-10 border border-[#E2E8F0]">
+            <div class="flex items-start gap-4 sm:gap-6 mb-6 sm:mb-8">
+              <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#4D7CFF]/10 flex items-center justify-center shrink-0">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4D7CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-[#0F172A] mb-2" style="font-family: 'Geist', sans-serif;">Sicher</h3>
+                <p class="text-[#475569] text-sm sm:text-base leading-relaxed">
+                  Ihre Kundendaten bleiben in Europa. DSGVO-konform von Grund auf.
+                </p>
+              </div>
+            </div>
+            <ul class="space-y-3 sm:space-y-4">
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">DSGVO by Design:</strong> Datenschutz ist kein nachtr&auml;gliches Feature, sondern Fundament jeder Website.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">EU-Rechenzentrum:</strong> Gehostet in &Ouml;sterreich &ndash; deutsches Recht, europ&auml;ische Standards.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">Cookie-frei:</strong> Keine Cookie-Banner n&ouml;tig &ndash; wir speichern keine Tracking-Daten.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">Kein US-Transfer:</strong> Null Abh&auml;ngigkeit von US-Konzernen. Ihre Daten bleiben in der EU.</span>
+              </li>
+            </ul>
+          </div>
+          <!-- Rechte Spalte: Visual Sicher -->
+          <div class="lg:col-span-2 bg-white rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-6 sm:p-8 border border-[#E2E8F0] flex flex-col items-center justify-center">
+            <VisualSicher client:load />
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Schnell -->
+      <div id="panel-schnell" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-3" data-tab="schnell">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          <!-- Linke Spalte: Text -->
+          <div class="lg:col-span-3 bg-white rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-6 sm:p-8 lg:p-10 border border-[#E2E8F0]">
+            <div class="flex items-start gap-4 sm:gap-6 mb-6 sm:mb-8">
+              <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#4D7CFF]/10 flex items-center justify-center shrink-0">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4D7CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-[#0F172A] mb-2" style="font-family: 'Geist', sans-serif;">Schnell</h3>
+                <p class="text-[#475569] text-sm sm:text-base leading-relaxed">
+                  Performantes Hosting in deutschen Rechenzentren &ndash; f&uuml;r h&ouml;chste Ladegeschwindigkeit.
+                </p>
+              </div>
+            </div>
+            <ul class="space-y-3 sm:space-y-4">
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">Schnelle Ladezeit:</strong> Optimierte Assets und Komprimierung f&uuml;r Ladezeiten unter einer Sekunde.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">Statisches Rendering:</strong> SSG (Static Site Generation) f&uuml;r blitzschnelle Auslieferung ohne Server-Logik.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">Mobil optimiert:</strong> Responsive Design mit Mobile-First-Ansatz &ndash; perfekt auf jedem Endger&auml;t.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#475569]">
+                <svg class="w-5 h-5 text-[#4D7CFF] shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong class="text-[#0F172A] font-semibold">CDN-frei:</strong> Direktauslieferung vom EU-Server &ndash; kein Cloudflare, kein Akamai, keine Umwege.</span>
+              </li>
+            </ul>
+          </div>
+          <!-- Rechte Spalte: Visual Schnell -->
+          <div class="lg:col-span-2 bg-white rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-6 sm:p-8 border border-[#E2E8F0] flex flex-col items-center justify-center">
+            <VisualSchnell client:load />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Tab-Visibility ── */
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+    animation: prinzipienFadeIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ── Tab-Buttons: Aktiver Zustand ── */
+  .tab-btn {
+    color: #94A3B8;
+    background: transparent;
+  }
+
+  .tab-btn:hover {
+    background: rgba(77, 124, 255, 0.04);
+  }
+
+  .tab-btn.active {
+    color: #4D7CFF;
+    background: rgba(77, 124, 255, 0.08);
+  }
+
+  /* ── Fade-In Animation ── */
+  @keyframes prinzipienFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ── Fokus-Stil ── */
+  .tab-btn:focus-visible {
+    outline: 2px solid #4D7CFF;
+    outline-offset: 2px;
+  }
+
+  /* ── Reduced Motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .tab-panel.active {
+      animation: none;
+    }
+    .tab-btn {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const section = document.getElementById('philosophie');
+    if (!section) return;
+
+    const btns = section.querySelectorAll('.tab-btn');
+    const panels = section.querySelectorAll('.tab-panel');
+
+    function activateTab(tabId) {
+      // Buttons aktualisieren
+      btns.forEach(function(btn) {
+        const isActive = btn.getAttribute('data-tab') === tabId;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        btn.setAttribute('tabindex', isActive ? '0' : '-1');
+      });
+
+      // Panels aktualisieren
+      panels.forEach(function(panel) {
+        const isActive = panel.getAttribute('data-tab') === tabId;
+        panel.classList.toggle('active', isActive);
+      });
+    }
+
+    // Click-Handler
+    btns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const tabId = btn.getAttribute('data-tab');
+        if (tabId) activateTab(tabId);
+      });
+
+      // Tastatur-Navigation
+      btn.addEventListener('keydown', function(e) {
+        const btnArray = Array.from(btns);
+        const idx = btnArray.indexOf(btn);
+        let nextIdx = -1;
+
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          nextIdx = (idx + 1) % btnArray.length;
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          nextIdx = (idx - 1 + btnArray.length) % btnArray.length;
+        }
+
+        if (nextIdx >= 0) {
+          const nextBtn = btnArray[nextIdx];
+          const tabId = nextBtn.getAttribute('data-tab');
+          if (tabId) {
+            activateTab(tabId);
+            nextBtn.focus();
+          }
+        }
+      });
+    });
+
+    // Initial aktivieren
+    const activeBtn = section.querySelector('.tab-btn.active') || btns[0];
+    const initialTab = activeBtn.getAttribute('data-tab');
+    if (initialTab) activateTab(initialTab);
+  })();
+</script>

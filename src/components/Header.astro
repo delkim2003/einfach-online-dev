@@ -1,0 +1,417 @@
+---
+import Logo from './Logo.astro';
+
+const navItems = [
+  { label: 'Leistungen', href: '#leistungen' },
+  { label: 'Philosophie', href: '#philosophie' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Kontakt', href: '#kontakt' },
+];
+
+const currentPath = Astro.url.pathname;
+
+const isActive = (href: string): boolean => {
+  return currentPath.startsWith(href);
+};
+---
+
+<header class="gipfel-header" id="site-header">
+  <div class="gipfel-header__bar">
+    <a href="/" class="gipfel-header__logo" aria-label="Zur Startseite">
+      <Logo />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="gipfel-header__nav" aria-label="Hauptnavigation">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="gipfel-header__link"
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            data-active={isActive(item.href) ? '' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a href="#kontakt" class="gipfel-header__cta">
+      Kontakt
+    </a>
+
+    <!-- CSS-only Hamburger (Checkbox-gesteuert) -->
+    <input type="checkbox" id="menu-toggle" class="gipfel-header__burger-input" aria-hidden="true" />
+    <label for="menu-toggle" class="gipfel-header__burger" aria-label="Menü öffnen/schließen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <!-- Mobile Panel -->
+    <div class="gipfel-header__mobile" role="navigation" aria-label="Mobile Navigation">
+      <ul class="gipfel-header__mobile-list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="gipfel-header__mobile-link"
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                data-active={isActive(item.href) ? '' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="#kontakt" class="gipfel-header__mobile-cta">
+            Kontakt
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* ================================================================
+     GIPFEL — Header (Light / EO Design)
+     Anfangs transparent · Weiß beim Scrollen
+     ================================================================ */
+
+  .gipfel-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    transition:
+      background-color 0.4s ease,
+      box-shadow 0.4s ease,
+      border-color 0.4s ease;
+    background: transparent;
+  }
+
+  .gipfel-header.scrolled {
+    background: #FFFFFF;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  /* ── Leiste ── */
+  .gipfel-header__bar {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    gap: 1.25rem;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 4vw, 48px);
+  }
+
+  /* ── Logo ── */
+  .gipfel-header__logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+
+  .gipfel-header__logo:hover {
+    transform: translateY(-1px);
+  }
+
+  .gipfel-header__logo :global(svg) {
+    height: 2.25rem;
+    width: auto;
+  }
+
+  /* ── Desktop-Nav ── */
+  .gipfel-header__nav {
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+    margin-right: 1.25rem;
+  }
+
+  .gipfel-header__mobile-link {
+    display: block;
+    padding: 0.75rem 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #1E293B;
+    text-decoration: none;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .gipfel-header__link {
+    position: relative;
+    padding: 0.75rem 0;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #64748B;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .gipfel-header__link:hover {
+    color: #4D7CFF;
+  }
+
+  .gipfel-header__link[data-active] {
+    color: #4D7CFF;
+    font-weight: 600;
+  }
+
+  /* ── CTA ── */
+  .gipfel-header__cta {
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.6rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    background: #4D7CFF;
+    border-radius: 10px;
+    flex-shrink: 0;
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .gipfel-header__cta:hover {
+    background: #3B6BF5;
+    transform: translateY(-1px);
+    color: #FFFFFF;
+  }
+
+  /* ── Checkbox (visuell versteckt) ── */
+  .gipfel-header__burger-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ── Burger-Icon ── */
+  .gipfel-header__burger {
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    margin-left: auto;
+    color: #64748B;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  .gipfel-header__burger:hover {
+    background: rgba(77, 124, 255, 0.06);
+  }
+
+  .gipfel-header__burger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #64748B;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: 1px;
+  }
+
+  /* Hamburger-X-Animation */
+  .gipfel-header__burger-input:checked ~ .gipfel-header__burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background: #4D7CFF;
+  }
+
+  .gipfel-header__burger-input:checked ~ .gipfel-header__burger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .gipfel-header__burger-input:checked ~ .gipfel-header__burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background: #4D7CFF;
+  }
+
+  /* ── Mobile-Panel ── */
+  .gipfel-header__mobile {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border-top: 1px solid #F1F5F9;
+    max-height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition:
+      max-height 0.4s ease,
+      opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .gipfel-header__burger-input:checked ~ .gipfel-header__mobile {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .gipfel-header__mobile-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1.25rem 1.5rem;
+    gap: 0.25rem;
+  }
+
+  .gipfel-header__mobile-list li {
+    list-style: none;
+  }
+
+  .gipfel-header__mobile-link {
+    display: block;
+    padding: 0.85rem 0.5rem;
+    color: #334155;
+    font-size: 1.05rem;
+    font-weight: 500;
+    border-bottom: 1px solid #F1F5F9;
+    transition:
+      color 0.2s ease,
+      padding-left 0.2s ease;
+    text-decoration: none;
+  }
+
+  .gipfel-header__mobile-link:hover,
+  .gipfel-header__mobile-link[data-active] {
+    color: #4D7CFF;
+    padding-left: 0.85rem;
+  }
+
+  .gipfel-header__mobile-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.85rem 1.25rem;
+    background: #4D7CFF;
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .gipfel-header__mobile-cta:hover {
+    background: #3B6BF5;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+  }
+
+  /* ================================================================
+     Responsive
+     ================================================================ */
+
+  /* ── Mobile (Standard) ── */
+  .gipfel-header__nav,
+  .gipfel-header__cta {
+    display: none;
+  }
+
+  .gipfel-header__burger {
+    display: inline-flex;
+  }
+
+  @media (min-width: 1024px) {
+    .gipfel-header__bar {
+      height: 64px;
+    }
+
+    /* Desktop: Navigation-Links direkt anzeigen, Hamburger verstecken */
+    .gipfel-header__nav {
+      display: flex !important;
+    }
+
+    .gipfel-header__cta {
+      display: flex !important;
+    }
+
+    .gipfel-header__burger,
+    .gipfel-header__burger-input,
+    .gipfel-header__mobile {
+      display: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gipfel-header__mobile {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Scroll-Effekt für Header: transparent → weiß
+  (function() {
+    const header = document.getElementById('site-header');
+    if (!header) return;
+
+    const onScroll = function() {
+      const hero = document.querySelector('#top');
+      if (hero) {
+        var heroBottom = hero.offsetTop + hero.offsetHeight * 0.65;
+        if (window.scrollY > heroBottom) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      } else {
+        header.classList.toggle('scrolled', window.scrollY > 60);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile Menu: Close on link click & Escape key
+    const toggle = document.getElementById('menu-toggle');
+    if (toggle) {
+      const close = function() {
+        toggle.checked = false;
+      };
+
+      document.querySelectorAll('.gipfel-header__mobile-link, .gipfel-header__mobile-cta')
+        .forEach(function(a) { a.addEventListener('click', close); });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') close();
+      });
+
+      window.matchMedia('(min-width: 1024px)').addEventListener('change', close);
+    }
+  })();
+</script>

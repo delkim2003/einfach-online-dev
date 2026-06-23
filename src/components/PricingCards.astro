@@ -1,0 +1,204 @@
+---
+// PricingCards.astro — ALPINE TERMINAL: COST COMPARISON
+// 3 Cards nebeneinander: Digital Start, Digital Flex, ALL-IN SMART
+// Terminal-Grün Badges, 3D Rotate auf Hover
+---
+
+<section class="py-20 lg:py-28 section-padding" id="preise" aria-label="Preise">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text-primary mb-4" style="font-family: 'Geist', sans-serif;">
+        Transparente Preise für Ihren Erfolg.
+      </h2>
+      <p class="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto">
+        Moderne Webentwicklung, DSGVO-konform und auf Performance optimiert. Wählen Sie das Paket, das zu Ihrem Unternehmen passt.
+      </p>
+    </div>
+
+    <!-- 3 Cards nebeneinander -->
+    <div class="flex flex-col lg:flex-row gap-6 items-stretch justify-center max-w-5xl mx-auto overflow-x-auto pb-4">
+      
+      <!-- Card 1: Digital Start -->
+      <article class="bento-tile flex flex-col min-w-[280px] flex-1 pricing-card-3d animate-on-scroll delay-100">
+        <div class="mb-2">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest text-accent-blue mb-2" style="font-family: 'Geist', sans-serif;">Für den Einstieg</span>
+          <h3 class="text-2xl font-black text-text-primary" style="font-family: 'Geist', sans-serif;">
+            Digital Start
+          </h3>
+        </div>
+        
+        <div class="mb-2">
+          <div class="flex items-baseline gap-1">
+            <span class="text-4xl font-black text-text-primary" style="font-family: 'Geist', sans-serif;">€ 1.490</span>
+          </div>
+          <p class="text-xs text-text-secondary mt-1">Einmalig · bis € 2.490</p>
+        </div>
+
+        <div class="flex gap-2 mb-4">
+          <span class="badge-terminal">> empfohlen</span>
+        </div>
+        
+        <p class="text-sm text-text-secondary leading-relaxed mb-6">
+          Einmalzahlung. Deine Website gehört dir – ohne Abo-Zwang, ohne laufende Kosten.
+        </p>
+        
+        <ul class="space-y-3 mb-6 flex-1">
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>DSGVO-konforme Website</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Astro SSG – Maximal Performance</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>EU-Hosting (Deutschland)</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Optimiert für Google & KI</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Persönlicher Ansprechpartner</span>
+          </li>
+        </ul>
+        
+        <a href="/kontakt" class="btn-secondary w-full text-center">
+          Jetzt anfragen
+        </a>
+      </article>
+      
+      <!-- Card 2: Digital Flex (Bestseller) -->
+      <article class="bento-tile flex flex-col min-w-[280px] flex-1 relative border-accent-blue/30 pricing-card-3d animate-on-scroll delay-200">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+          <span class="badge-terminal">> bestseller</span>
+        </div>
+        
+        <div class="mb-2 pt-2">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest text-accent-blue mb-2" style="font-family: 'Geist', sans-serif;">Mehr Flexibilität</span>
+          <h3 class="text-2xl font-black text-text-primary" style="font-family: 'Geist', sans-serif;">
+            Digital Flex
+          </h3>
+        </div>
+        
+        <div class="mb-2">
+          <div class="flex items-baseline gap-1">
+            <span class="text-4xl font-black text-text-primary" style="font-family: 'Geist', sans-serif;">€ 2.990</span>
+          </div>
+          <p class="text-xs text-text-secondary mt-1">Einmalig · bis € 4.490</p>
+        </div>
+
+        <div class="flex gap-2 mb-4">
+          <span class="badge-terminal" style="border-color: rgba(77,124,255,0.3); color: #4D7CFF;">> empfohlen</span>
+        </div>
+        
+        <p class="text-sm text-text-secondary leading-relaxed mb-6">
+          Maximale Flexibilität. CMS-Integration für eigenständige Inhaltspflege.
+        </p>
+        
+        <ul class="space-y-3 mb-6 flex-1">
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Alle Leistungen von Digital Start</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>CMS-Integration (Craft CMS / Statamic)</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Inhalte selbst bearbeiten</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Blog, News & Portfolio</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Skalierbar – wächst mit Ihnen</span>
+          </li>
+        </ul>
+        
+        <div class="border-t border-border-subtle pt-4 mb-6">
+          <p class="text-xs text-text-secondary leading-relaxed">
+            <span class="font-semibold text-accent-blue">Online Care</span> – € 99–149 / Monat – Wartung, Updates & Support.
+          </p>
+        </div>
+        
+        <a href="/kontakt" class="btn-primary w-full text-center">
+          Jetzt anfragen
+        </a>
+      </article>
+      
+      <!-- Card 3: ALL-IN SMART -->
+      <article class="bento-tile flex flex-col min-w-[280px] flex-1 relative border-accent-cyan/30 pricing-card-3d animate-on-scroll delay-300">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+          <span class="badge-terminal">> premium</span>
+        </div>
+        
+        <div class="mb-2 pt-2">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest text-accent-cyan mb-2" style="font-family: 'Geist', sans-serif;">Rundum-Sorglos</span>
+          <h3 class="text-2xl font-black text-text-primary" style="font-family: 'Geist', sans-serif;">
+            ALL-IN SMART
+          </h3>
+        </div>
+        
+        <div class="mb-2">
+          <div class="flex items-baseline gap-1">
+            <span class="text-4xl font-black text-text-primary" style="font-family: 'Geist', sans-serif;">€ 149</span>
+            <span class="text-sm text-text-secondary">/ Monat</span>
+          </div>
+          <p class="text-xs text-text-secondary mt-1">€ 399 einmalige Bereitstellung</p>
+        </div>
+
+        <div class="flex gap-2 mb-4">
+          <span class="badge-terminal" style="border-color: rgba(41,197,246,0.3); color: #29C5F6;">> all-inclusive</span>
+        </div>
+        
+        <p class="text-sm text-text-secondary leading-relaxed mb-6">
+          Mieten statt kaufen. Inklusive Hosting, Wartung, Updates – alles aus einer Hand.
+        </p>
+        
+        <ul class="space-y-3 mb-6 flex-1">
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-cyan" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Astro SSG – DSGVO-konform</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-cyan" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>EU-Hosting & Sicherheits-Updates</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-cyan" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Technischer Support inklusive</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-cyan" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>SEO & GEO-Optimierung</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-text-secondary">
+            <svg class="mt-0.5 shrink-0 text-accent-cyan" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Keine Überraschungen – alles inklusive</span>
+          </li>
+        </ul>
+        
+        <div class="border-t border-border-subtle pt-4 mb-6">
+          <p class="text-xs text-text-secondary leading-relaxed">
+            <span class="font-semibold text-accent-cyan">24 Monate Bindung</span> – CMS & priorisierter Support optional.
+          </p>
+        </div>
+        
+        <a href="/kontakt" class="btn-primary w-full text-center">
+          Jetzt mieten
+        </a>
+      </article>
+      
+    </div>
+    
+    <p class="text-center text-text-secondary text-sm mt-10 max-w-2xl mx-auto">
+      Umsatzsteuerbefreit – Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG. Bindung: 24 Monate (Miet-Modell). Einmalzahlung: keine Mindestlaufzeit.
+    </p>
+  </div>
+</section>

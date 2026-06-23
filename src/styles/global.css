@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+@import "tailwindcss";
+
+/* Alpine/Gipfel — Helles Design */
+:root {
+  --page: #FFFFFF;
+  --surface: #F8FAFC;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --accent-blue: #4D7CFF;
+  --accent-cyan: #22d3ee;
+}
