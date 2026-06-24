@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+---
+
+<Layout 
+  title="Seite nicht gefunden"
+  description="Die angefragte Seite existiert nicht. Zurück zur Startseite."
+  canonical="https://einfach-online.dev/404"
+>
+
+<Header />
+
+<main class="pt-20 min-h-[80vh] flex items-center justify-center bg-white">
+  <div class="text-center px-4 max-w-lg mx-auto">
+    <!-- Error Code -->
+    <div class="mb-6">
+      <span class="text-[120px] sm:text-[160px] font-black text-[#4D7CFF]/10 leading-none tracking-tight" style="font-family: 'Geist', sans-serif;">404</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] mb-3">
+      Seite nicht gefunden
+    </h1>
+    
+    <p class="text-[#475569] text-base sm:text-lg mb-8 leading-relaxed">
+      Diese Seite existiert leider nicht. Vielleicht wurde sie verschoben oder der Link ist fehlerhaft.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="/" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#4D7CFF] text-white text-sm font-semibold rounded-xl shadow-[0_4px_16px_rgba(77,124,255,0.25)] hover:bg-[#3B6BF5] hover:shadow-[0_6px_24px_rgba(77,124,255,0.35)] transition-all duration-300 hover:-translate-y-0.5">
+        Zur Startseite
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="/kontakt" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-[#4D7CFF] text-sm font-semibold rounded-xl border border-[#E2E8F0] hover:border-[#4D7CFF]/30 transition-all duration-300">
+        Kontakt aufnehmen
+      </a>
+    </div>
+
+    <p class="mt-10 text-sm text-[#94A3B8]">
+      Fehler gemeldet? <a href="mailto:info@einfach-online.dev" class="text-[#4D7CFF] hover:underline">info@einfach-online.dev</a>
+    </p>
+  </div>
+</main>
+
+<Footer />
+<CookieBanner />
+
+</Layout>
