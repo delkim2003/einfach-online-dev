@@ -182,10 +182,50 @@ const ogImageUrl = `${baseUrl}/images/og-default.webp`;
   <meta property="og:url" content={can} />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="de_AT" />
+  <meta property="article:published_time" content={rawPubDate} />
+  <meta property="article:author" content={author} />
+  {category && <meta property="article:section" content={category} />}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={ttl} />
   <meta name="twitter:description" content={dsc} />
   <meta name="twitter:image" content={ogImageUrl} />
+
+  <!-- Article JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {ttl ? JSON.stringify(ttl) : '"Blog-Beitrag"'},
+    "description": {dsc ? JSON.stringify(dsc) : '"' + ttl + '"'},
+    "author": {
+      "@type": "Person",
+      "name": {author ? JSON.stringify(author) : '"Philipp Schlemmer"'}
+    },
+    "datePublished": {rawPubDate ? JSON.stringify(rawPubDate) : '""'},
+    "image": {JSON.stringify(ogImageUrl)},
+    "publisher": {
+      "@type": "Organization",
+      "name": "einfach-online.dev"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {can ? JSON.stringify(can) : JSON.stringify(baseUrl + '/blog/')}
+    }
+  }
+  </script>
+
+  <!-- BreadcrumbList JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://einfach-online.dev" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://einfach-online.dev/blog/" },
+      { "@type": "ListItem", "position": 3, "name": {ttl ? JSON.stringify(ttl) : '"Blog-Beitrag"'}, "item": {can ? JSON.stringify(can) : JSON.stringify(baseUrl + '/blog/')} }
+    ]
+  }
+  </script>
 </head>
 <body>
   <Header />

@@ -138,9 +138,41 @@ const jsonLd = {
   <meta name="twitter:image" content={ogImageUrl} />
   <meta name="twitter:image:alt" content={title} />
 
-  <link rel="preconnect" href={baseUrl} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- WebSite + Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "einfach-online.dev",
+    "url": "https://einfach-online.dev",
+    "description": "Webdesign aus der Steiermark – persönlich, modern, suchmaschinenoptimiert.",
+    "inLanguage": "de-AT",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://einfach-online.dev/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "einfach-online.dev",
+    "url": "https://einfach-online.dev",
+    "email": "info@einfach-online.dev",
+    "founder": { "@type": "Person", "name": "Philipp Schlemmer" },
+    "knowsAbout": ["Webentwicklung", "SEO", "GEO", "KI-Suche", "Drupal", "Astro"]
+  }
+  </script>
 </head>
 <body class="">
   <slot />
