@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option A — Berg-Silhouetten Test</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #FFFFFF; }
+  
+  /* Berg-Silhouette Container */
+  .section-mountains {
+    background-color: #F0F4F8;
+    position: relative;
+    overflow: hidden;
+  }
+  .section-mountains::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23FFFFFF' fill-opacity='0.25' d='M0,160L80,138.7C160,117,320,75,480,85.3C640,96,800,160,960,176C1120,192,1280,160,1360,144L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z'/%3E%3Cpath fill='%23FFFFFF' fill-opacity='0.15' d='M0,224L80,213.3C160,203,320,181,480,192C640,203,800,245,960,245.3C1120,245,1280,203,1360,181.3L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z'/%3E%3Cpath fill='%23FFFFFF' fill-opacity='0.10' d='M0,288L80,272C160,256,320,224,480,218.7C640,213,800,235,960,234.7C1120,235,1280,213,1360,202.7L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 100% auto;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .section-mountains > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Section weiss zum Vergleich */
+  .section-white {
+    background-color: #FFFFFF;
+  }
+
+  /* Content Demo */
+  .demo-content { padding: 5rem 2rem; text-align: center; }
+  .demo-card { background: white; border-radius: 16px; padding: 3rem; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #E2E8F0; }
+  h2 { font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 1rem; }
+  h2 span { color: #4D7CFF; }
+  p { color: #475569; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<section class="section-white">
+  <div class="demo-content">
+    <div class="demo-card">
+      <h2>Unsere <span>Leistungen</span></h2>
+      <p>Von der ersten Idee bis zum Launch — persönlich betreut.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GRAUE SECTION MIT BERGEN -->
+<section class="section-mountains">
+  <div class="demo-content">
+    <div class="demo-card">
+      <h2>Wofür wir <span>stehen</span></h2>
+      <p>Drei Prinzipien. Eine Haltung. Unabhängig, sicher, schnell — alpine Werte für Ihre Website.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-white">
+  <div class="demo-content">
+    <div class="demo-card">
+      <h2>So einfach <span>geht's</span></h2>
+      <p>Vom ersten Gespräch zum fertigen Projekt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GRAUE SECTION MIT BERGEN -->
+<section class="section-mountains">
+  <div class="demo-content">
+    <div class="demo-card">
+      <h2>System-<span>Status</span></h2>
+      <p>Ihre Daten sind bei uns in sicheren Händen.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-white">
+  <div class="demo-content">
+    <div class="demo-card">
+      <h2>Häufige Fragen – <span>direkt beantwortet</span></h2>
+      <p>Alles was Sie wissen müssen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GRAUE SECTION MIT BERGEN -->
+<section class="section-mountains">
+  <div class="demo-content">
+    <div class="demo-card">
+      <h2>Investition & <span>Transparenz</span></h2>
+      <p>Faire Preise, keine Überraschungen.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-white">
+  <div class="demo-content">
+    <div class="demo-card">
+      <h2>Lassen Sie uns <span>reden.</span></h2>
+      <p>Unverbindlich und direkt.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
