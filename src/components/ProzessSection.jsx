@@ -82,7 +82,7 @@ export default function ProzessSection() {
             className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl"
             style={{ color: '#0F172A', letterSpacing: '-0.02em' }}
           >
-            So einfach geht's
+            So einfach <span style={{ color: '#4D7CFF' }}>geht's</span>
           </h2>
           <p
             className="mx-auto max-w-xl text-base sm:text-lg"
