@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/Layout.astro
+layout: ../../layouts/BlogLayout.astro
 title: "Ihre Website als Umsatztreiber: Warum die günstigste Lösung oft die teuerste ist"
 description: "Eine Website ist eine Investition, kein Kostenfaktor. Vergleichen Sie die Optionen: Keine Website, billige Bastellösung oder professioneller Auftritt – was rechnet sich für Ihr KMU?"
 pubDate: 2026-06-23

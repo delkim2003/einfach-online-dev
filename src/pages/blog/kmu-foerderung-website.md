@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/Layout.astro
+layout: ../../layouts/BlogLayout.astro
 title: "KMU-Förderung 2025/2026: Die besten Zuschüsse für Ihre Website in Österreich"
 description: "Förderungen für Ihre neue Website: aws Digitalisierungsscheck, WKO-Beratung, Steiermark-Zuschüsse – wer welche Programme nutzen kann."
 pubDate: 2026-06-23

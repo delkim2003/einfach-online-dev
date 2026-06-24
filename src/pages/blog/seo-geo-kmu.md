@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/Layout.astro
+layout: ../../layouts/BlogLayout.astro
 title: "SEO & GEO: So werden Sie in Google und KI-Suchmaschinen gefunden"
 description: "Klassisches SEO trifft auf KI-Optimierung: Wie KMUs bei Google, ChatGPT, Perplexity und Google SGE sichtbar werden – die wichtigsten Strategien."
 pubDate: 2026-06-23
