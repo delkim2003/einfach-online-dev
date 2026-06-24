@@ -7,7 +7,7 @@ const latestPosts = allPosts
   .slice(0, 3);
 ---
 
-<section class="py-20 lg:py-28 bg-transparent" id="blog" aria-label="Blog">
+<section class="py-20 lg:py-28 bg-white" id="blog" aria-label="Blog">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14">
       <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#4D7CFF]/8 border border-[#4D7CFF]/15 text-[#4D7CFF] text-xs font-medium tracking-wide mb-4">
@@ -37,7 +37,7 @@ const latestPosts = allPosts
               <span class="text-xs font-medium text-[#4D7CFF] bg-[#4D7CFF]/8 px-2.5 py-1 rounded-full">
                 {post.frontmatter?.category}
               </span>
-              <span class="text-xs text-[#94A3B8]">
+              <span class="text-xs text-[#64748B]">
                 {new Date(post.frontmatter?.pubDate).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' })}
               </span>
             </div>

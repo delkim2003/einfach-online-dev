@@ -56,7 +56,11 @@ const ogImageUrl = `${baseUrl}/images/og-default.webp`;
     }
     body::before{
       content:'';position:fixed;top:0;left:0;right:0;bottom:0;
-      z-index:-1;background-image:url('/images/hero-berg.jpg');
+      z-index:-1;
+      background-image:image-set(
+        url('/images/hero-berg.webp') type('image/webp'),
+        url('/images/hero-berg.jpg') type('image/jpeg')
+      );
       background-size:cover;background-position:30% 5%;
       opacity:0.2;pointer-events:none;
       -webkit-transform:translateZ(0);transform:translateZ(0);

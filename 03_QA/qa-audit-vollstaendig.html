@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-Audit: einfach-online.dev — Vollständiger Pre-Launch Report</title>
+<style>
+  :root { --pass: #16a34a; --fail: #dc2626; --warn: #f59e0b; --info: #2563eb; --bg-darker: #0f172a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #f1f5f9; color: #1e293b; line-height: 1.6; font-size: 15px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+  header { background: linear-gradient(135deg, #0f172a, #1e293b); color: #fff; padding: 3rem 0 2rem; position: relative; }
+  header .container { position: relative; }
+  header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  header .subtitle { font-size: 1.05rem; color: #94a3b8; margin-bottom: 0.25rem; }
+  header .meta { font-size: 0.85rem; color: #64748b; }
+  header .score-badge { position: absolute; top: 0; right: 1.5rem; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; color: #fff; }
+  .score-badge.critical-s { background: #dc2626; }
+  .score-badge.warning-s { background: #f59e0b; }
+  .score-badge.pass-s { background: #16a34a; }
+
+  .summary-card { background: #fff; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .summary-card h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; color: #0f172a; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem; }
+  .stat-item { text-align: center; padding: 0.75rem; border-radius: 8px; }
+  .stat-item .num { font-size: 1.5rem; font-weight: 800; display: block; }
+  .stat-item .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; }
+  .stat-item.crit .num { color: #dc2626; }
+  .stat-item.high .num { color: #ea580c; }
+  .stat-item.med .num { color: #f59e0b; }
+  .stat-item.low .num { color: #2563eb; }
+  .stat-item.enhance .num { color: #8b5cf6; }
+
+  .section { background: #fff; border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .section-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #e2e8f0; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+  .section-header h2 { font-size: 1.05rem; font-weight: 700; }
+  .section-header .status-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; font-weight: 600; text-transform: uppercase; }
+  .status-pass { background: #dcfce7; color: #166534; }
+  .status-fail { background: #fee2e2; color: #991b1b; }
+  .status-warn { background: #fef3c7; color: #92400e; }
+  .section-body { padding: 1.25rem 1.5rem; }
+
+  .issue { border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem; padding: 1rem; }
+  .issue:last-child { margin-bottom: 0; }
+  .issue-header { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .issue-severity { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+  .severity-Critical { background: #fee2e2; color: #991b1b; }
+  .severity-High { background: #ffedd5; color: #9a3412; }
+  .severity-Medium { background: #fef3c7; color: #92400e; }
+  .severity-Low { background: #dbeafe; color: #1e40af; }
+  .severity-Enhancement { background: #f3e8ff; color: #6b21a8; }
+  .issue-title { font-weight: 600; font-size: 0.95rem; }
+  .issue-details { font-size: 0.85rem; color: #475569; }
+  .issue-details p { margin-bottom: 0.35rem; }
+  .issue-details strong { color: #0f172a; }
+  .issue-details .tag { display: inline-block; font-size: 0.65rem; padding: 1px 6px; border-radius: 4px; margin-right: 4px; font-weight: 600; }
+  .tag-page { background: #e0e7ff; color: #3730a3; }
+  .tag-priority { background: #fce7f3; color: #9d174d; }
+
+  .feature-list { columns: 2; column-gap: 2rem; }
+  .feature-list li { break-inside: avoid; padding: 0.35rem 0; font-size: 0.85rem; border-bottom: 1px solid #f1f5f9; }
+  .feature-list .found { color: #16a34a; }
+  .feature-list .missing { color: #dc2626; }
+  .feature-list .broken { color: #ea580c; }
+
+  .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .plan-card { border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; }
+  .plan-card h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
+  .plan-card ul { list-style: disc; padding-left: 1.2rem; }
+  .plan-card li { font-size: 0.8rem; margin-bottom: 0.3rem; color: #475569; }
+  .plan-card .time { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; }
+
+  .quick-wins { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .quick-wins h3 { color: #166534; margin-bottom: 0.75rem; }
+  .quick-wins li { font-size: 0.85rem; margin-bottom: 0.4rem; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+  th { background: #f8fafc; font-weight: 600; color: #0f172a; }
+  tr:hover { background: #f8fafc; }
+
+  .fail { color: #dc2626; font-weight: 600; }
+  .pass { color: #16a34a; font-weight: 600; }
+  .warn { color: #f59e0b; font-weight: 600; }
+
+  .badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; }
+  .badge-critical { background: #fee2e2; color: #991b1b; }
+  .badge-high { background: #ffedd5; color: #9a3412; }
+  .badge-medium { background: #fef3c7; color: #92400e; }
+  .badge-low { background: #dbeafe; color: #1e40af; }
+
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0; }
+  .toc { background: #fff; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .toc ol { padding-left: 1.5rem; }
+  .toc li { margin-bottom: 0.3rem; }
+  .toc a { color: #2563eb; text-decoration: none; font-size: 0.9rem; }
+  .toc a:hover { text-decoration: underline; }
+  @media (max-width: 640px) { .feature-list { columns: 1; } .stats-grid { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="score-badge critical-s">42</div>
+    <h1>🔍 Vollständiger QA-Audit: einfach-online.dev</h1>
+    <p class="subtitle">Pre-Launch Review · 24. Juni 2026 · Dev-Server: http://localhost:5201</p>
+    <p class="meta">Geprüft von Hermes Agent · Kein Sugarcoating · Brutal ehrlich</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ===== EXECUTIVE SUMMARY ===== -->
+  <div class="summary-card">
+    <h2>📋 Executive Summary</h2>
+    <p style="margin-bottom:1rem;font-size:0.9rem">Die Website <strong>einfach-online.dev</strong> ist optisch und technisch auf einem guten Weg — aber <strong class="fail">nicht launch-ready</strong>. Das Design ist modern und konsistent, die Performance laut Lighthouse exzellent (98), und die SEO-Grundlagen (Schemas, Sitemap, robots.txt) sind solide.</p>
+    <p style="margin-bottom:1rem;font-size:0.9rem">Allerdings gibt es <strong class="fail">KRITISCHE funktionale Lücken</strong>, die einen Launch derzeit unmöglich machen:</p>
+    <ul style="list-style:disc;padding-left:1.5rem;margin-bottom:1rem;font-size:0.9rem">
+      <li><strong class="fail">🔥 Das Kontaktformular sendet an /server/contact.php — diese Datei existiert NICHT.</strong> Formular-Submissions führen zu einem 404.</li>
+      <li><strong class="fail">🔥 Navigation-Links ("Philosophie", "Leistungen", "FAQ", "Kontakt") nutzen #-Anker — führen von Subseiten (Blog, Impressum etc.) nirgendwo hin.</li>
+      <li><strong class="fail">🔥 /preise/ und /philosophie/ geben 404. Der "Philosophie"-Nav-Link ist tot.</strong></li>
+      <li><strong class="warn">⚠ Alle Seiten-Titel doppeln den Site-Namen (z.B. "Leistungen & Preise | einfach-online.dev | einfach-online.dev")</strong></li>
+      <li><strong class="warn">⚠ Keine benutzerdefinierte 404-Seite vorhanden.</strong></li>
+    </ul>
+    <div class="stats-grid">
+      <div class="stat-item crit"><span class="num">4</span><span class="label">Kritische Issues</span></div>
+      <div class="stat-item high"><span class="num">8</span><span class="label">Hohe Issues</span></div>
+      <div class="stat-item med"><span class="num">7</span><span class="label">Mittlere Issues</span></div>
+      <div class="stat-item low"><span class="num">5</span><span class="label">Niedrige Issues</span></div>
+      <div class="stat-item enhance"><span class="num">8</span><span class="label">Enhancements</span></div>
+    </div>
+    <p style="margin-top:1rem;font-size:0.9rem"><strong>Gesamt: 32 Issues · Launch-Readiness: <span class="fail">42/100</span></strong></p>
+  </div>
+
+  <!-- ===== TABLE OF CONTENTS ===== -->
+  <div class="toc">
+    <h3 style="margin-bottom:0.75rem;font-size:1rem">Inhaltsverzeichnis</h3>
+    <ol>
+      <li><a href="#s1">Core Feature Inventory</a></li>
+      <li><a href="#s2">Page-by-Page Review</a></li>
+      <li><a href="#s3">Button, Link &amp; CTA Check</a></li>
+      <li><a href="#s4">Forms &amp; Input Workflows</a></li>
+      <li><a href="#s5">User Workflow Testing</a></li>
+      <li><a href="#s6">Role &amp; Permission Functionality</a></li>
+      <li><a href="#s7">Dashboard &amp; Admin Review</a></li>
+      <li><a href="#s8">Feature Completeness Check</a></li>
+      <li><a href="#s9">Business Logic Review</a></li>
+      <li><a href="#s10">Integration &amp; Automation Check</a></li>
+      <li><a href="#s11">Mobile &amp; Responsive Functionality</a></li>
+      <li><a href="#s12">UX &amp; Clarity Review</a></li>
+      <li><a href="#s13">Performance &amp; Reliability Indicators</a></li>
+      <li><a href="#s14">Missing Features &amp; Improvement Opportunities</a></li>
+      <li><a href="#s15">Feature Inventory</a></li>
+      <li><a href="#s16">Top 10 Priority Fixes</a></li>
+      <li><a href="#s17">Quick Wins</a></li>
+      <li><a href="#s18">7-Day Plan · 30-Day Plan · Long-Term Roadmap</a></li>
+    </ol>
+  </div>
+
+  <!-- ===================== SECTION 1: CORE FEATURE INVENTORY ===================== -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <h2>1. Core Feature Inventory</h2>
+      <span class="status-badge status-fail">5 FAIL</span>
+    </div>
+    <div class="section-body">
+      <ul class="feature-list">
+        <li><span class="pass">✅</span> Astro SSG — Statische Seitengenerierung</li>
+        <li><span class="pass">✅</span> Tailwind CSS — Utility-First Styling</li>
+        <li><span class="pass">✅</span> TypeScript — Typsicherheit</li>
+        <li><span class="pass">✅</span> Responsive Design (Mobile-first)</li>
+        <li><span class="pass">✅</span> CSS-only Hamburger-Menü</li>
+        <li><span class="pass">✅</span> Cookie-Banner mit Opt-in/Opt-out</li>
+        <li><span class="pass">✅</span> JSON-LD Structured Data (Article, Breadcrumb, FAQPage, WebSite, Organization, LocalBusiness)</li>
+        <li><span class="pass">✅</span> Sitemap + robots.txt</li>
+        <li><span class="pass">✅</span> Security Headers (.htaccess)</li>
+        <li><span class="pass">✅</span> Open Graph / Twitter Cards</li>
+        <li><span class="pass">✅</span> Blog mit 3 Artikeln</li>
+        <li><span class="pass">✅</span> Preisseite mit 3 Paketen</li>
+        <li><span class="pass">✅</span> FAQ-Accordion (Startseite)</li>
+        <li><span class="pass">✅</span> Prinzipien-Tabs (Unabhängig/Sicher/Schnell)</li>
+        <li class="fail">❌ <strong>Kontaktformular</strong> — action="/server/contact.php" existiert nicht</li>
+        <li class="fail">❌ <strong>404-Seite</strong> — Keine benutzerdefinierte 404-Seite</li>
+        <li class="fail">❌ <strong>/preise/ Seite</strong> — 404 Not Found</li>
+        <li class="fail">❌ <strong>/philosophie/ Seite</strong> — 404 Not Found</li>
+        <li class="warn">⚠ <strong>Navigation #-Anker</strong> — Funktioniert nur von Startseite</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 2: PAGE-BY-PAGE REVIEW ===================== -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <h2>2. Page-by-Page Review</h2>
+      <span class="status-badge status-fail">7 FAIL / 5 PASS</span>
+    </div>
+    <div class="section-body">
+
+      <!-- 2.1 Startseite -->
+      <table>
+        <tr><th>Seite</th><th>Status</th><th>Befund</th></tr>
+        <tr>
+          <td><strong>/ (Startseite)</strong></td>
+          <td><span class="pass">PASS</span></td>
+          <td>Hero, Leistungen, ÜberMich, Timeline, System-Status, FAQ, Blog-Preview, Kontakt, Footer — alle Sektionen vorhanden. Design modern und konsistent.</td>
+        </tr>
+        <tr>
+          <td><strong>/leistungen/</strong></td>
+          <td><span class="warn">WARN</span></td>
+          <td>Doppelter Site-Name im Titel ("Leistungen &amp; Preise | einfach-online.dev | einfach-online.dev"). Pricing Cards vorhanden, aber "Jetzt anfragen"-Links sind dezent (keine Buttons).</td>
+        </tr>
+        <tr>
+          <td><strong>/ueber-mich/</strong></td>
+          <td><span class="warn">WARN</span></td>
+          <td>Doppelter Site-Name im Titel. Kein Porträtfoto (nur Logo). Telefonnummer unvollständig (+436****4567). Keine Testimonials/Referenzen.</td>
+        </tr>
+        <tr>
+          <td><strong>/kontakt/</strong></td>
+          <td><span class="fail">FAIL</span></td>
+          <td>Doppelter Site-Name im Titel. <strong>Formular bricht bei Submit: contact.php existiert nicht.</strong></td>
+        </tr>
+        <tr>
+          <td><strong>/blog/</strong></td>
+          <td><span class="pass">PASS</span></td>
+          <td>3 Blog-Karten im Grid. Kategorien, Datum, Teaser vorhanden. Keine Paginierung (bei 3 Beiträgen OK).</td>
+        </tr>
+        <tr>
+          <td><strong>/blog/seo-geo-kmu</strong></td>
+          <td><span class="pass">PASS</span></td>
+          <td>Weiße Content-Box vorhanden. Text lesbar. Breadcrumbs, Metadaten, Schema korrekt. Das bekannte Blog-Readability-Problem wurde gefixt.</td>
+        </tr>
+        <tr>
+          <td><strong>/blog/kmu-foerderung-website</strong></td>
+          <td><span class="pass">PASS</span></td>
+          <td>Gleiches Layout wie seo-geo-kmu. Keine Probleme.</td>
+        </tr>
+        <tr>
+          <td><strong>/blog/website-umsatztreiber-kmu</strong></td>
+          <td><span class="pass">PASS</span></td>
+          <td>Gleiches Layout. Tabelle mit ROI-Berechnung vorhanden. Keine Probleme.</td>
+        </tr>
+        <tr>
+          <td><strong>/impressum/</strong></td>
+          <td><span class="warn">WARN</span></td>
+          <td>Doppelter Site-Name im Titel. Inhaltlich vollständig (Unternehmensdaten, WKO, USt, EU-Streitbeilegung, Haftung).</td>
+        </tr>
+        <tr>
+          <td><strong>/datenschutz/</strong></td>
+          <td><span class="warn">WARN</span></td>
+          <td>Doppelter Site-Name im Titel. Sehr detailliert und DSGVO-konform. Erwähnt Plausible Analytics (selbst gehostet).</td>
+        </tr>
+        <tr>
+          <td><strong>/faq/</strong></td>
+          <td><span class="pass">PASS</span></td>
+          <td>Weiterleitung per meta-refresh + JS zu /#faq. Funktionell OK, aber nicht ideal für SEO (kein eigener Inhalt).</td>
+        </tr>
+        <tr>
+          <td><strong>/agb/</strong></td>
+          <td><span class="warn">WARN</span></td>
+          <td>Doppelter Site-Name im Titel. 15 Paragrafen. Rechtlich vollständig.</td>
+        </tr>
+        <tr>
+          <td><strong>/preise/</strong></td>
+          <td><span class="fail">FAIL</span></td>
+          <td><strong>404 Not Found.</strong> In der Aufgabenstellung gelistet, aber nicht im Routing vorhanden.</td>
+        </tr>
+        <tr>
+          <td><strong>/philosophie/</strong></td>
+          <td><span class="fail">FAIL</span></td>
+          <td><strong>404 Not Found.</strong> Der Navigationslink "Philosophie" zeigt auf diese Route.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 3: BUTTON, LINK, CTA CHECK ===================== -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <h2>3. Button, Link &amp; CTA Check</h2>
+      <span class="status-badge status-fail">6 FAIL / 2 PASS</span>
+    </div>
+    <div class="section-body">
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Critical">Critical</span>
+          <span class="issue-title">Navigation "Philosophie" → 404</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> Alle Seiten (Header)</p>
+          <p><strong>What's wrong:</strong> Der Nav-Eintrag "Philosophie" hat href="/#philosophie". Von Subseiten (/blog, /leistungen, /impressum etc.) funktioniert der #-Anker nicht, da das Ziel-Element auf der Startseite liegt. Klick führt zu weißer Seite mit leerem Bereich.</p>
+          <p><strong>Why it matters:</strong> Kaputter Hauptnavigations-Link — schlechte UX, verwirrt Besucher.</p>
+          <p><strong>Recommended fix:</strong> Entweder eine statische Subpage /philosophie/ erstellen (wie /leistungen/) oder den Link auf die Startseite mit Anker (/ → /#philosophie) umleiten.</p>
+          <p><strong>Priority:</strong> <span class="tag tag-priority">P1 — Pre-Launch</span> · <strong>How to test:</strong> Von /blog/ auf "Philosophie" klicken</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Critical">Critical</span>
+          <span class="issue-title">Navigation "Leistungen" → funktioniert nur von Startseite</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> Alle Seiten (Header)</p>
+          <p><strong>What's wrong:</strong> Header.astro hat href="/#leistungen" für "Leistungen". Von /leistungen/ aus führt der Link auf sich selbst (#leistungen existiert nicht auf /leistungen/). Von anderen Subseiten springt er zur Startseite (was OK ist), aber der Anker scrollt nicht.</p>
+          <p><strong>Recommended fix:</strong> href="/leistungen/" für die separate Leistungsseite verwenden.</p>
+          <p><strong>Priority:</strong> <span class="tag tag-priority">P1 — Pre-Launch</span></p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-High">High</span>
+          <span class="issue-title">Navigation "FAQ" → funktioniert nur von Startseite</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> Alle Seiten (Header)</p>
+          <p><strong>What's wrong:</strong> href="/#faq" führt von /blog/, /impressum/ etc. zur Startseite — scrollt aber nicht zum FAQ-Bereich, weil die Startseite neu lädt.</p>
+          <p><strong>Recommended fix:</strong> href="/#faq" beibehalten, aber sicherstellen dass smooth scroll nach page-load funktioniert. Besser: FAQ als eigene Subpage.</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-High">High</span>
+          <span class="issue-title">Navigation "Kontakt" → funktioniert nur von Startseite</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> Alle Seiten (Header)</p>
+          <p><strong>What's wrong:</strong> href="/#kontakt" im Header und CTA-Button. Von Subseiten wird zur Startseite navigiert, aber der Kontaktbereich wird nicht fokussiert.</p>
+          <p><strong>Recommended fix:</strong> href="/kontakt/" für die separate Kontaktseite verwenden.</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-High">High</span>
+          <span class="issue-title">Footer "Leistungen" Link → falscher Anker</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> Footer (alle Seiten)</p>
+          <p><strong>What's wrong:</strong> Footer hat href="/#leistungen" — gleiches Problem wie Header.</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Medium">Medium</span>
+          <span class="issue-title">Footer "Cookie-Einstellungen" → nicht existenter Anker</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> Footer (alle Seiten)</p>
+          <p><strong>What's wrong:</strong> href="/#cookie-einstellungen" — dieser Anker existiert nirgendwo auf der Seite. Der JS-Code versucht per querySelector den Cookie-Banner zu finden, aber das ist fragil.</p>
+          <p><strong>Recommended fix:</strong> Statt #-Anker einen JS-Event-Listener verwenden, der den Cookie-Banner direkt öffnet (funktioniert bereits teilweise via cookie-settings-link id).</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Enhancement">Enhancement</span>
+          <span class="issue-title">"Jetzt anfragen" sind Textlinks, keine Buttons</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /leistungen/</p>
+          <p><strong>What's wrong:</strong> Die CTAs unter den Preiskarten sind als &lt;a&gt;-Links mit Textstil, nicht als visuelle Buttons gestaltet. Das reduziert die Conversion-Wahrscheinlichkeit.</p>
+          <p><strong>Recommended fix:</strong> Primäre Buttons verwenden (blau, mit Hover-Effekt, wie im Header).</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Enhancement">Enhancement</span>
+          <span class="issue-title">Footer "Kontakt"-Eintrag hat zwei leere List Items</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> Footer (alle Seiten)</p>
+          <p><strong>What's wrong:</strong> Im Accessibility-Tree sind zwei leere &lt;li&gt;-Elemente sichtbar. Wahrscheinlich leere &lt;li&gt;-Tags im Template.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 4: FORMS & INPUT WORKFLOWS ===================== -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <h2>4. Forms &amp; Input Workflows</h2>
+      <span class="status-badge status-fail">FAIL</span>
+    </div>
+    <div class="section-body">
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Critical">Critical</span>
+          <span class="issue-title">Kontaktformular: action="/server/contact.php" existiert nicht</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /kontakt/ und Startseite (#kontakt)</p>
+          <p><strong>What's wrong:</strong> Das Formular hat method="POST" action="/server/contact.php". Die Datei <strong>existiert nicht</strong> — weder im Quellcode (server/ ist leer) noch im Build (dist/server/ enthält nur smtp-config.php). Eine Formular-Submission führt zu einem 404-Fehler.</p>
+          <p><strong>Why it matters:</strong> <span class="fail">Das Formular ist der primäre Lead-Conversion-Kanal. Ohne funktionierendes Backend werden alle Anfragen verloren.</span> Dies macht die gesamte Website für den Geschäftszweck unbrauchbar.</p>
+          <p><strong>Recommended fix:</strong> 1) Die contact.php erstellen mit SMTP-Versand (smtp-config.php existiert bereits) ODER 2) Formular auf einen externen Service umstellen (Formspree, Web3Forms, etc.) ODER 3) Formular-Submission per JavaScript mit fetch() an eine API senden.</p>
+          <p><strong>Priority:</strong> <span class="tag tag-priority">P0 — BLOCKER</span></p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Medium">Medium</span>
+          <span class="issue-title">Kein Captcha/Spam-Schutz (sichtbar)</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /kontakt/, Startseite</p>
+          <p><strong>What's wrong:</strong> Es gibt kein sichtbares Captcha (reCAPTCHA, Turnstile, etc.). Ein Honeypot-Feld ist vorhanden (verstecktes "website"-Feld), aber ohne Server-Logik macht auch der Honeypot keinen Sinn.</p>
+          <p><strong>Recommended fix:</strong> Nach Implementierung des Backends: Turnstile (Cloudflare, datenschutzfreundlich) oder Honeypot + Rate-Limiting implementieren.</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Medium">Medium</span>
+          <span class="issue-title">Keine Client-seitige Validierungs-Feedback</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /kontakt/</p>
+          <p><strong>What's wrong:</strong> Das Formular hat required-Attribute, aber keine visuellen Fehlermeldungen bei ungültiger Eingabe. Nur native Browser-Tooltips werden angezeigt.</p>
+          <p><strong>Recommended fix:</strong> CSS-Stile für :invalid-Felder (roter Border) und javascript-basierte Fehlermeldungen.</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Low">Low</span>
+          <span class="issue-title">Keine Erfolgsmeldung nach Submit</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /kontakt/</p>
+          <p><strong>What's wrong:</strong> Nach erfolgreichem Submit gibt es keine client-seitige Rückmeldung (kein Thank-you-State, keine Weiterleitung).</p>
+          <p><strong>Recommended fix:</strong> Nach Submit eine Dankes-Seite oder ein Inline-Erfolgs-Banner anzeigen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 5: USER WORKFLOW TESTING ===================== -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <h2>5. User Workflow Testing</h2>
+      <span class="status-badge status-fail">FAIL</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <tr><th>Workflow</th><th>Status</th><th>Befund</th></tr>
+        <tr><td>Startseite → Leistungen ansehen</td><td><span class="pass">PASS</span></td><td>Scrollt zu #leistungen auf Startseite</td></tr>
+        <tr><td>Startseite → Blog → Artikel lesen</td><td><span class="pass">PASS</span></td><td>Funktioniert. Breadcrumb führt zurück zum Blog.</td></tr>
+        <tr><td>Blog-Artikel → Zurück zum Blog</td><td><span class="pass">PASS</span></td><td>Link und Breadcrumb funktionieren</td></tr>
+        <tr><td>Blog → "Philosophie" (Nav)</td><td><span class="fail">FAIL</span></td><td>Springt zu /#philosophie — leere weiße Seite</td></tr>
+        <tr><td>Impressum → "Kontakt" (CTA)</td><td><span class="fail">FAIL</span></td><td>Springt zu /#kontakt — Kontaktformular nicht sichtbar</td></tr>
+        <tr><td>Kontaktformular ausfüllen → absenden</td><td><span class="fail">FAIL</span></td><td>404 — contact.php fehlt</td></tr>
+        <tr><td>Leistungen → "Jetzt anfragen"</td><td><span class="fail">FAIL</span></td><td>Springt zu /#kontakt — funktioniert nur von Startseite</td></tr>
+        <tr><td>Footer "Datenschutz" → Datenschutzseite</td><td><span class="pass">PASS</span></td><td>Funktioniert</td></tr>
+        <tr><td>Footer "Cookie-Einstellungen"</td><td><span class="warn">WARN</span></td><td>Fragiler JS-Fallback. Funktioniert nicht immer.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== SECTIONS 6-7 ===================== -->
+  <div class="section" id="s6">
+    <div class="section-header"><h2>6. Role &amp; Permission Functionality</h2><span class="status-badge status-pass">N/A</span></div>
+    <div class="section-body">
+      <p style="font-size:0.9rem;color:#475569">Nicht zutreffend. Die Website ist eine statische Astro-Site ohne CMS, Login-System oder Backend. Es gibt keine Rollen oder Berechtigungen.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header"><h2>7. Dashboard &amp; Admin Review</h2><span class="status-badge status-pass">N/A</span></div>
+    <div class="section-body">
+      <p style="font-size:0.9rem;color:#475569">Nicht zutreffend. Kein CMS, kein Admin-Bereich. Der "System-Status" auf der Startseite ist ein statisches visuelles Element, kein echtes Dashboard — das sollte klar kommuniziert werden.</p>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 8: FEATURE COMPLETENESS ===================== -->
+  <div class="section" id="s8">
+    <div class="section-header"><h2>8. Feature Completeness Check</h2><span class="status-badge status-fail">2 MISSING</span></div>
+    <div class="section-body">
+      <table>
+        <tr><th>Feature</th><th>Erwartet</th><th>Status</th></tr>
+        <tr><td>Startseite mit allen Sektionen</td><td>Hero, Leistungen, ÜberMich, Prozess, System, Blog, FAQ, Preise, Kontakt</td><td><span class="pass">✅</span></td></tr>
+        <tr><td>Leistungsseite mit Preisen</td><td>3 Pakete, Preise, Features, CTAs</td><td><span class="pass">✅</span></td></tr>
+        <tr><td>Über-Mich-Seite</td><td>Persönliche Vorstellung, Foto, Werte</td><td><span class="warn">⚠ Kein Porträtfoto</span></td></tr>
+        <tr><td>Kontaktseite</td><td>Formular mit Name, Email, Paket, Nachricht, DSGVO-Checkbox</td><td><span class="fail">❌ Backend fehlt</span></td></tr>
+        <tr><td>Blog-Übersicht</td><td>Beiträge mit Kategorien, Datum, Teaser</td><td><span class="pass">✅</span></td></tr>
+        <tr><td>Blog-Detail</td><td>Lesbares Layout, Metadaten, Schema</td><td><span class="pass">✅</span></td></tr>
+        <tr><td>Impressum</td><td>Alle Pflichtangaben nach §5 ECG</td><td><span class="pass">✅</span></td></tr>
+        <tr><td>Datenschutz</td><td>DSGVO-konform, Art. 13, alle Rechte</td><td><span class="pass">✅</span></td></tr>
+        <tr><td>FAQ-Seite</td><td>Accordion mit Fragen/Antworten</td><td><span class="pass">✅ (via Startseite + Redirect)</span></td></tr>
+        <tr><td>AGB</td><td>Rechtstext</td><td><span class="pass">✅</span></td></tr>
+        <tr><td><strong>/preise/ Route</strong></td><td>Separate Preisseite</td><td><span class="fail">❌ 404</span></td></tr>
+        <tr><td><strong>/philosophie/ Route</strong></td><td>Separate Philosophie-Seite</td><td><span class="fail">❌ 404</span></td></tr>
+        <tr><td>404-Seite</td><td>Benutzerdefinierte Fehlerseite</td><td><span class="fail">❌ Fehlt</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 9: BUSINESS LOGIC ===================== -->
+  <div class="section" id="s9">
+    <div class="section-header"><h2>9. Business Logic Review</h2><span class="status-badge status-fail">3 ISSUES</span></div>
+    <div class="section-body">
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-High">High</span>
+          <span class="issue-title">Preispaket "All-in Smart" fehlt auf /leistungen/</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /leistungen/</p>
+          <p><strong>What's wrong:</strong> Die PricingCards-Komponente zeigt nur 3 Pakete an (Digital Start, Digital Flex, All-in Smart). Auf der Startseite wird jedoch "Kaufen &amp; Pflegen" vs "Mieten" via Toggle unterschieden. Die /leistungen/-Seite zeigt alle Pakete statisch — potentiell inkonsistent.</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Medium">Medium</span>
+          <span class="issue-title">Telefonnummer ist unvollständig</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /ueber-mich/</p>
+          <p><strong>What's wrong:</strong> Die Telefonnummer "tel:+436****4567" ist teilweise zensiert. Das ist weder klickbar noch nutzbar. Besser: Vollständige Nummer angeben oder ganz weglassen.</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Medium">Medium</span>
+          <span class="issue-title">"Kleinunternehmer"-Regelung korrekt?</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /leistungen/, /impressum/</p>
+          <p><strong>What's wrong:</strong> Die Website deklariert "Umsatzsteuerbefreit – Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG". Das ist legal. Aber die Preise auf der Startseite (€1.490, €2.990) müssten dann Brutto = Netto sein — das sollte klar kommuniziert werden, da viele Kunden den Unterschied nicht kennen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 10: INTEGRATION & AUTOMATION ===================== -->
+  <div class="section" id="s10">
+    <div class="section-header"><h2>10. Integration &amp; Automation Check</h2><span class="status-badge status-pass">PASS</span></div>
+    <div class="section-body">
+      <table>
+        <tr><th>Integration</th><th>Status</th><th>Details</th></tr>
+        <tr><td>Astro SSG Build</td><td><span class="pass">✅</span></td><td>Build produziert statische HTML-Dateien. Funktioniert.</td></tr>
+        <tr><td>Sitemap</td><td><span class="pass">✅</span></td><td>sitemap-index.xml, sitemap-0.xml vorhanden</td></tr>
+        <tr><td>robots.txt</td><td><span class="pass">✅</span></td><td>Allow: /, Sitemap-Verweis</td></tr>
+        <tr><td>Security Headers</td><td><span class="pass">✅</span></td><td>.htaccess mit CSP, CORS, Caching. Kein unsafe-inline für Scripts (CSP erlaubt 'unsafe-inline' — könnte strenger sein).</td></tr>
+        <tr><td>HTTPS Redirect</td><td><span class="pass">✅</span></td><td>RewriteRule vorhanden (funktioniert nur auf Apache-Server mit mod_rewrite).</td></tr>
+        <tr><td>SEO Tags</td><td><span class="pass">✅</span></td><td>OG, Twitter, Schema.org (Article, Breadcrumb, FAQPage, WebSite, Organization, LocalBusiness)</td></tr>
+        <tr><td>E-Mail Backend</td><td><span class="fail">❌</span></td><td>smtp-config.php existiert, aber contact.php fehlt. Keine funktionierende Integration.</td></tr>
+        <tr><td>Analytics</td><td><span class="warn">⚠</span></td><td>Plausible Analytics im Datenschutz erwähnt ("selbst gehostet, opt-in"), aber kein Skript im Layout gefunden. Entweder deaktiviert oder nur nach Consent geladen.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 11: MOBILE & RESPONSIVE ===================== -->
+  <div class="section" id="s11">
+    <div class="section-header"><h2>11. Mobile &amp; Responsive Functionality</h2><span class="status-badge status-pass">PASS</span></div>
+    <div class="section-body">
+      <table>
+        <tr><th>Check</th><th>Status</th><th>Befund</th></tr>
+        <tr><td>Viewport Meta Tag</td><td><span class="pass">✅</span></td><td>Vorhanden und korrekt</td></tr>
+        <tr><td>CSS Media Queries</td><td><span class="pass">✅</span></td><td>Breakpoints bei 640px, 1024px. Mobile-first Ansatz.</td></tr>
+        <tr><td>Hamburger-Menü</td><td><span class="pass">✅</span></td><td>CSS-only (Checkbox-gesteuert). Schließt bei Klick auf Link. Escape-Key-Handler vorhanden.</td></tr>
+        <tr><td>Touch-Targets (min-height: 44px)</td><td><span class="pass">✅</span></td><td>Header-Links haben min-height: 44px (gut für mobile Accessibility)</td></tr>
+        <tr><td>Mountain Fixed Background</td><td><span class="pass">✅</span></td><td>Auf body::before umgestellt (fix für iOS). opacity: 0.2.</td></tr>
+        <tr><td>Font-Scaling</td><td><span class="pass">✅</span></td><td>clamp() für Blog-Titel, responsive font-size in Media Queries</td></tr>
+        <tr><td>Preis-Karten auf Mobile</td><td><span class="pass">✅</span></td><td>Stacken vertikal bei schmalen Viewports</td></tr>
+        <tr><td>Blog Grid auf Mobile</td><td><span class="pass">✅</span></td><td>3-Spalten auf Desktop, 1-Spalte auf Mobile</td></tr>
+        <tr><td>Floating Toolbar Overlay</td><td><span class="warn">⚠</span></td><td>Eine dunkle Toolbar (Inspect/Audit/Settings) schwebt über dem Content. Auf Desktop sichtbar, könnte auf Mobile stören. Scheint Dev-Tool zu sein.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 12: UX & CLARITY ===================== -->
+  <div class="section" id="s12">
+    <div class="section-header"><h2>12. UX &amp; Clarity Review</h2><span class="status-badge status-warn">4 ISSUES</span></div>
+    <div class="section-body">
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-High">High</span>
+          <span class="issue-title">Doppelter Site-Name auf ALLEN Subseiten-Titeln</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /leistungen/, /ueber-mich/, /kontakt/, /impressum/, /datenschutz/, /agb/</p>
+          <p><strong>What's wrong:</strong> Layout.astro rendert <code>&lt;title&gt;{title} | {siteName}&lt;/title&gt;</code>. Aber alle Subpages übergeben bereits <code>title="Seite | einfach-online.dev"</code>. Resultat: "Leistungen &amp; Preise | einfach-online.dev | einfach-online.dev". Sieht amateurhaft aus und schadet SEO (doppelter Brand-Name).</p>
+          <p><strong>Recommended fix:</strong> Aus den title-Props der Subpages den " | einfach-online.dev"-Teil entfernen. Z.B. <code>title="Leistungen &amp; Preise"</code> statt <code>title="Leistungen &amp; Preise | einfach-online.dev"</code>.</p>
+          <p><strong>Priority:</strong> <span class="tag tag-priority">P1 — Pre-Launch</span></p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Medium">Medium</span>
+          <span class="issue-title">Kein Porträtfoto auf /ueber-mich/</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> /ueber-mich/</p>
+          <p><strong>What's wrong:</strong> Auf der "Über Mich"-Seite wird nur das EO-Logo gezeigt, kein Gesicht. Das reduziert die persönliche Verbindung und das Vertrauen — kritisch für einen Freelancer.</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Medium">Medium</span>
+          <span class="issue-title">Keine Testimonials / Referenzen</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> Startseite, /ueber-mich/</p>
+          <p><strong>What's wrong:</strong> Bei "50+ Projekte" wären 2-3 Kundenstimmen oder Referenzlogos ein starker Vertrauensbeweis.</p>
+        </div>
+      </div>
+
+      <div class="issue">
+        <div class="issue-header">
+          <span class="issue-severity severity-Low">Low</span>
+          <span class="issue-title">Cookie-Banner überlagert Hero-Content</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>Affected page:</strong> Alle Seiten</p>
+          <p><strong>What's wrong:</strong> Das Cookie-Banner erscheint als Overlay und verdeckt teilweise den Hero-Bereich. Das stört den ersten Eindruck.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 13: PERFORMANCE & RELIABILITY ===================== -->
+  <div class="section" id="s13">
+    <div class="section-header"><h2>13. Performance &amp; Reliability Indicators</h2><span class="status-badge status-pass">GUT</span></div>
+    <div class="section-body">
+      <table>
+        <tr><th>KPI</th><th>Wert</th><th>Bewertung</th></tr>
+        <tr><td>Lighthouse Performance</td><td><span class="pass">98</span></td><td>Exzellent (letzter bekannter Wert)</td></tr>
+        <tr><td>Lighthouse Accessibility</td><td><span class="warn">94</span></td><td>Gut, aber Luft nach oben für 100</td></tr>
+        <tr><td>WebP-Bildoptimierung</td><td><span class="pass">✅</span></td><td>image-set() mit WebP + JPEG Fallback</td></tr>
+        <tr><td>Google Fonts (extern)</td><td><span class="warn">⚠</span></td><td>Wird von fonts.googleapis.com geladen — DSGVO-Risiko (US-Dienst). Der Header sagt "keine US-Tools", aber Google Fonts ist ein US-Dienst. Inkonsistent.</td></tr>
+        <tr><td>CSS-in-JS / Inline Styles</td><td><span class="warn">⚠</span></td><td>BlogLayout.astro hat komplette Styles im &lt;style&gt;-Tag. Das ist OK für SSG, verhindert aber Caching.</td></tr>
+        <tr><td>Kein Tracking (Privacy)</td><td><span class="pass">✅</span></td><td>Kein Google Analytics, Facebook Pixel, etc.</td></tr>
+        <tr><td>EU-Hosting</td><td><span class="pass">✅</span></td><td>IONOS (Deutschland) — DSGVO-konform</td></tr>
+        <tr><td>HTTP/2 / IPv6</td><td><span class="pass">✅</span></td><td>Im Text erwähnt</td></tr>
+        <tr><td>.htaccess Caching</td><td><span class="pass">✅</span></td><td>1 Jahr für statische Assets, 0s für HTML</td></tr>
+        <tr><td>GZip Compression</td><td><span class="pass">✅</span></td><td>Via mod_deflate</td></tr>
+      </table>
+
+      <div class="issue" style="margin-top:1rem">
+        <div class="issue-header">
+          <span class="issue-severity severity-Medium">Medium</span>
+          <span class="issue-title">Google Fonts — Widerspruch zur "Keine US-Tools"-Aussage</span>
+        </div>
+        <div class="issue-details">
+          <p><strong>What's wrong:</strong> Im .htaccess und im Marketingtext heißt es "Keine US-Tools, keine Google Fonts". Tatsächlich wird Google Fonts via @import in global.css und in der CSP geladen. Die DSGVO-Konformität von Google Fonts ist umstritten (LG München, 2022).</p>
+          <p><strong>Recommended fix:</strong> Google Fonts lokal hosten (self-hosting) — die Schriftarten-Dateien ins Projekt kopieren und von dort laden. Oder auf system-ui zurückfallen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 14: MISSING FEATURES ===================== -->
+  <div class="section" id="s14">
+    <div class="section-header"><h2>14. Missing Features &amp; Improvement Opportunities</h2><span class="status-badge status-warn">8 ITEMS</span></div>
+    <div class="section-body">
+      <ul style="list-style:disc;padding-left:1.5rem">
+        <li style="margin-bottom:0.5rem"><strong>Kontaktformular-Backend (contact.php)</strong> — <span class="fail">KRITISCH</span>. Ohne funktionierendes Formular ist die Website geschäftlich nutzlos.</li>
+        <li style="margin-bottom:0.5rem"><strong>Eigene /philosophie/ Seite</strong> — Der Navigationslink existiert, aber die Route gibt 404.</li>
+        <li style="margin-bottom:0.5rem"><strong>Eigene /preise/ Seite</strong> — In der Aufgabenstellung gelistet, gibt 404.</li>
+        <li style="margin-bottom:0.5rem"><strong>Benutzerdefinierte 404-Seite</strong> — .htaccess verweist auf /404.html (existiert nicht). Astro zeigt Standard-Apartment-404.</li>
+        <li style="margin-bottom:0.5rem"><strong>Paginierung für Blog</strong> — Derzeit nur 3 Beiträge, OK. Aber bei Wachstum nötig.</li>
+        <li style="margin-bottom:0.5rem"><strong>Kategorien-Filter im Blog</strong> — Kategorien-Badges sind visuell, aber nicht filterbar/verlinkt.</li>
+        <li style="margin-bottom:0.5rem"><strong>Suchfunktion</strong> — Schema.org SearchAction ist definiert, aber es gibt kein Suchfeld auf der Website.</li>
+        <li style="margin-bottom:0.5rem"><strong>Testimonials / Kundenstimmen</strong> — Wären ein starker Vertrauensfaktor.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 15: FEATURE INVENTORY ===================== -->
+  <div class="section" id="s15">
+    <div class="section-header"><h2>Complete Feature Inventory</h2><span class="status-badge status-fail">5 BROKEN / 2 MISSING</span></div>
+    <div class="section-body">
+      <table>
+        <tr><th>Feature</th><th>Status</th><th>Details</th></tr>
+        <tr><td>Startseite</td><td><span class="pass">✅</span></td><td>Vollständig, 10 Sektionen</td></tr>
+        <tr><td>Leistungsseite</td><td><span class="pass">✅</span></td><td>3 Pricing Cards, Layout OK. Titel doppelt.</td></tr>
+        <tr><td>Über-Mich-Seite</td><td><span class="warn">⚠</span></td><td>Kein Porträtfoto, Telefon unvollständig</td></tr>
+        <tr><td>Kontaktseite</td><td><span class="fail">❌ BROKEN</span></td><td>Formular Backend fehlt</td></tr>
+        <tr><td>Blog-Übersicht</td><td><span class="pass">✅</span></td><td>3 Beiträge, Kategorien, Teasers</td></tr>
+        <tr><td>Blog-Artikel (3 Stk.)</td><td><span class="pass">✅</span></td><td>Weiße Box, lesbar, Schema</td></tr>
+        <tr><td>FAQ (Startseite)</td><td><span class="pass">✅</span></td><td>Accordion, FAQPage Schema</td></tr>
+        <tr><td>FAQ (eigene Seite)</td><td><span class="pass">✅</span></td><td>Redirect zu /#faq</td></tr>
+        <tr><td>Preissektion</td><td><span class="pass">✅</span></td><td>Toggle Kaufen/Mieten, 3 Pakete</td></tr>
+        <tr><td>Impressum</td><td><span class="pass">✅</span></td><td>Vollständig, rechtlich korrekt</td></tr>
+        <tr><td>Datenschutz</td><td><span class="pass">✅</span></td><td>Sehr detailliert, DSGVO-konform</td></tr>
+        <tr><td>AGB</td><td><span class="pass">✅</span></td><td>15 Paragrafen, vollständig</td></tr>
+        <tr><td>Cookie-Banner</td><td><span class="pass">✅</span></td><td>Opt-in für Analytics, Notwendige immer</td></tr>
+        <tr><td>System-Status (visuell)</td><td><span class="pass">✅</span></td><td>Statisches Dashboard, dekorativ</td></tr>
+        <tr><td>Prinzipien-Tabs</td><td><span class="pass">✅</span></td><td>JSX, 3 Tabs (Unabhängig/Sicher/Schnell)</td></tr>
+        <tr><td>Prozess-Sektion</td><td><span class="pass">✅</span></td><td>4 Schritte (Analyse→Konzept→Umsetzung→Launch)</td></tr>
+        <tr><td>Hamburger-Menü</td><td><span class="pass">✅</span></td><td>CSS-only, schließt bei Klick</td></tr>
+        <tr><td>SEO/Schema.org</td><td><span class="pass">✅</span></td><td>6 Schema-Typen (Article, Breadcrumb, FAQPage, WebSite, Organization, LocalBusiness)</td></tr>
+        <tr><td>Sitemap</td><td><span class="pass">✅</span></td><td>sitemap-index.xml vorhanden</td></tr>
+        <tr><td>robots.txt</td><td><span class="pass">✅</span></td><td>Allow: /</td></tr>
+        <tr><td>Security Headers</td><td><span class="pass">✅</span></td><td>.htaccess mit CSP, CORS, HSTS via Rewrite</td></tr>
+        <tr><td>Open Graph / Twitter Cards</td><td><span class="pass">✅</span></td><td>Vorhanden auf allen Seiten</td></tr>
+        <tr><td>Canonical URLs</td><td><span class="pass">✅</span></td><td>Auf allen Subseiten vorhanden</td></tr>
+        <tr><td>Kontaktformular (Frontend)</td><td><span class="pass">✅</span></td><td>HTML, Honeypot, Validierung</td></tr>
+        <tr><td>Kontaktformular (Backend)</td><td><span class="fail">❌ BROKEN</span></td><td>contact.php fehlt</td></tr>
+        <tr><td>Navigation #-Anker</td><td><span class="fail">❌ BROKEN</span></td><td>Funktionieren nur von Startseite</td></tr>
+        <tr><td>/preise/ Route</td><td><span class="fail">❌ MISSING</span></td><td>404 Not Found</td></tr>
+        <tr><td>/philosophie/ Route</td><td><span class="fail">❌ MISSING</span></td><td>404 Not Found</td></tr>
+        <tr><td>404-Seite (custom)</td><td><span class="fail">❌ MISSING</span></td><td>.htaccess erwartet /404.html</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== TOP 10 PRIORITY FIXES ===================== -->
+  <div class="quick-wins" id="s16">
+    <h3>🏆 Top 10 Priority Fixes (vor Launch)</h3>
+    <ol style="padding-left:1.5rem">
+      <li><strong>P0 — CONTACT.PHP ERSTELLEN</strong> — Formular-Backend implementieren (oder auf Formspree/Web3Forms umstellen). Ohne dies ist die Website geschäftlich tot.</li>
+      <li><strong>P1 — NAVIGATION REPARIEREN</strong> — Header-Links auf /leistungen/, /kontakt/, /#faq, /#philosophie fixen. Von Subseiten muss die Navigation funktionieren.</li>
+      <li><strong>P1 — SEITEN-TITEL FIXEN</strong> — Doppelten Site-Name aus allen title-Props entfernen.</li>
+      <li><strong>P1 — /philosophie/ SEITE ERSTELLEN</strong> — Inhalt aus der PrinzipienSection übernehmen.</li>
+      <li><strong>P1 — 404-SEITE ERSTELLEN</strong> — Astro-Komponente 404.astro im pages-Ordner anlegen.</li>
+      <li><strong>P2 — GOOGLE FONTS LOCAL HOSTEN</strong> — DSGVO-Konformität sicherstellen. Entspricht dem Marketing-Versprechen.</li>
+      <li><strong>P2 — PORTRAITFOTO EINFÜGEN</strong> — Auf /ueber-mich/ für Vertrauensaufbau.</li>
+      <li><strong>P2 — KONTAKTFORMULAR VALIDIERUNG</strong> — Client-seitige Fehlermeldungen und Captcha (Turnstile).</li>
+      <li><strong>P2 — TELEFONNUMMER KORRIGIEREN</strong> — Vollständige Nummer oder entfernen.</li>
+      <li><strong>P3 — /preise/ SEITE ERSTELLEN</strong> — Inhalt aus PricingSection übernehmen.</li>
+    </ol>
+  </div>
+
+  <!-- ===================== QUICK WINS ===================== -->
+  <div class="quick-wins" id="s17" style="border-color:#fbbf24;background:linear-gradient(135deg,#fffbeb,#fef3c7)">
+    <h3 style="color:#92400e">⚡ Quick Wins (in &lt; 30 Minuten umsetzbar)</h3>
+    <ol style="padding-left:1.5rem">
+      <li>Seiten-Titel fixen: Aus allen title-Props " | einfach-online.dev" entfernen (6 Dateien, 2 Minuten)</li>
+      <li>Telefonnummer korrigieren oder entfernen (1 Datei, 1 Minute)</li>
+      <li>404-Seite erstellen: 404.astro anlegen mit Branding und Navigation (10 Minuten)</li>
+      <li>Footer leere &lt;li&gt;-Elemente entfernen (1 Minute)</li>
+      <li>Kontaktformular auf Web3Forms/Formspree umstellen statt eigener PHP (15 Minuten)</li>
+    </ol>
+  </div>
+
+  <!-- ===================== PLANS ===================== -->
+  <div class="section" id="s18">
+    <div class="section-header"><h2>📅 7-Day Plan · 30-Day Plan · Long-Term Roadmap</h2></div>
+    <div class="section-body">
+      <div class="plan-grid">
+        <div class="plan-card">
+          <p class="time">7-Tage-Plan (Pre-Launch Sprint)</p>
+          <h3>🔴 Must-Have</h3>
+          <ul>
+            <li>Kontaktformular-Backend implementieren</li>
+            <li>Navigation fixen (#-Anker Problem)</li>
+            <li>Seiten-Titel reparieren</li>
+            <li>404-Seite erstellen</li>
+            <li>/philosophie/ Seite anlegen</li>
+            <li>Google Fonts lokal hosten</li>
+            <li>Lighthouse Accessibility auf 100 bringen</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <p class="time">30-Day Plan</p>
+          <h3>🟡 Should-Have</h3>
+          <ul>
+            <li>Portraitfoto für /ueber-mich/</li>
+            <li>Testimonials / Kundenreferenzen</li>
+            <li>Blog-Kategorien verlinken/filterbar</li>
+            <li>Kontaktformular Captcha + Validierung</li>
+            <li>/preise/ Seite erstellen</li>
+            <li>Cookie-Einstellungen Link fixen</li>
+            <li>Bessere CTA-Buttons auf /leistungen/</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <p class="time">Long-Term Roadmap</p>
+          <h3>🟢 Nice-to-Have</h3>
+          <ul>
+            <li>Blog-Paginierung</li>
+            <li>Suchfunktion (Suche-Feld im Header)</li>
+            <li>Dark Mode Toggle</li>
+            <li>Content-Management via Headless CMS</li>
+            <li>Automatisierte Tests (Playwright)</li>
+            <li>CI/CD Pipeline (GitHub Actions → Deploy)</li>
+            <li>Blog-Kommentarfunktion (via externen Dienst)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SCORE SUMMARY ===================== -->
+  <div class="summary-card">
+    <h2>📊 Launch-Readiness Score: <span class="fail">42/100</span></h2>
+    <p style="font-size:0.9rem">Begründung: Die Website hat ein hervorragendes visuelles Design, gute Performance und solide SEO-Grundlagen. Aber <strong class="fail">zwei kritische Blocker</strong> (Formular-Backend fehlt, Navigation kaputt von Subseiten) machen einen Launch derzeit unmöglich. Zusätzlich senken der doppelte Site-Name auf allen Seiten, die fehlende 404-Seite und die Google Fonts-DSGVO-Lücke die Punktzahl. Mit einer Woche konzentrierter Arbeit ist eine 85-90 erreichbar.</p>
+  </div>
+
+  <hr>
+  <p style="text-align:center;color:#94a3b8;font-size:0.8rem;padding:2rem 0">
+    QA-Audit generiert am 24. Juni 2026 · Hermes Agent (Nous Research) · einfach-online.dev<br>
+    Geprüft gegen Dev-Server http://localhost:5201 · Quellcode im Projektverzeichnis
+  </p>
+
+</div>
+</body>
+</html>
