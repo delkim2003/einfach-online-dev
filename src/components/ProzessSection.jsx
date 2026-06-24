@@ -71,7 +71,7 @@ export default function ProzessSection() {
       id="prozess"
       aria-labelledby="prozess-title"
       className="py-20 lg:py-28"
-      style={{ background: 'transparent' }}
+      style={{ background: '#FFFFFF' }}
       ref={sectionRef}
     >
       <div className="mx-auto max-w-6xl px-6">
