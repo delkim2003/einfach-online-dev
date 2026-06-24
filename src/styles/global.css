@@ -11,4 +11,26 @@
   --accent-cyan: #22d3ee;
 }
 
-/* Berg-Panorama als fixed Background (via Layout.astro) */
+/* Berg-Panorama als fixed Background — mobil-kompatibel via body::before */
+body {
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: url('/images/hero-berg.jpg');
+  background-size: cover;
+  background-position: 30% 5%;
+  opacity: 0.2;
+  pointer-events: none;
+  /* iOS Safari Fix */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}

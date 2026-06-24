@@ -143,16 +143,6 @@ const jsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </head>
 <body class="">
-  <!-- Fixed Background: Berg-Panorama (20% Sichtbarkeit, scrollt mit) -->
-  <div class="fixed inset-0 -z-10 w-full h-full overflow-hidden" aria-hidden="true">
-    <img
-      src="/images/hero-berg.jpg"
-      alt=""
-      class="w-full h-full object-cover object-[30%_5%] opacity-20"
-      loading="eager"
-      decoding="async"
-    />
-  </div>
   <slot />
 
   <script src="/scripts/cookie-banner.js" defer></script>
