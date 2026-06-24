@@ -13,6 +13,11 @@ canonical: "https://einfach-online.dev/blog/kmu-foerderung-website/"
 
 Eine professionelle Website ist für kleine und mittlere Unternehmen (KMU) heute kein Luxus mehr, sondern eine Notwendigkeit. Die gute Nachricht: Die österreichische Bundesregierung und die Bundesländer fördern Ihre digitale Sichtbarkeit mit attraktiven Zuschüssen und Beratungsangeboten.
 
+<figure style="margin:2.5rem auto;max-width:720px;text-align:center">
+  <img src="/images/blog/foerderung.jpg" alt="Finanzunterlagen und Verträge auf einem Schreibtisch – Fördermittel für KMUs" style="width:100%;height:auto;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.08)" loading="lazy" />
+  <figcaption style="margin-top:0.75rem;font-size:0.875rem;color:#64748B;font-style:italic">Der aws Digitalisierungsscheck ist das aktuell stärkste Förderprogramm für Ihre neue Website – bis zu € 50.000 Zuschuss.</figcaption>
+</figure>
+
 ## aws Digitalisierungsscheck – bis zu € 50.000
 
 Die **Austria Wirtschaftsservice (aws)** ist die Förderbank des Bundes. Das Programm **„aws Digitalisierung und KI“** (ehemals Digitalisierungsscheck) unterstützt KMU bei der Umsetzung digitaler Projekte – und eine Website ist ein Paradebeispiel dafür.
@@ -64,6 +69,11 @@ Für Unternehmen in der Steiermark gibt es zusätzliche Programme:
 - **Externe Leistungen:** Die meisten Förderungen decken nur externe Dienstleistungen (Agentur, Entwickler, Berater), keine Eigenleistungen.
 - **Dokumentation:** Angebote, Rechnungen und Zahlungsbelege sorgfältig aufbewahren.
 - **Wirtschaftlichkeit:** Das Projekt muss für Ihr Unternehmen wirtschaftlich sinnvoll sein.
+
+<figure style="margin:2.5rem auto;max-width:720px;text-align:center">
+  <img src="/images/blog/foerderung-geld.jpg" alt="Euro-Münzen und Geldscheine – Fördermittel senken Ihre Investitionskosten" style="width:100%;height:auto;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.08)" loading="lazy" />
+  <figcaption style="margin-top:0.75rem;font-size:0.875rem;color:#64748B;font-style:italic">Bis zu 50 % Ihrer Website-Kosten können durch Förderungen abgedeckt werden – vorausgesetzt, der Antrag wird vor Projektstart gestellt.</figcaption>
+</figure>
 
 ## Fazit
 

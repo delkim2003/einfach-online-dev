@@ -11,6 +11,11 @@ canonical: "https://einfach-online.dev/blog/website-umsatztreiber-kmu/"
 
 Viele kleine Unternehmen sehen eine Website noch als Kostenfaktor. „Das mach ich später" oder „Ein Bekannter kann das schnell für € 500" sind Sätze, die ich immer wieder höre. Die Realität sieht anders aus: Eine professionelle Website ist eine der rentabelsten Investitionen, die Sie für Ihr Unternehmen tätigen können.
 
+<figure style="margin:2.5rem auto;max-width:720px;text-align:center">
+  <img src="/images/blog/umsatztreiber.jpg" alt="Geschäftsleute bei einer Strategie-Besprechung – Website als Investition" style="width:100%;height:auto;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.08)" loading="lazy" />
+  <figcaption style="margin-top:0.75rem;font-size:0.875rem;color:#64748B;font-style:italic">Eine professionelle Website ist keine Ausgabe, sondern eine Investition – mit messbarem ROI bereits im ersten Jahr.</figcaption>
+</figure>
+
 ## Der Vergleich: Drei Szenarien
 
 ### Szenario A: Keine Website
@@ -50,6 +55,11 @@ Angenommen, Sie betreiben einen kleinen Handel oder ein Dienstleistungsunternehm
 | **ROI erstes Jahr** | **+ 88 %** |
 
 Ab dem zweiten Jahr liegt der ROI bei über 1.000 %, weil nur noch die geringen laufenden Kosten anfallen.
+
+<figure style="margin:2.5rem auto;max-width:720px;text-align:center">
+  <img src="/images/blog/umsatz-graph.jpg" alt="Wachstumsgraph mit aufsteigender Linie – Ihre Website als Umsatztreiber" style="width:100%;height:auto;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.08)" loading="lazy" />
+  <figcaption style="margin-top:0.75rem;font-size:0.875rem;color:#64748B;font-style:italic">Schon ein einziger zusätzlicher Kunde pro Monat kann Ihre Website innerhalb eines Jahres rentabel machen.</figcaption>
+</figure>
 
 ## DSGVO als Kostenfalle
 

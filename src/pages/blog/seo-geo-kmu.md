@@ -19,6 +19,11 @@ Die Art, wie Menschen suchen, verändert sich radikal. Neben Google nutzen immer
 
 Beide Strategien ergänzen sich. Eine GEO-optimierte Website ist automatisch auch SEO-fit – umgekehrt gilt das nicht immer.
 
+<figure style="margin:2.5rem auto;max-width:720px;text-align:center">
+  <img src="/images/blog/seo-geo.jpg" alt="Laptop mit Programmcode und Analysen – moderne Webentwicklung" style="width:100%;height:auto;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.08)" loading="lazy" />
+  <figcaption style="margin-top:0.75rem;font-size:0.875rem;color:#64748B;font-style:italic">SEO und GEO ergänzen sich: Eine technisch saubere Basis ist die beste Voraussetzung für Sichtbarkeit in Google und KI-Suchmaschinen.</figcaption>
+</figure>
+
 ## Die 5 wichtigsten Hebel für 2026
 
 ### 1. Technische Basis: Speed & Security
@@ -60,6 +65,11 @@ KI-Modelle wie ChatGPT durchsuchen das Web, wenn sie auf aktuelle Informationen 
 - **Kurze, prägnante Antworten** – Die ersten 2-3 Sätze unter einer Überschrift sind entscheidend
 - **Listen und Aufzählungen** – KI extrahiert Bullet Points zuverlässiger als Fließtext
 - **Definitionen** – Schreiben Sie als Erstes, WAS etwas ist, bevor Sie erklären, WIE es funktioniert
+
+<figure style="margin:2.5rem auto;max-width:720px;text-align:center">
+  <img src="/images/blog/seo-analytics.jpg" alt="Dashboard mit Daten-Analysen und KPIs für SEO-Erfolgsmessung" style="width:100%;height:auto;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.08)" loading="lazy" />
+  <figcaption style="margin-top:0.75rem;font-size:0.875rem;color:#64748B;font-style:italic">Datenbasierte Entscheidungen: Mit den richtigen Analysen erkennen Sie, welche SEO-Maßnahmen wirklich wirken.</figcaption>
+</figure>
 
 ## Fazit
 
