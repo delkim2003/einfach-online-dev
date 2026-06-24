@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const postModules = import.meta.glob('./*.md', { eager: true });
+const allPosts = Object.values(postModules);
+const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate));
+
+const pageTitle = "Blog";
+const pageDescription = "Aktuelle Beiträge rund um Webdesign, SEO, GEO, DSGVO und Digitalisierung für KMUs in Österreich.";
+const pageCanonical = "https://einfach-online.dev/blog/";
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={pageCanonical}>
+  <Header />
+
+  <main class="py-20 lg:py-28">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] mb-4">
+          Blog
+        </h1>
+        <p class="text-lg text-[#475569] max-w-2xl mx-auto">
+          Tipps, News und Gedanken rund um Webdesign, SEO, GEO, DSGVO und Digitalisierung – speziell für kleine und mittlere Unternehmen in Österreich.
+        </p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {sortedPosts.map((post) => (
+          <a
+            href={post.url}
+            class="group block bg-white rounded-xl border border-[#E2E8F0] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+          >
+            <div class="aspect-[16/9] bg-gradient-to-br from-[#4D7CFF]/10 to-[#22d3ee]/10 flex items-center justify-center">
+              <svg class="w-12 h-12 text-[#4D7CFF]/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              </svg>
+            </div>
+            <div class="p-5">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs font-medium text-[#4D7CFF] bg-[#4D7CFF]/8 px-2.5 py-1 rounded-full">
+                  {post.frontmatter.category}
+                </span>
+                <span class="text-xs text-[#94A3B8]">
+                  {new Date(post.frontmatter.pubDate).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </span>
+              </div>
+              <h2 class="text-lg font-bold text-[#0F172A] mb-2 group-hover:text-[#4D7CFF] transition-colors">
+                {post.frontmatter.title}
+              </h2>
+              <p class="text-sm text-[#475569] leading-relaxed line-clamp-3">
+                {post.frontmatter.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

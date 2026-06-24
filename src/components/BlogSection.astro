@@ -1,0 +1,73 @@
+---
+// BlogSection.astro — Letzte 3 Blog-Beiträge als Karten (Berg 20% Hintergrund)
+const postModules = import.meta.glob('../pages/blog/*.md', { eager: true });
+const allPosts = Object.values(postModules);
+const latestPosts = allPosts
+  .sort((a, b) => new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate))
+  .slice(0, 3);
+---
+
+<section class="py-20 lg:py-28 bg-transparent" id="blog" aria-label="Blog">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#4D7CFF]/8 border border-[#4D7CFF]/15 text-[#4D7CFF] text-xs font-medium tracking-wide mb-4">
+        Aktuelles
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] mb-4">
+        Neues aus dem Blog
+      </h2>
+      <p class="text-base sm:text-lg text-[#475569] max-w-2xl mx-auto">
+        Tipps zu SEO, GEO, DSGVO und Digitalisierung – speziell für KMUs in Österreich.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {latestPosts.map((post) => (
+        <a
+          href={post.url}
+          class="group block bg-white rounded-xl border border-[#E2E8F0] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+        >
+          <div class="aspect-[16/9] bg-gradient-to-br from-[#4D7CFF]/10 to-[#22d3ee]/10 flex items-center justify-center">
+            <svg class="w-10 h-10 text-[#4D7CFF]/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+            </svg>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs font-medium text-[#4D7CFF] bg-[#4D7CFF]/8 px-2.5 py-1 rounded-full">
+                {post.frontmatter?.category}
+              </span>
+              <span class="text-xs text-[#94A3B8]">
+                {new Date(post.frontmatter?.pubDate).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </span>
+            </div>
+            <h3 class="text-base font-bold text-[#0F172A] mb-2 group-hover:text-[#4D7CFF] transition-colors line-clamp-2">
+              {post.frontmatter?.title}
+            </h3>
+            <p class="text-sm text-[#475569] leading-relaxed line-clamp-2">
+              {post.frontmatter?.description}
+            </p>
+            <div class="mt-4 flex items-center text-sm font-semibold text-[#4D7CFF] group-hover:gap-2 transition-all">
+              Weiterlesen
+              <svg class="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="text-center mt-10">
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-[#4D7CFF] text-white text-sm font-semibold rounded-xl shadow-[0_4px_20px_rgba(77,124,255,0.3)] hover:shadow-[0_6px_30px_rgba(77,124,255,0.4)] hover:bg-[#3B6BF5] transition-all duration-300 ease-out hover:-translate-y-0.5"
+      >
+        Alle Beiträge anzeigen
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
