@@ -2,10 +2,10 @@
 import Logo from './Logo.astro';
 
 const navItems = [
-  { label: 'Leistungen', href: '#leistungen' },
-  { label: 'Philosophie', href: '#philosophie' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Kontakt', href: '#kontakt' },
+  { label: 'Leistungen', href: '/#leistungen' },
+  { label: 'Philosophie', href: '/#philosophie' },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'Kontakt', href: '/#kontakt' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -37,7 +37,7 @@ const isActive = (href: string): boolean => {
       }
     </nav>
 
-    <a href="#kontakt" class="gipfel-header__cta">
+    <a href="/#kontakt" class="gipfel-header__cta">
       Kontakt
     </a>
 
@@ -67,7 +67,7 @@ const isActive = (href: string): boolean => {
           ))
         }
         <li>
-          <a href="#kontakt" class="gipfel-header__mobile-cta">
+          <a href="/#kontakt" class="gipfel-header__mobile-cta">
             Kontakt
           </a>
         </li>
