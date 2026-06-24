@@ -2,13 +2,13 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const { title, description, canonical } = Astro.props;
-const pageTitle = title || "Blog-Beitrag";
-const pageDescription = description || "Blog-Beitrag von einfach-online.dev";
-const pageCanonical = canonical || "https://einfach-online.dev/blog";
+const content = Astro.props.content || {};
+const fm = content.frontmatter || {};
+const ttl = fm.title || "Blog-Beitrag";
+const dsc = fm.description || "Blog-Beitrag von einfach-online.dev";
+const can = fm.canonical || "https://einfach-online.dev/blog";
 
 const baseUrl = "https://einfach-online.dev";
-const siteName = "einfach-online.dev";
 const ogImageUrl = `${baseUrl}/images/og-default.webp`;
 ---
 
@@ -17,13 +17,13 @@ const ogImageUrl = `${baseUrl}/images/og-default.webp`;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
+  <meta name="description" content={dsc} />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Philipp Schlemmer" />
   <meta name="theme-color" content="#FFFFFF" />
 
   <link rel="icon" type="image/svg+xml" href="/svg/logo_ohne_glow.svg" />
-  <link rel="canonical" href={canonical} />
+  <link rel="canonical" href={can} />
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
@@ -76,27 +76,26 @@ const ogImageUrl = `${baseUrl}/images/og-default.webp`;
     .article-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9375rem; }
     .article-content th { background: #F8FAFC; padding: 0.75rem 1rem; text-align: left; font-weight: 600; border: 1px solid #E2E8F0; }
     .article-content td { padding: 0.75rem 1rem; border: 1px solid #E2E8F0; }
-    .article-content code { background: #F1F5F9; padding: 0.125rem 0.375rem; border-radius: 4px; font-size: 0.875rem; font-family: 'JetBrains Mono', monospace; }
+    .article-content code { background: #F1F5F9; padding: 0.125rem 0.375rem; border-radius: 4px; font-size: 0.875rem; }
     .article-content img { border-radius: 12px; margin: 2rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
   </style>
 
-  <title>{pageTitle} | einfach-online.dev</title>
+  <title>{ttl} | einfach-online.dev</title>
 
-  <meta property="og:site_name" content={siteName} />
-  <meta property="og:title" content={pageTitle} />
-  <meta property="og:description" content={pageDescription} />
+  <meta property="og:site_name" content="einfach-online.dev" />
+  <meta property="og:title" content={ttl} />
+  <meta property="og:description" content={dsc} />
   <meta property="og:image" content={ogImageUrl} />
-  <meta property="og:url" content={pageCanonical} />
+  <meta property="og:url" content={can} />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="de_AT" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={pageTitle} />
-  <meta name="twitter:description" content={pageDescription} />
+  <meta name="twitter:title" content={ttl} />
+  <meta name="twitter:description" content={dsc} />
   <meta name="twitter:image" content={ogImageUrl} />
 </head>
 <body>
-  <!-- Fixed Background: Berg-Panorama (20% Sichtbarkeit) -->
   <div class="fixed inset-0 -z-10 w-full h-full overflow-hidden" aria-hidden="true">
     <img
       src="/images/hero-berg.jpg"
