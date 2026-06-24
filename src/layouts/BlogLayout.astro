@@ -2,11 +2,22 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const content = Astro.props.content || {};
-const fm = content.frontmatter || {};
+// Astro 6: Markdown-Frontmatter liegt in Astro.props.frontmatter
+const fm = Astro.props.frontmatter || {};
 const ttl = fm.title || "Blog-Beitrag";
-const dsc = fm.description || "Blog-Beitrag von einfach-online.dev";
-const can = fm.canonical || "https://einfach-online.dev/blog";
+const dsc = fm.description || "";
+const can = fm.canonical || "";
+const author = fm.author || "Philipp Schlemmer";
+const category = fm.category || "";
+const rawPubDate = fm.pubDate || "";
+
+// Datum formatieren
+let formattedDate = "";
+try {
+  formattedDate = new Date(rawPubDate).toLocaleDateString('de-DE', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+} catch (e) { formattedDate = rawPubDate; }
 
 const baseUrl = "https://einfach-online.dev";
 const ogImageUrl = `${baseUrl}/images/og-default.webp`;
@@ -61,23 +72,23 @@ const ogImageUrl = `${baseUrl}/images/og-default.webp`;
     ::selection { background: #4D7CFF; color: #FFFFFF; }
 
     /* Article Typography */
-    .article-content h1 { font-size: 2.25rem; margin-bottom: 1rem; }
-    .article-content h2 { font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+    .article-content { max-width: 720px; margin: 0 auto; }
+    .article-content h2 { font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #F1F5F9; }
     .article-content h3 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.5rem; }
-    .article-content p { margin-bottom: 1.25rem; font-size: 1.0625rem; line-height: 1.75; }
+    .article-content p { margin-bottom: 1.25rem; font-size: 1.0625rem; line-height: 1.75; color: #334155; }
     .article-content ul, .article-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; list-style: disc; }
     .article-content ol { list-style: decimal; }
     .article-content li { margin-bottom: 0.5rem; font-size: 1.0625rem; line-height: 1.65; color: #334155; }
     .article-content strong { font-weight: 700; color: #0F172A; }
-    .article-content blockquote { border-left: 4px solid #4D7CFF; padding-left: 1.25rem; margin: 1.5rem 0; color: #475569; font-style: italic; }
+    .article-content blockquote { border-left: 4px solid #4D7CFF; padding-left: 1.25rem; margin: 1.5rem 0; color: #475569; font-style: italic; background: #F8FAFC; padding: 1.25rem; border-radius: 8px; border-left-width: 4px; }
     .article-content a { color: #4D7CFF; text-decoration: underline; text-underline-offset: 2px; }
     .article-content a:hover { color: #3B6BF5; }
     .article-content hr { border: none; border-top: 1px solid #E2E8F0; margin: 2.5rem 0; }
-    .article-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9375rem; }
+    .article-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9375rem; border-radius: 8px; overflow: hidden; }
     .article-content th { background: #F8FAFC; padding: 0.75rem 1rem; text-align: left; font-weight: 600; border: 1px solid #E2E8F0; }
     .article-content td { padding: 0.75rem 1rem; border: 1px solid #E2E8F0; }
     .article-content code { background: #F1F5F9; padding: 0.125rem 0.375rem; border-radius: 4px; font-size: 0.875rem; }
-    .article-content img { border-radius: 12px; margin: 2rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .article-content img { border-radius: 12px; margin: 2rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.06); width: 100%; }
   </style>
 
   <title>{ttl} | einfach-online.dev</title>
@@ -96,22 +107,67 @@ const ogImageUrl = `${baseUrl}/images/og-default.webp`;
   <meta name="twitter:image" content={ogImageUrl} />
 </head>
 <body>
+  <!-- Fixed Background -->
   <div class="fixed inset-0 -z-10 w-full h-full overflow-hidden" aria-hidden="true">
-    <img
-      src="/images/hero-berg.jpg"
-      alt=""
-      class="w-full h-full object-cover object-[30%_5%] opacity-20"
-      loading="eager"
-      decoding="async"
-    />
+    <img src="/images/hero-berg.jpg" alt="" class="w-full h-full object-cover object-[30%_5%] opacity-20" loading="eager" decoding="async" />
   </div>
 
   <Header />
 
-  <main class="min-h-screen" style="position:relative; z-index:1; background:transparent;">
-    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-      <div class="article-content"><slot /></div>
-    </article>
+  <main style="position:relative; z-index:1; background:transparent;">
+    <!-- Article Header -->
+    <div class="bg-white/90 backdrop-blur-sm border-b border-[#E2E8F0]">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <!-- Back link -->
+        <a href="/blog" class="inline-flex items-center gap-1.5 text-sm text-[#64748B] hover:text-[#4D7CFF] transition-colors mb-8 group">
+          <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Zurück zum Blog
+        </a>
+
+        <!-- Category Badge -->
+        {category && (
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#4D7CFF]/8 border border-[#4D7CFF]/15 text-[#4D7CFF] text-xs font-medium tracking-wide mb-4">
+            {category}
+          </span>
+        )}
+
+        <!-- Title -->
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] leading-[1.12] tracking-tight mb-4">
+          {ttl}
+        </h1>
+
+        <!-- Author & Date -->
+        <div class="flex items-center gap-3 text-sm text-[#64748B]">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#4D7CFF] to-[#22d3ee] flex items-center justify-center text-white text-xs font-bold">
+            {author ? author.charAt(0) : 'P'}
+          </div>
+          <span class="font-medium text-[#334155]">{author || "Philipp Schlemmer"}</span>
+          <span class="text-[#CBD5E1]">•</span>
+          <span>{formattedDate}</span>
+          <span class="text-[#CBD5E1]">•</span>
+          <span class="text-[#94A3B8]">{Math.ceil(Astro.props.rawContent?.length / 1500) || 5} min Lesezeit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="py-12 sm:py-16 lg:py-20">
+      <div class="article-content px-4 sm:px-6 lg:px-8">
+        <slot />
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-[#E2E8F0]">
+        <a href="/blog" class="inline-flex items-center gap-2 text-[#4D7CFF] font-semibold hover:gap-3 transition-all">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Alle Beiträge anzeigen
+        </a>
+      </div>
+    </div>
   </main>
 
   <Footer />
